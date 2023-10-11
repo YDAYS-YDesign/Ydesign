@@ -1,0 +1,58 @@
+{
+  "name": "@ydesign/core",
+  "version": "1.0.0",
+  "description": "A simple react components library including responsive and translation features",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build": "rollup --config"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@emotion/css": "^11.11.2",
+    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@storybook/addon-essentials": "7.4.6",
+    "@storybook/addon-interactions": "7.4.6",
+    "@storybook/addon-links": "7.4.6",
+    "@storybook/addon-onboarding": "1.0.8",
+    "@storybook/blocks": "7.4.6",
+    "@storybook/react": "7.4.6",
+    "@storybook/react-vite": "7.4.6",
+    "@storybook/testing-library": "0.2.2",
+    "@types/react": "^18.2.28",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "eslint": "^8.51.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.15",
+    "prettier": "^3.0.3",
+    "rollup": "^4.0.2",
+    "rollup-plugin-dts": "^6.1.0",
+    "storybook": "7.4.6",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "dependencies": {
+    "react-icons": "^4.11.0",
+    "rollup-plugin-typescript2": "^0.36.0"
+  }
+}
