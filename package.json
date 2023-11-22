@@ -1,6 +1,6 @@
 {
   "name": "@ydesign/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
