@@ -19,7 +19,7 @@ jobs:
           node-version: '14'
 
       - name: Build package
-        run: npm i
+        run: pnpm i
 
       - name: Build package
         run: npm run build
