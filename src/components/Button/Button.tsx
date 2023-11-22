@@ -60,10 +60,6 @@ const styles = {
                 color: ${isDarkMode ? theme.colors.yellow : theme.colors.black};
                 }
             }`}
-            &:active {
-                background-color: ${theme.colors.yellow};
-                color: ${theme.colors.black};
-            }
         `;
     },
 };

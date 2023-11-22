@@ -56,8 +56,10 @@
   "types": "dist/types/index.d.ts",
   "type": "module",
   "dependencies": {
-    "@storybook/addons": "^7.5.3",
-    "@storybook/theming": "^7.5.3",
+    "@storybook/addon-themes": "0.0.0-pr-24575-sha-3de4e9e0",
+    "@storybook/addons": "0.0.0-pr-24575-sha-3de4e9e0",
+    "@storybook/manager-api": "0.0.0-pr-24575-sha-3de4e9e0",
+    "@storybook/theming": "0.0.0-pr-24575-sha-3de4e9e0",
     "emotion-theming": "^11.0.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "storybook-dark-mode": "^3.0.1"
