@@ -1,6 +1,6 @@
 {
-  "name": "@ydesign/core",
-  "version": "1.0.3",
+  "name": "@y-design/core",
+  "version": "1.0.0",
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -9,7 +9,7 @@
     "build-storybook": "storybook build",
     "build": "rollup --config"
   },
-  "author": "",
+  "author": "ydesignprojet@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@emotion/css": "^11.11.2",
@@ -46,6 +46,7 @@
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "browser": "dist/cjs/index.js",
   "files": [
     "dist"
   ],
@@ -54,5 +55,13 @@
   "dependencies": {
     "react-icons": "^4.11.0",
     "rollup-plugin-typescript2": "^0.36.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Antoineg3802/Ydesign_TEST.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Antoineg3802/Ydesign_TEST/issues"
+  },
+  "homepage": "https://github.com/Antoineg3802/Ydesign_TEST#readme"
 }
