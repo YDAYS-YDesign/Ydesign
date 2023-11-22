@@ -22,9 +22,5 @@
         "react/no-unescaped-entities": ["off"],
         "object-curly-spacing": ["error", "always"]
     },
-    "ignorePatterns": [
-        "rollup.config.js",
-        "**/*.d.ts",
-        
-]
+    "ignorePatterns": ["rollup.config.js", "**/*.d.ts"]
 }
