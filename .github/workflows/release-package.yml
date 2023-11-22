@@ -27,8 +27,6 @@ jobs:
         with:
           node-version: '16'
 
-      - name: 
-
       - name: Build package
         run: npm run build
 
