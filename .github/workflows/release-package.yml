@@ -27,6 +27,8 @@ jobs:
         with:
           node-version: '16'
 
+      - name: 
+
       - name: Build package
         run: npm run build
 
@@ -37,8 +39,7 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org/'
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish package to NPM
         run: npm publish --access public
-        env:
-          AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
