@@ -7,6 +7,8 @@ export const theme = {
         violet: "#A58CFF",
         grey: "#F2F2F2",
         red: "#FF0000",
+        actionOutline: "rgba(255, 224, 71, 0.5)",
+        text: "#111111",
     },
 };
 
