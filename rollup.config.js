@@ -1,11 +1,12 @@
 import typescript from "rollup-plugin-typescript2";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
+import commonjs from '@rollup/plugin-commonjs';
 import pkg from "./package.json" assert { type: "json" };
 
 const input = "src/index.ts";
 
-const plugins = [typescript(), peerDepsExternal(), nodeResolve()];
+const plugins = [typescript(), peerDepsExternal(), nodeResolve(), commonjs()];
 
 
 export default [

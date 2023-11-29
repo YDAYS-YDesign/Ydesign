@@ -12,7 +12,8 @@ export interface ButtonProps
 export const Button = ({
     children,
     disabled = false,
-    ...props
+    className,
+    ...rest
 }: ButtonProps): JSX.Element => {
     const { isDarkMode, isMobileView } = useTheme();
     return (
@@ -20,11 +21,11 @@ export const Button = ({
             disabled={disabled}
             className={cx(
                 disabled,
+                className,
                 styles.button(isDarkMode, isMobileView, disabled),
-                props.className,
             )}
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...props}
+            {...rest}
         >
             {children}
         </button>

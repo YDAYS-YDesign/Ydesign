@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -13,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@emotion/css": "^11.11.2",
-    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
     "@storybook/addon-essentials": "0.0.0-pr-24575-sha-3de4e9e0",
@@ -42,6 +41,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "storybook": "0.0.0-pr-24575-sha-3de4e9e0",
+    "tslib": "^1.10.0",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
