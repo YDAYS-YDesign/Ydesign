@@ -4,7 +4,7 @@ import { useDarkMode } from "storybook-dark-mode";
 
 interface Props {
     defaultDarkMode?: boolean;
-    children: React.ReactNode;
+    children: React.JSX.Element;
 }
 
 export interface ThemeContext {

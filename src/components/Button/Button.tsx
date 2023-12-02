@@ -12,6 +12,7 @@ export interface ButtonProps
     size?: ButtonSize;
     children?: React.ReactNode;
     disabled?: boolean;
+    suffix?: React.ReactNode;
 }
 
 export const Button = ({
@@ -36,6 +37,7 @@ export const Button = ({
             {...rest}
         >
             {children}
+            {rest.suffix}
         </button>
     );
 };
@@ -84,7 +86,6 @@ const styles = {
     primary: (size: ButtonSize, isMobileView: boolean, disabled: boolean) => {
         const { fontSize, padding, minSizes } = getSizeStyles(size);
         return css`
-            // reset default button styles
             background: none;
             color: inherit;
             border: none;
@@ -96,6 +97,7 @@ const styles = {
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 5px;
 
             // custom button styles
             ${minSizes}
@@ -134,6 +136,7 @@ const styles = {
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 5px;
 
             // custom button styles
             font-family: "Gill Sans", sans-serif;

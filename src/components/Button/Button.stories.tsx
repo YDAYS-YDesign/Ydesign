@@ -2,6 +2,7 @@ import React from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Button, ButtonProps } from "./Button";
 import { css } from "@emotion/css";
+import { Icon } from "../Icon/Icon";
 
 const StorybookButton: React.FC<ButtonProps> = (props) => {
     return (
@@ -22,13 +23,13 @@ const StorybookButton: React.FC<ButtonProps> = (props) => {
 };
 
 export default {
-    title: "Button", // Add a title for your component
+    title: "Button",
     component: StorybookButton,
     parameters: {
         backgrounds: { disable: true },
     },
     argTypes: {
-        children: { control: "text" }, // This line allows changing the button text
+        children: { control: "text" },
         variant: {
             control: "select",
             options: ["primary", "secondary"],
@@ -59,6 +60,18 @@ Secondary.args = {
     children: "un bouton", // Default button text
     variant: "secondary",
     size: "medium",
+};
+
+export const Suffix = Template.bind({});
+Suffix.argTypes = {
+    suffix: { control: "none" },
+};
+Suffix.args = {
+    variant: "primary",
+    disabled: false,
+    children: "Search", // Default button text
+    size: "medium",
+    suffix: <Icon iconName={"search"} color={"white"} />,
 };
 
 export const Disabled = Template.bind({});

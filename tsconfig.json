@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "outDir": "dist/dist",
-    "module": "es6",
+    "module": "ESNext",
     "target": "es6",
     "lib": ["es6", "dom"],
     "sourceMap": true,
@@ -28,6 +28,7 @@
   "include": [
     "src/**/*",
     "src/setupTests.ts",
+    "assets/**/*",
   ],
   "types": [
     "typePatches"
