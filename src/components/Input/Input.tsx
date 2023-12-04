@@ -1,34 +1,36 @@
 import React from "react";
 import { css, cx } from "@emotion/css";
-import { theme } from "../../theme/theme";
 import { useTheme } from "../../hooks/useTheme";
-import { getFocusStyle } from "../../theme/commonStyling";
+import { Sizes, getSizeStyles } from "../../theme/commonStyling";
+import { theme } from "../../theme/theme";
 
 export interface InputProps
-    extends React.InputHTMLAttributes<HTMLInputElement> {
-    disabled?: boolean;
-    suffix?: React.ReactNode;
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+    size?: Sizes;
+    children?: React.ReactNode;
+    rounded?: boolean;
 }
 
 export const Input = ({
     children,
     className,
-    disabled = false,
+    size = "medium",
+    rounded = false,
     ...rest
 }: InputProps): JSX.Element => {
-    const { isMobileView } = useTheme();
+    const { isDarkMode } = useTheme();
     return (
         <input
-            disabled={disabled}
-            className={cx(className)}
-            // eslint-disable-next-line react/jsx-props-no-spreading
+            className={cx(styles.input(size, isDarkMode, rounded), className)}
             {...rest}
         />
     );
 };
 
 const styles = {
-    input: (isDisabled: boolean) => {
+    input: (size: Sizes, isDarkMode: boolean, rounded: boolean) => {
+        const { fontSize, padding, minSizes } = getSizeStyles(size);
+
         return css`
             // reset input styles
             border: none;
@@ -39,22 +41,35 @@ const styles = {
             color: inherit;
             padding: 0;
             margin: 0;
-            width: 100%;
 
             // custom Input
+            color: ${isDarkMode ? theme.colors.white : theme.colors.black};
             font-family: "Gill Sans", sans-serif;
-            background-color: ${isDisabled
-                ? theme.colors.grey
+            background-color: ${isDarkMode
+                ? theme.colors.black
                 : theme.colors.white};
-            color: ${theme.colors.text};
-            border-radius: 40px;
-            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-            &:active {
-                border: ${theme.colors.yellow} solid 1px;
+            border: ${theme.colors.border} solid 2px;
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 0.5;
             }
+            font-size: ${fontSize}px;
+            ${minSizes}
+            padding: 0 8px;
+            border-radius: ${rounded ? "50px" : "8px"};
+            transition-timing-function: cubic-bezier(0.35, 0, 0.27, 0.96);
+            transition-duration: 0.2s;
+            transition-property: all;
             &:focus {
-                ${getFocusStyle()}
-                background-color: ${theme.colors.yellow};
+                outline: "2px dotted transparent";
+                outline-offset: 2px;
+                box-shadow:
+                    0 0 0 2px
+                        ${isDarkMode ? theme.colors.black : theme.colors.white},
+                    0 0 0px 5px ${theme.colors.primary};
+            }
+            &:hover {
+                border: ${theme.colors.primary} solid 2px;
             }
         `;
     },

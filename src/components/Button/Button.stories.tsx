@@ -38,6 +38,7 @@ export default {
             control: "select",
             options: ["small", "medium", "large"],
         },
+        rounded: { control: "boolean" },
     },
 };
 
@@ -52,6 +53,7 @@ Primary.args = {
     children: "un bouton", // Default button text
     variant: "primary",
     size: "medium",
+    rounded: false,
 };
 
 export const Secondary = Template.bind({});
@@ -60,6 +62,7 @@ Secondary.args = {
     children: "un bouton", // Default button text
     variant: "secondary",
     size: "medium",
+    rounded: false,
 };
 
 export const Suffix = Template.bind({});
@@ -71,6 +74,7 @@ Suffix.args = {
     disabled: false,
     children: "Search", // Default button text
     size: "medium",
+    rounded: false,
     suffix: <Icon iconName={"search"} color={"white"} />,
 };
 
@@ -79,5 +83,6 @@ Disabled.args = {
     variant: "primary",
     disabled: true,
     children: "un bouton", // Default button text
+    rounded: false,
     size: "medium",
 };

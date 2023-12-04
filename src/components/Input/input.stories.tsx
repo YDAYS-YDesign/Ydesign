@@ -32,13 +32,17 @@ type Story = StoryObj<typeof meta>;
 export const InputStory: Story = {
     args: {
         disabled: false,
-        value: "",
+        rounded: false,
+        placeholder: "placeholder...",
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        value: {
+        rounded: {
+            control: "boolean",
+        },
+        placeholder: {
             control: "text",
         },
     },

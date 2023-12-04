@@ -7,7 +7,6 @@ import { IconsArray } from "../../types/IconsArray";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { useTheme } from "../../hooks/useTheme";
 import { Meta, StoryObj } from "@storybook/react";
-import { getFocusStyle } from "../../theme/commonStyling";
 import { theme } from "../../theme/theme";
 
 const SearchableIconStory = (props: { args: IconProps }) => {
@@ -109,7 +108,7 @@ const styles = {
             }
             &:focus {
                 outline: "1px dotted transparent";
-                box-shadow: 0 0 0px 2px ${theme.colors.grey};
+                box-shadow: 0 0 0px 2px ${theme.colors.primary};
                 border: 1px solid transparent !important;
                 color: ${isDarkMode ? "white" : "grey"};
             }

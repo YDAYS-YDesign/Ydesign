@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, FunctionComponent } from "react";
 import { IconType } from "../../types/IconType";
+import { css } from "@emotion/css";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
     iconName: IconType;
@@ -47,7 +48,16 @@ export const Icon = ({
         );
 
     return (
-        <Suspense>
+        <Suspense
+            fallback={
+                <div
+                    className={css`
+                        width: ${getSizes(size).width}px;
+                        height: ${getSizes(size).height}px;
+                    `}
+                ></div>
+            }
+        >
             <IconComponent
                 {...props}
                 stroke={color}

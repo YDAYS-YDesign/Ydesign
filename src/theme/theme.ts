@@ -1,16 +1,26 @@
-export const theme = {
+import { t } from "@storybook/theming/dist/create-df04f5c3";
+
+export let theme = {
     colors: {
-        yellow: "#d4b413",
-        black: "#111111",
+        // primary is violet
+        primary: "#8d71fd",
+        // secondary is blue cyan
+        secondary: "#3589f4",
+        // tertiary is yellow
+        yellow: "#FFF7AE",
+        // other colors
+        black: "#2A2A2A",
         white: "#FFFFFF",
-        cyan: "#00FFFF",
-        violet: "#A58CFF",
-        grey: "#7d7c7c",
-        red: "#FF0000",
-        actionYellow: "rgba(255, 224, 71, 0.5)",
-        actionViolet: "rgba(165, 140, 255, 0.5)",
-        text: "#FFFFFF",
+        disabled: "grey",
+        border: "#969696",
     },
+    font: {
+        family: `font-family: "Gill Sans", sans-serif;`,
+        darkThemeText: `color: #FFFFFF;`,
+        lightThemeText: `color: #000000;`,
+    },
+    shape: {},
+    spacing: {},
 };
 
 export type Theme = typeof theme;
