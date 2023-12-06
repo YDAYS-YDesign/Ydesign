@@ -78,7 +78,7 @@ const styles = {
             }
             font-size: ${fontSize}px;
             ${minSizes}
-            padding: 0 8px;
+            padding: 0px 10px 0px 12px;
             border-radius: ${rounded ? "50px" : "8px"};
             transition-timing-function: cubic-bezier(0.35, 0, 0.27, 0.96);
             transition-duration: 0.2s;
