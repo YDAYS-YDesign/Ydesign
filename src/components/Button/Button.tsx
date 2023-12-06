@@ -106,6 +106,7 @@ const styles = {
                 background-color: ${theme.colors.disabled};
                 cursor: not-allowed;
             }
+            height: 30px;
         `;
     },
 };

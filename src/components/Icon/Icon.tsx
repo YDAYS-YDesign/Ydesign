@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, FunctionComponent } from "react";
 import { IconType } from "../../types/IconType";
 import { css } from "@emotion/css";
+import SVG from "react-inlinesvg";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
     iconName: IconType;
@@ -38,33 +39,15 @@ export const Icon = ({
                 };
         }
     };
-    const IconComponent: FunctionComponent<React.SVGProps<SVGSVGElement>> =
-        lazy(() =>
-            import(`../../assets/iconsComponents/${iconName}.tsx`).catch(
-                () => ({
-                    default: () => <span>Icon not found</span>,
-                }),
-            ),
-        );
 
     return (
-        <Suspense
-            fallback={
-                <div
-                    className={css`
-                        width: ${getSizes(size).width}px;
-                        height: ${getSizes(size).height}px;
-                    `}
-                ></div>
-            }
-        >
-            <IconComponent
-                {...props}
-                stroke={color}
-                fill="none"
-                viewBox="0 0 24 24"
-                {...getSizes(size)}
-            />
-        </Suspense>
+        <SVG
+            src={`../../assets/svgs/${iconName}.svg`}
+            {...getSizes(size)}
+            title={"activity"}
+            stroke={color}
+            fill="none"
+            viewBox="0 0 24 24"
+        />
     );
 };

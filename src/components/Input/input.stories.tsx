@@ -4,6 +4,9 @@ import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { Input } from "./Input";
 import { css } from "@emotion/css";
+import { Icon } from "../Icon/Icon";
+import { IconType } from "../../types/IconType";
+import { IconsArray } from "../../types/IconsArray";
 
 const meta: Meta<typeof Input> = {
     title: "Input",
@@ -21,7 +24,17 @@ const meta: Meta<typeof Input> = {
                     align-items: center;
                 `}
             >
-                <Input {...args} />
+                <Input
+                    {...args}
+                    suffix={
+                        args.suffix && (
+                            <Icon
+                                iconName={args.suffix as IconType}
+                                color="grey"
+                            />
+                        )
+                    }
+                />
             </div>
         </YDesignWrapper>
     ),
@@ -29,11 +42,12 @@ const meta: Meta<typeof Input> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const InputStory: Story = {
+export const DefaultInput: Story = {
     args: {
         disabled: false,
         rounded: false,
         placeholder: "placeholder...",
+        width: 200,
     },
     argTypes: {
         disabled: {
@@ -44,6 +58,37 @@ export const InputStory: Story = {
         },
         placeholder: {
             control: "text",
+        },
+        width: {
+            control: "number",
+        },
+    },
+};
+
+export const WithSuffix: Story = {
+    args: {
+        disabled: false,
+        rounded: false,
+        placeholder: "placeholder...",
+        width: 200,
+        suffix: "check",
+    },
+    argTypes: {
+        disabled: {
+            control: "boolean",
+        },
+        rounded: {
+            control: "boolean",
+        },
+        placeholder: {
+            control: "text",
+        },
+        width: {
+            control: "number",
+        },
+        suffix: {
+            control: "select",
+            options: IconsArray,
         },
     },
 };

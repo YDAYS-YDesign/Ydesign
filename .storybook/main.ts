@@ -7,7 +7,8 @@ const config: StorybookConfig = {
         "@storybook/addon-essentials",
         "@storybook/addon-onboarding",
         "@storybook/addon-interactions",
-        'storybook-dark-mode'
+        'storybook-dark-mode',
+        'storybook-preset-inline-svg',
     ],
     framework: {
         name: "@storybook/react-vite",
@@ -16,6 +17,10 @@ const config: StorybookConfig = {
     docs: {
         autodocs: "tag",
     },
+    staticDirs: [{
+        from: '../src/assets',
+        to: 'assets'
+    }]
     
 };
 export default config;

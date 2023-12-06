@@ -67,6 +67,8 @@
     "react-inlinesvg": "^4.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "storybook-dark-mode": "^3.0.1",
+    "storybook-preset-inline-svg": "^1.0.1",
+    "svg-inline-loader": "^0.8.2",
     "vite-svg-loader": "^5.1.0"
   }
 }
