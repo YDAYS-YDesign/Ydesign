@@ -72,10 +72,10 @@ Suffix.argTypes = {
 Suffix.args = {
     variant: "primary",
     disabled: false,
-    children: "Search", // Default button text
+    children: "Download", // Default button text
     size: "medium",
     rounded: false,
-    suffix: <Icon iconName={"search"} color={"white"} />,
+    suffix: <Icon iconName={"download"} color={"black"} />,
 };
 
 export const Disabled = Template.bind({});

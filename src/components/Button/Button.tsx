@@ -2,7 +2,7 @@ import React from "react";
 import { css, cx } from "@emotion/css";
 import { useTheme } from "../../hooks/useTheme";
 import { Sizes, getSizeStyles } from "../../theme/commonStyling";
-import { theme } from "../../theme/theme";
+import { Theme } from "../../theme/theme";
 
 export type ButtonVariant = "primary" | "secondary";
 export interface ButtonProps
@@ -24,16 +24,14 @@ export const Button = ({
     rounded = false,
     ...rest
 }: ButtonProps): JSX.Element => {
-    const { isMobileView, isDarkMode } = useTheme();
-    console.log(
-        `${disabled ? `background-color: ${theme.colors.disabled};` : ""}`,
-    );
+    const { isDarkMode, theme } = useTheme();
+    console.log("theme", theme);
     return (
         <button
             disabled={disabled}
             className={cx(
                 className,
-                styles.button(size, variant, isDarkMode, rounded),
+                styles.button(size, variant, isDarkMode, rounded, theme),
             )}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
@@ -50,6 +48,7 @@ const styles = {
         variant: ButtonVariant,
         isDarkMode: boolean,
         rounded: boolean,
+        theme: Theme,
     ) => {
         const { fontSize, padding, minSizes } = getSizeStyles(size);
         return css`
@@ -73,7 +72,7 @@ const styles = {
             ${variant == "primary"
                 ? `background-color: ${theme.colors.primary};`
                 : `background-color: ${theme.colors.secondary};`}
-            color: ${theme.colors.white};
+            color: ${theme.colors.black};
             border-radius: ${rounded ? "50px" : "8px"};
             padding: ${padding};
             font-size: ${fontSize}px;

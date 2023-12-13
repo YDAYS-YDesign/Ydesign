@@ -2,7 +2,7 @@ import React from "react";
 import { css, cx } from "@emotion/css";
 import { useTheme } from "../../hooks/useTheme";
 import { Sizes, getSizeStyles } from "../../theme/commonStyling";
-import { theme } from "../../theme/theme";
+import { Theme } from "../../theme/theme";
 
 export interface InputProps
     extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -22,14 +22,19 @@ export const Input = ({
     width,
     ...rest
 }: InputProps): JSX.Element => {
-    const { isDarkMode } = useTheme();
+    const { isDarkMode, theme } = useTheme();
     return (
-        <div className={styles.container(size, isDarkMode, rounded, width)}>
+        <div
+            className={styles.container(
+                size,
+                isDarkMode,
+                rounded,
+                theme,
+                width,
+            )}
+        >
             <input
-                className={cx(
-                    styles.input(size, isDarkMode, rounded, width),
-                    className,
-                )}
+                className={cx(styles.input(size, isDarkMode, theme), className)}
                 {...rest}
             />
             {suffix && <div className={styles.suffix}>{suffix && suffix}</div>}
@@ -50,6 +55,7 @@ const styles = {
         size: Sizes,
         isDarkMode: boolean,
         rounded: boolean,
+        theme: Theme,
         width?: number,
     ) => {
         const { fontSize, minSizes } = getSizeStyles(size);
@@ -64,13 +70,9 @@ const styles = {
             color: inherit;
             padding: 0;
             margin: 0;
-
-            // custom Input
             color: ${isDarkMode ? theme.colors.white : theme.colors.black};
             font-family: "Gill Sans", sans-serif;
-            background-color: ${isDarkMode
-                ? theme.colors.black
-                : theme.colors.white};
+            background-color: ${theme.colors.white};
             border: ${theme.colors.border} solid 2px;
             &:disabled {
                 cursor: not-allowed;
@@ -83,6 +85,7 @@ const styles = {
             transition-timing-function: cubic-bezier(0.35, 0, 0.27, 0.96);
             transition-duration: 0.2s;
             transition-property: all;
+            // on focus within the first child input
             &:focus-within {
                 outline: "2px dotted transparent";
                 outline-offset: 2px;
@@ -102,12 +105,7 @@ const styles = {
             align-items: center;
         `;
     },
-    input: (
-        size: Sizes,
-        isDarkMode: boolean,
-        rounded: boolean,
-        width?: number,
-    ) => {
+    input: (size: Sizes, isDarkMode: boolean, theme: Theme) => {
         const { fontSize, minSizes } = getSizeStyles(size);
 
         return css`
@@ -120,11 +118,9 @@ const styles = {
             color: inherit;
             padding: 0;
             margin: 0;
-            color: ${isDarkMode ? theme.colors.white : theme.colors.black};
+            color: ${theme.colors.black};
             font-family: "Gill Sans", sans-serif;
-            background-color: ${isDarkMode
-                ? theme.colors.black
-                : theme.colors.white};
+            background-color: ${theme.colors.white};
             &:disabled {
                 cursor: not-allowed;
             }
@@ -134,7 +130,6 @@ const styles = {
                 background-color: transparent;
                 font-family: inherit;
                 font-size: inherit;
-                color: inherit;
                 padding: 0;
                 margin: 0;
             }
