@@ -1,9 +1,8 @@
 name: Publish NPM Package on Release
 
 on:
-  push:
-    branches:
-      - 'feat/pipeline-deploy'
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -13,31 +12,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
+      - name: Get releases informations
+        id: get_release
+        uses: actions/github-script@v3
         with:
-          version: 7
-          run_install: false
+          script: |
+            const release = await github.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: context.ref.replace('refs/tags/', '')
+            });
+            return release.data;
 
-      - name: Install dependencies
-        run: pnpm install --recursive
+      # - uses: pnpm/action-setup@v2
+      #   name: Install pnpm
+      #   with:
+      #     version: 7
+      #     run_install: false
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+      # - name: Install dependencies
+      #   run: pnpm install --recursive
 
-      - name: Build package
-        run: npm run build
+      # - name: Use Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '16'
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org/'
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
+      # - name: Build package
+      #   run: npm run build
 
-      - name: Publish package to NPM
-        run: |
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '20.x'
+      #     registry-url: 'https://registry.npmjs.org/'
+      #     token: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      # - name: Publish package to NPM
+      #   run: |
+      #     npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
