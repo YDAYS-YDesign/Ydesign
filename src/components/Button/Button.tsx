@@ -24,7 +24,7 @@ export const Button = ({
     rounded = false,
     ...rest
 }: ButtonProps): JSX.Element => {
-    const { isMobileView, isDarkMode } = useTheme();
+    const { isDarkMode } = useTheme();
     console.log(
         `${disabled ? `background-color: ${theme.colors.disabled};` : ""}`,
     );
@@ -32,8 +32,8 @@ export const Button = ({
         <button
             disabled={disabled}
             className={cx(
-                className,
                 styles.button(size, variant, isDarkMode, rounded),
+                className,
             )}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
