@@ -13,6 +13,8 @@ export let theme = {
         white: "#FFFFFF",
         disabled: "grey",
         border: "#969696",
+        lightPrimary: "#D2C5FF",
+        darkerDisabled: "#E5E5E5",
     },
     font: {
         family: `font-family: "Gill Sans", sans-serif;`,
