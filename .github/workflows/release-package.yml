@@ -22,6 +22,7 @@ jobs:
               repo: context.repo.repo,
               tag: context.ref.replace('refs/tags/', '')
             });
+            console.log(release.tag)
             return release.data;
 
       # - uses: pnpm/action-setup@v2
