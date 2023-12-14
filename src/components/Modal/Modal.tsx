@@ -59,7 +59,6 @@ const fadeIn = css`
 const styles = {
     modal: (rounded: boolean, isOpen: boolean) => css`
         position: fixed;
-        width
         top: 50;
         left: 50;
         display: flex;
@@ -73,7 +72,15 @@ const styles = {
         width: ${isOpen ? "80%" : "30%"};
         max-width: 600px;
         overflow: hidden;
-        transition: display 20s ease-in-out;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        animation : 1s ease-out 0s 1 fadeIn;
     `,
     content: css`
         padding: 20px;
