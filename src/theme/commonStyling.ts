@@ -16,13 +16,13 @@ export const getSizeStyles = (size: Sizes) => {
     let padding = "8px 16px";
     switch (size) {
         case "small":
-            padding = "4px 12px";
+            padding = "4px 10px";
             break;
         case "medium":
-            padding = "6px 14px";
+            padding = "6px 12px";
             break;
         case "large":
-            padding = "8px 16px";
+            padding = "8px 14px";
             break;
     }
     let sizes;

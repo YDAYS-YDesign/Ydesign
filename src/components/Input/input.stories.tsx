@@ -45,8 +45,31 @@ type Story = StoryObj<typeof meta>;
 export const DefaultInput: Story = {
     args: {
         disabled: false,
-        rounded: false,
+        rounded: true,
         placeholder: "placeholder...",
+        width: 200,
+    },
+    argTypes: {
+        disabled: {
+            control: "boolean",
+        },
+        rounded: {
+            control: "boolean",
+        },
+        placeholder: {
+            control: "text",
+        },
+        width: {
+            control: "number",
+        },
+    },
+};
+
+export const Disabled: Story = {
+    args: {
+        disabled: true,
+        rounded: true,
+        placeholder: "I'm disabled",
         width: 200,
     },
     argTypes: {
@@ -68,7 +91,7 @@ export const DefaultInput: Story = {
 export const WithSuffix: Story = {
     args: {
         disabled: false,
-        rounded: false,
+        rounded: true,
         placeholder: "placeholder...",
         width: 200,
         suffix: "check",
