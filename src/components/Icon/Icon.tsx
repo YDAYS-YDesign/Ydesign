@@ -49,7 +49,6 @@ export const Icon = ({
         <button
             onClick={props.onClick}
             className={css`
-                // remove every styles from button
                 background: none;
                 border: none;
                 padding: 0;

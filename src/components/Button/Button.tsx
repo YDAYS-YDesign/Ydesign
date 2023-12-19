@@ -3,6 +3,8 @@ import { css, cx } from "@emotion/css";
 import { useTheme } from "../../hooks/useTheme";
 import { Sizes, getSizeStyles } from "../../theme/commonStyling";
 import { Theme } from "../../theme/theme";
+import { IconType } from "../../types/IconType";
+import { Icon } from "../Icon/Icon";
 
 export type ButtonVariant = "primary" | "secondary";
 export interface ButtonProps
@@ -11,7 +13,8 @@ export interface ButtonProps
     size?: Sizes;
     children?: React.ReactNode;
     disabled?: boolean;
-    suffix?: React.ReactNode;
+    suffix?: IconType;
+    suffixColor?: string;
     rounded?: boolean;
 }
 
@@ -21,23 +24,24 @@ export const Button = ({
     variant = "primary",
     size = "medium",
     disabled = false,
-    rounded = false,
+    rounded = true,
+    suffix,
+    suffixColor = "black",
+    content,
     ...rest
 }: ButtonProps): JSX.Element => {
-    const { isDarkMode, theme } = useTheme();
-    console.log("theme", theme);
+    const { theme } = useTheme();
     return (
         <button
             disabled={disabled}
             className={cx(
                 className,
-                styles.button(size, variant, isDarkMode, rounded, theme),
+                styles.button(size, variant, rounded, theme, disabled),
             )}
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
         >
-            {children}
-            {rest.suffix}
+            <span>{content}</span>
+            {suffix && <Icon iconName={suffix} color={suffixColor} />}
         </button>
     );
 };
@@ -46,9 +50,9 @@ const styles = {
     button: (
         size: Sizes,
         variant: ButtonVariant,
-        isDarkMode: boolean,
         rounded: boolean,
         theme: Theme,
+        disabled?: boolean,
     ) => {
         const { fontSize, padding, minSizes } = getSizeStyles(size);
         return css`
@@ -70,14 +74,12 @@ const styles = {
             font-family: "Gill Sans", sans-serif;
             user-select: none;
             ${variant == "primary"
-                ? `background-color: ${theme.colors.primary};`
-                : `background-color: ${theme.colors.secondary};`}
+                ? `background-color: ${theme.colors.primary}`
+                : `background-color: ${theme.colors.white}`};
             color: ${theme.colors.black};
             border-radius: ${rounded ? "50px" : "8px"};
             padding: ${padding};
             font-size: ${fontSize}px;
-            border: 0px solid
-                ${isDarkMode ? theme.colors.black : theme.colors.white};
             &:active {
                 transform: scale(0.98);
             }
@@ -85,22 +87,14 @@ const styles = {
             transition-duration: 0.2s;
             transition-property: all;
             cursor: pointer;
-            &: hover {
-                background-color: ${variant == "primary"
-                    ? theme.colors.primary
-                    : theme.colors.secondary};
+            border: 2px solid
+                ${disabled ? theme.colors.disabled : theme.colors.primary};
+            &:hover {
+                background-color: ${theme.colors.white};
+                ${variant == "secondary" &&
+                `border 4px solid ${theme.colors.primary}`};
             }
-            &:focus {
-                outline: "2px dotted transparent";
-                outline-offset: 2px;
-                box-shadow:
-                    0 0 0 2px
-                        ${isDarkMode ? theme.colors.black : theme.colors.white},
-                    0 0 0px 5px
-                        ${variant == "primary"
-                            ? theme.colors.primary
-                            : theme.colors.secondary};
-            }
+
             &:disabled {
                 background-color: ${theme.colors.disabled};
                 cursor: not-allowed;
