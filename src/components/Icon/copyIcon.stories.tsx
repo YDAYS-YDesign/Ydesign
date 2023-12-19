@@ -9,6 +9,48 @@ import { useTheme } from "../../hooks/useTheme";
 import { Meta, StoryObj } from "@storybook/react";
 import { theme } from "../../theme/theme";
 
+const SearchableIconStory = (props: { args: IconProps }) => {
+    const [search, setSearch] = React.useState("");
+    const filteredIcons = IconsArray.filter((iconName) =>
+        iconName.toLowerCase().includes(search.toLowerCase()),
+    );
+    const { isDarkMode } = useTheme();
+
+    const handleCopy = (iconName: string) => {
+        navigator.clipboard.writeText(iconName);
+    };
+
+    return (
+        <div>
+            <input
+                type="text"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+            />
+            <span className={styles.comment}>
+                Click name to copy to clipboard
+            </span>
+            <div className={styles.searchable.container}>
+                {filteredIcons.map((iconName) => (
+                    <div className={styles.searchable.iconContainer}>
+                        <Icon
+                            color={props.args.color}
+                            size={props.args.size}
+                            iconName={iconName as IconType}
+                        />
+                        <button
+                            className={styles.searchable.iconName(isDarkMode)}
+                            onClick={() => handleCopy(iconName)}
+                        >
+                            {iconName}
+                        </button>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 const styles = {
     comment: css`
         margin-top: 10px;
@@ -81,29 +123,17 @@ const meta: Meta<typeof Icon> = {
     },
     component: (args) => (
         <YDesignWrapper>
-            <div
-                className={css`
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    height: 90vh;
-                `}
-            >
-                <Icon {...args} />
-            </div>
+            <SearchableIconStory args={args} />
         </YDesignWrapper>
     ),
 };
 
 type Story = StoryObj<typeof meta>;
 
-export const IconStory: Story = {
+export const SearchIcon: Story = {
     args: {
         size: "medium",
         color: "grey",
-        iconName: "search",
-        isClickable: false,
     },
     argTypes: {
         size: {
@@ -112,13 +142,6 @@ export const IconStory: Story = {
         },
         color: {
             control: "color",
-        },
-        iconName: {
-            control: "select",
-            options: IconsArray,
-        },
-        isClickable: {
-            control: "boolean",
         },
     },
 };

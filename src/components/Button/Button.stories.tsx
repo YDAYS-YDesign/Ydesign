@@ -16,7 +16,7 @@ const StorybookButton: React.FC<ButtonProps> = (props) => {
                     align-items: center;
                 `}
             >
-                <Button {...props}>{props.children}</Button>
+                <Button {...props}>{props.content}</Button>
             </div>
         </YDesignWrapper>
     );
@@ -29,7 +29,7 @@ export default {
         backgrounds: { disable: true },
     },
     argTypes: {
-        children: { control: "text" },
+        content: { control: "text" },
         variant: {
             control: "select",
             options: ["primary", "secondary"],
@@ -50,39 +50,39 @@ const Template = (args: ButtonProps) => <StorybookButton {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
     disabled: false,
-    children: "un bouton", // Default button text
+    content: "un bouton", // Default button text
     variant: "primary",
     size: "medium",
-    rounded: false,
+    rounded: true,
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
     disabled: false,
-    children: "un bouton", // Default button text
+    content: "un bouton", // Default button text
     variant: "secondary",
     size: "medium",
-    rounded: false,
+    rounded: true,
 };
 
-export const Suffix = Template.bind({});
-Suffix.argTypes = {
+export const WithSuffix = Template.bind({});
+WithSuffix.argTypes = {
     suffix: { control: "none" },
 };
-Suffix.args = {
+WithSuffix.args = {
     variant: "primary",
     disabled: false,
-    children: "Search", // Default button text
+    content: "Download", // Default button text
     size: "medium",
     rounded: false,
-    suffix: <Icon iconName={"search"} color={"white"} />,
+    suffix: "download",
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
     variant: "primary",
     disabled: true,
-    children: "un bouton", // Default button text
+    content: "un bouton", // Default button text
     rounded: false,
     size: "medium",
 };
