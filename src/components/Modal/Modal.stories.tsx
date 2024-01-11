@@ -2,10 +2,15 @@ import React from 'react';
 
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Modal, ModalProps } from './Modal';
-import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
 
 const StorybookModal: React.FC<ModalProps> = (props) => {
+    const [isOpen, setIsOpen] = React.useState(props.isOpen);
+
+    const handleClose = () => {
+        setIsOpen(false);
+        props.onClose();
+    };
     return (
         <YDesignWrapper>
             <div
@@ -17,7 +22,7 @@ const StorybookModal: React.FC<ModalProps> = (props) => {
                     align-items: center;
                 `}
             >
-                <Modal {...props}></Modal>
+                <Modal {...props} isOpen={isOpen} onClose={handleClose} />
             </div>
         </YDesignWrapper>
     );
