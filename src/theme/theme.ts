@@ -1,20 +1,18 @@
-import { t } from "@storybook/theming/dist/create-df04f5c3";
-
 export let theme = {
     colors: {
         // primary is violet
-        primary: "#8d71fd",
+        primary: "#A58CFF",
         // secondary is blue cyan
-        secondary: "#3589f4",
+        secondary: "#8CC4FF",
         // tertiary is yellow
-        yellow: "#FFF7AE",
+        yellow: "#FFE047",
         // other colors
-        black: "#2A2A2A",
+        black: "#111111",
         white: "#FFFFFF",
-        disabled: "grey",
+        disabled: "#AAAAAA",
         border: "#969696",
         lightPrimary: "#D2C5FF",
-        darkerDisabled: "#E5E5E5",
+        error: "#FF4444",
     },
     font: {
         family: `font-family: "Gill Sans", sans-serif;`,
