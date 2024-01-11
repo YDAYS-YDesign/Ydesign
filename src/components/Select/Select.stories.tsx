@@ -1,17 +1,16 @@
+import { action } from '@storybook/addon-actions';
 import React from "react";
-import  { useState } from 'react';
+import { Select , SelectProps} from "./Select";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
-import { Select, SelectProps } from "./Select";
+import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
-import { Icon } from "../Icon/Icon";
 
-const StorybookSelect: React.FC<SelectProps> = (props) => {
-    const [selectedValue, setSelectedValue] = useState("");
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
-
-  };
-    return (
+const meta: Meta<typeof Select> = {
+    title: "Select",
+    parameters: {
+        backgrounds: { disable: true },
+    },
+    component: (args) => (
         <YDesignWrapper>
             <div
                 className={css`
@@ -22,28 +21,73 @@ const StorybookSelect: React.FC<SelectProps> = (props) => {
                     align-items: center;
                 `}
             >
-                <Select title={"Select an element "} options={["First option" , "Second option", "Third option","1 ", "Fourth option" ]} themeUser={"light"} onSelect={handleSelect} isBlock={true}/>
+                <Select
+                    {...args}
+                />
             </div>
         </YDesignWrapper>
+    ),
+};
+
+type Story = StoryObj<typeof meta>;
+
+
+export const DefaultSelect: Story = (args : SelectProps) => {
+    const handleSelect = (selectedOption: string) => {
+        action('onSelect')(selectedOption);
+    };
+
+    return (
+        <div
+        className={css`
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `}
+    >
+        <Select
+            title={args.title}
+            
+            isDarkMode={args.isDarkMode}
+            // onSelect={handleSelect}
+            
+            {...args}
+        />
+    </div>
     );
 };
 
-// export default {
-//     title: "Select",
-//     component: StorybookSelect,
-//     parameters: {
-//         backgrounds: { disable: true },
-//     },
-//     argTypes: {
-//         children: { control: "text" },
-//         variant: {
-//             control: "select",
-//             options: ["primary", "secondary"],
-//         },
-//         size: {
-//             control: "select",
-//             options: ["small", "medium", "large"],
-//         },
-//         rounded: { control: "boolean" },
-//     },
-// };
+DefaultSelect.args = {
+    title: "Select an option",
+    options: ["First option", "Second option", "Third option", "Fourth option"],
+    isDarkMode: false,
+    isBlock: true,
+};
+
+DefaultSelect.argTypes = {
+    title: {
+        control: "string",
+    },
+    options: {
+        control: {
+            type: "array",
+            of: { type: "string" },
+        },
+    },
+    isDarkMode: {
+        control: "boolean",
+    },
+    onSelect: {
+        table: {
+            disable: true, 
+        },
+    },
+    isBlock: {
+        control: "boolean",
+    },
+};
+
+
+export default meta;
