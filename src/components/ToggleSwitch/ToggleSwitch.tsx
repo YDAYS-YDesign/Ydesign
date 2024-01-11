@@ -23,8 +23,6 @@ export const ToggleSwitch = ({
     const handleToggle = () => {
         const newCheckedState = !checked;
         setChecked(newCheckedState);
-        console.log("Toggle state:", newCheckedState);
-        console.log(buttonColor);
     };
 
     return (

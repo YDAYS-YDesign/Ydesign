@@ -6,7 +6,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
 
 const meta: Meta<typeof ToggleSwitch> = {
-    title: "Slider",
+    title: "Toogle",
     parameters: {
         backgrounds: { disable: false },
     },
