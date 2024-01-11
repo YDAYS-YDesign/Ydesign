@@ -11,6 +11,7 @@ export let theme = {
         white: "#FFFFFF",
         disabled: "#AAAAAA",
         border: "#969696",
+        lightPrimary: "#D2C5FF",
         error: "#FF4444",
     },
     font: {
