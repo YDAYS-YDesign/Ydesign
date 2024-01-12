@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
+import { action } from "@storybook/addon-actions";
 import React from "react";
-import { Select , SelectProps} from "./Select";
+import { Select, SelectProps } from "./Select";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
@@ -21,9 +21,7 @@ const meta: Meta<typeof Select> = {
                     align-items: center;
                 `}
             >
-                <Select
-                    {...args}
-                />
+                <Select {...args} />
             </div>
         </YDesignWrapper>
     ),
@@ -31,31 +29,31 @@ const meta: Meta<typeof Select> = {
 
 type Story = StoryObj<typeof meta>;
 
-
-export const DefaultSelect: Story = (args : SelectProps) => {
+export const DefaultSelect: Story = (args: SelectProps) => {
     const handleSelect = (selectedOption: string) => {
-        action('onSelect')(selectedOption);
+        action("onSelect")(selectedOption);
     };
 
     return (
-        <div
-        className={css`
-            width: 100%;
-            height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        `}
-    >
-        <Select
-            title={args.title}
-            
-            isDarkMode={args.isDarkMode}
-            // onSelect={handleSelect}
-            
-            {...args}
-        />
-    </div>
+        <YDesignWrapper>
+            <div
+                className={css`
+                    width: 100%;
+                    height: 90vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                `}
+            >
+                <Select
+                    title={args.title}
+                    isDarkMode={args.isDarkMode}
+                    // onSelect={handleSelect}
+
+                    {...args}
+                />
+            </div>
+        </YDesignWrapper>
     );
 };
 
@@ -81,13 +79,12 @@ DefaultSelect.argTypes = {
     },
     onSelect: {
         table: {
-            disable: true, 
+            disable: true,
         },
     },
     isBlock: {
         control: "boolean",
     },
 };
-
 
 export default meta;
