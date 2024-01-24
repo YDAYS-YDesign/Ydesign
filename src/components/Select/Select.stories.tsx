@@ -29,8 +29,6 @@ const meta: Meta<typeof Select> = {
 
 type Story = StoryObj<typeof meta>;
 
-
-
 export const Small: Story = {
     args: {
         title: "Select an option",
@@ -49,7 +47,6 @@ export const Small: Story = {
         },block:{
             control:"boolean"
         },
-
     },
 };
 export const Medium: Story = {
@@ -115,7 +112,5 @@ export const Disable: Story = {
 
     },
 };
-
-
 
 export default meta;
