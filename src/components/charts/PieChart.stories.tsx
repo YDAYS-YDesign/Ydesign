@@ -53,24 +53,9 @@ const meta: Meta<typeof PieChart> = {
                 `}
             >
                 <PieChart
-                    chartData={{
-                        labels: UserData.map((data) => data.year),
-                        datasets: [
-                            {
-                                label: "Users Gained",
-                                data: UserData.map((data) => data.userGain),
-                                backgroundColor: [
-                                    "rgba(75,192,192,1)",
-                                    "#ecf0f1",
-                                    "#50AF95",
-                                    "#f3ba2f",
-                                    "#2a71d0",
-                                ],
-                                borderColor: "black",
-                                borderWidth: 2,
-                            },
-                        ],
-                    }}
+                    title={args.title}
+                    hoverColor={args.hoverColor}
+                    chartData={args.chartData}
                 />
             </div>
         </YDesignWrapper>
@@ -80,8 +65,35 @@ const meta: Meta<typeof PieChart> = {
 type Story = StoryObj<typeof meta>;
 
 export const DefaultPieChart: Story = {
-    args: {},
-    argTypes: {},
+    args: {
+        title: "Pie Chart title",
+        hoverColor: "blue",
+        chartData: {
+            dataset: {
+                backgroundColor: ["green", "yellow", "red"],
+                data: [10, 40, 50],
+            },
+            labels: ["Label1", "Label2", "Label3"],
+        },
+    },
+    argTypes: {
+        hoverColor: {
+            control: {
+                type: "color",
+            },
+        },
+        chartData: {
+            control: {
+                type: "object",
+            },
+        },
+
+        title: {
+            control: {
+                type: "text",
+            },
+        },
+    },
 };
 
 export default meta;
