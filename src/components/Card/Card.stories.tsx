@@ -33,8 +33,8 @@ export default {
         imgAlt: { control: "text" },
         title: { control: "text" },
         description: { control: "text" },
-        //     buttonText: { control: "text" },
-        //     link: { control: "text" },
+        buttonText: { control: "text" },
+        link: { control: "text" },
     },
 };
 
@@ -50,6 +50,6 @@ Default.args = {
     title: "Panda Géant",
     description:
         "Le Panda géant est un mammifères de la famille des Ursidés, endémique de Chine centrale. Il fait partie de l'ordre des Carnivores, même si son régime alimentaire est constitué à 99 % de végétaux, principalement de bambou",
-    // buttonText: "En Savoir Plus",
-    // link: "https://www.google.com",
+    buttonText: "En Savoir Plus",
+    link: "https://www.google.com",
 };

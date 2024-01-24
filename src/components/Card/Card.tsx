@@ -31,12 +31,16 @@ export const Card: React.FC<CardProps> = ({
             {title && (
                 <div className={`description ${styles.description}`}>
                     {title && <h1 className={styles.title}>{title}</h1>}
-                    {description && <p>{description}</p>}
-                    {/* {buttonText && link && (
+                    {description && 
+                    <div className={styles.textContainer}>
+                    <p className={styles.text}>{description}</p>
+                    </div>
+                    }
+                    {buttonText && link && (
                         <Button rounded className={styles.buttonText(theme)}>
                             {buttonText}
                         </Button>
-                    )} */}
+                    )}
                 </div>
             )}
         </div>
@@ -89,5 +93,14 @@ const styles = {
                 0 0 0 2px ${theme.colors.yellow},
                 0 0 0px 5px ${theme.colors.primary};
         }
+    `,
+    textContainer: css`
+        height: 25px;
+        /* overflow: hidden; */
+    text-overflow: ellipsis;
+    `,  
+    text:css`
+    overflow: hidden;
+    text-overflow: ellipsis;
     `,
 };
