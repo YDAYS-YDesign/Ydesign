@@ -65,30 +65,9 @@ const styles = {
     ) => css`
         font-family: "Gill Sans", sans-serif;
         color: ${isDarkMode ? theme.colors.white : theme.colors.black};
-        margin-top: 20px;
         overflow: hidden;
-        display: none;
-        animation: 0.8s ${isOpen ? "slideDown" : "slideUp"};
-        display: ${isOpen ? "block" : "none"};
-        @keyframes slideDown {
-            0% {
-                max-height: 0px;
-            }
-            100% {
-                max-height: 100px;
-            }
-        }
-        @keyframes slideUp {
-            0% {
-                max-height: 100px;
-            }
-            100% {
-                max-height: 0px;
-            }
-        }
-    `,
-    hidden: css`
-        display: none;
+        max-height: ${isOpen ? "400px" : "0"};
+        transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     `,
     accordionDescription: css`
         max-width: 100%;
