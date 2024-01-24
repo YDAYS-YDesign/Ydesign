@@ -4,6 +4,7 @@ import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { ToggleSwitch } from "./ToggleSwitch";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
+import { theme } from "../../theme/theme";
 
 const meta: Meta<typeof ToggleSwitch> = {
     title: "Toogle",
@@ -33,7 +34,7 @@ export const DefaultToggleSwitch: Story = {
     args: {
         disabled: false,
         forcedChecked: false,
-        buttonColor: "red",
+        buttonColor: "blue",
     },
     argTypes: {
         disabled: {
