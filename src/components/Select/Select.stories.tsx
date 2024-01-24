@@ -62,12 +62,10 @@ DefaultSelect.args = {
     options: ["First option", "Second option", "Third option", "Fourth option"],
     isDarkMode: false,
     isBlock: true,
+    disabled: false,
 };
 
 DefaultSelect.argTypes = {
-    title: {
-        control: "string",
-    },
     options: {
         control: {
             type: "array",
@@ -76,6 +74,9 @@ DefaultSelect.argTypes = {
     },
     isDarkMode: {
         control: "boolean",
+    },
+    disabled:{
+        control:"boolean"
     },
     onSelect: {
         table: {

@@ -8,13 +8,15 @@ export interface SelectProps {
   title?:string
   options: string[] 
   isDarkMode?:boolean 
+  disabled: boolean
   onSelect: (selectedValue: string) => void
   isBlock?:boolean
   className?: string;
   
+  
 }
 // ------------------------------------------------------
-export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , onSelect , isBlock , className }) => {
+export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , disabled, onSelect , isBlock , className }) => {
   isDarkMode = isDarkMode || false;
   isBlock = isBlock || true;
   const [isOpen, setIsOpen] = useState(false);
@@ -22,13 +24,18 @@ export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , onS
   const ref = useRef<HTMLDivElement>(null);
   // ------------------------------------------------------
   const handleToggle = () => {
-    setIsOpen(!isOpen);
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
   };
   const handleSelection = (option: string) => {
-    setIsOpen(!isOpen);
-    setSelectedOption(option);
-    onSelect(option)
-  };
+    if (!disabled){
+
+      setIsOpen(!isOpen);
+      setSelectedOption(option);
+      onSelect(option)
+    }
+    };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,13 +57,13 @@ export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , onS
   return (
     <div className={cx(
       className,
-      styles.select(isDarkMode , isBlock  ),
+      styles.select(isDarkMode , isBlock ,disabled ),
   )}>
     <div className="custom-select" >
       <div className= 'select-header'onClick={handleToggle}  ref={ref}  >
       <input className= 'inputHead' type="text" value={selectedOption || title} />
         <div className={isOpen ? 'rotate chevron' : 'chevron'}>
-        <Icon iconName={'chevron-down'} color={isDarkMode ? theme.colors.white : theme.colors.black} />
+        <Icon iconName={'chevron-down'} color={disabled ? theme.colors.white : isDarkMode ? theme.colors.white : theme.colors.black} />
         </div>
       </div>
       {isOpen && (
@@ -79,6 +86,7 @@ const styles = {
   select: (
       isDarkMode: boolean,
       isBlock : boolean,
+      disabled :boolean,
   ) => {
     return css`@keyframes fadeIn {
       from {
@@ -99,25 +107,25 @@ const styles = {
       align-items: center; 
       width: 253px;
       height : 35px ;
-      background-color: ${isDarkMode ? theme.colors.black : theme.colors.white};
-      border: 2px solid ${theme.colors.primary};
+      background-color: ${disabled ? theme.colors.disabled : isDarkMode ? theme.colors.black : theme.colors.white};
+      border: 2px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
       border-radius: 25px;
-      margin:5px;
+      margin: 5px;
       
       margin-bot:0;
     } 
     .inputHead{
+      cursor: ${disabled ? "not-allowed" : "cursor: auto;" };
       font-family:${theme.font.family} ;
-      color: ${isDarkMode ? theme.colors.white : theme.colors.black};
+      color: ${disabled ? theme.colors.white : isDarkMode ? theme.colors.white : theme.colors.black};
       font-size: 16px;
       padding-left:25px;
       height: 100%;
       width: 100%;
       border-radius: 25px;
-      background-color: ${isDarkMode ? theme.colors.black : theme.colors.white};
+      background-color: ${disabled ? theme.colors.disabled : isDarkMode ? theme.colors.black : theme.colors.white};
       margin: 0;
-      color: ${isDarkMode ? theme.colors.white : theme.colors.black};
-      border: 1px solid ${theme.colors.primary};
+      border: 1px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
     }
     .inputHead:focus {
       outline: none;
@@ -135,7 +143,7 @@ const styles = {
     }
 
     .select-header:hover{
-      border: 2px solid ${theme.colors.primary};
+      border: 2px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
     }
     .select-list {
       animation: fadeIn 1s forwards;
@@ -153,13 +161,13 @@ const styles = {
     }
     
     .liDiv{
-      background-color: ${isDarkMode ? theme.colors.black : theme.colors.white};
+      background-color: ${disabled ? theme.colors.disabled :isDarkMode ? theme.colors.black : theme.colors.white};
       padding:0;
       width:100%;
       height :35px ;
     }
     .liDiv:hover{
-      background-color:${theme.colors.primary};
+      background-color:${disabled ? theme.colors.disabled : theme.colors.primary};
     }
     
     li{
