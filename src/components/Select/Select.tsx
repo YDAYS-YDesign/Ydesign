@@ -3,26 +3,49 @@ import { css , cx } from "@emotion/css";
 import { theme } from "../../theme/theme";
 import { Icon } from "../Icon/Icon";
 
-// ------------------------------------------------------
+enum Size {
+  small =1,
+  medium =2,
+  big=3,
+}
+
 export interface SelectProps {
   title?:string
   options: string[] 
   isDarkMode?:boolean 
-  disabled: boolean
+  disabled?: boolean
   onSelect: (selectedValue: string) => void
   isBlock?:boolean
   className?: string;
-  
-  
+  size?:Size;
 }
-// ------------------------------------------------------
-export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , disabled, onSelect , isBlock , className }) => {
+
+export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , disabled, onSelect , isBlock , className , size}) => {
   isDarkMode = isDarkMode || false;
+  size = size || Size.medium;
+  disabled = disabled || false;
   isBlock = isBlock || true;
+var transf
+
+  if (isBlock) {
+    if(size === 1){
+      transf = "top: -31px;"
+    }else{
+      transf = "top: -40px;"
+    }
+  }else{
+    if(size === 1){
+      transf = "transform:translateY(-31px);"
+    }else{
+      transf = "transform:translateY(-43px);"
+    }
+  }
+  
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-  // ------------------------------------------------------
+ 
   const handleToggle = () => {
     if (!disabled) {
       setIsOpen(!isOpen);
@@ -45,19 +68,16 @@ export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , dis
           }
       }
     };
-
-    // Attach the listeners on component mount.
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
-  // ------------------------------------------------------
   return (
     <div className={cx(
       className,
-      styles.select(isDarkMode , isBlock ,disabled ),
+      styles.select(isDarkMode , isBlock ,disabled , size , transf),
   )}>
     <div className="custom-select" >
       <div className= 'select-header'onClick={handleToggle}  ref={ref}  >
@@ -81,12 +101,16 @@ export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , dis
     </div>
   );
 };
-// ------------------------------------------------------
+
+
 const styles = {
   select: (
       isDarkMode: boolean,
       isBlock : boolean,
       disabled :boolean,
+      size : Size,
+      transf : string,
+
   ) => {
     return css`@keyframes fadeIn {
       from {
@@ -96,6 +120,7 @@ const styles = {
         opacity: 1; 
       }
     }
+
     .custom-select{
       margin: 3px;
       font-family: 'Exo', sans-serif;
@@ -105,36 +130,36 @@ const styles = {
       z-index: 2;
       display: flex;
       align-items: center; 
-      width: 253px;
-      height : 35px ;
+      width: ${size == 2 ? "253px" : size==3 ? "400px" : "125px" };
+      height : ${size == 2 ? "35px" : size==3 ? "60px" : "23px" };
       background-color: ${disabled ? theme.colors.disabled : isDarkMode ? theme.colors.black : theme.colors.white};
-      border: 2px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
-      border-radius: 25px;
+      border: 1px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
+      border-radius: ${size == 2 ? "25px" : size==3 ? "30px" : "20px" };
       margin: 5px;
-      
       margin-bot:0;
     } 
     .inputHead{
-      cursor: ${disabled ? "not-allowed" : "cursor: auto;" };
+      width: 100%;
+      height: 100%;
+      margin: 0;
       font-family:${theme.font.family} ;
       color: ${disabled ? theme.colors.white : isDarkMode ? theme.colors.white : theme.colors.black};
-      font-size: 16px;
-      padding-left:25px;
-      height: 100%;
-      width: 100%;
-      border-radius: 25px;
+      font-size: ${size == 2 ? " 16px" : size==3 ? "35px" : "9px" };
+      padding-left:${size == 2 ? " 25px" : size==3 ? "30px" : "10px" };
+      cursor: ${disabled ? "not-allowed" : "cursor: auto;" };
       background-color: ${disabled ? theme.colors.disabled : isDarkMode ? theme.colors.black : theme.colors.white};
-      margin: 0;
       border: 1px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
+      border-radius: ${size == 2 ? "25px" : size==3 ? "30px" : "20px" };
     }
     .inputHead:focus {
       outline: none;
   }
     .chevron svg {
       position: absolute;
-      top: calc(25%); 
+      top: calc(${size == 2 ? " 15%" : size==3 ? "19%" : "13%" }); 
       right: 10px; 
-      width: 28px;
+      width:${size == 2 ? " 28px" : size==3 ? "50px" : "17px" };
+      height: ${size == 2 ? " 28px" : size==3 ? "38px" : "17px" };
       transition: transform 0.5s ease;
       z-index:2;
     }
@@ -143,28 +168,34 @@ const styles = {
     }
 
     .select-header:hover{
-      border: 2px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
+      border: 1px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
     }
     .select-list {
       animation: fadeIn 1s forwards;
       z-index: 1;
-      position: ${isBlock ? 'relative' : 'absolute'}; 
-      ${isBlock ? ' top: -40px;' :" transform: translateY(-40px);"}  
+
+
+      position: ${isBlock ? "relative" : "absolute"}; 
+
+      ${transf}  
+
+
       list-style-type: none;
-      width: 253px;
+      width:  width: ${size == 2 ? "253px" : size==3 ? "400px" : "125px" };
       border: 2px solid ${theme.colors.primary};
-      border-radius: 25px;
+      border-radius: ${size == 2 ? " 25px" : size==3 ? "30px" : "20px" };
       color: ${isDarkMode ?  theme.colors.black : theme.colors.white};
       margin:0 5px -40px 5px;
-      padding:38px 0  20px 0;
+      padding:${size == 1 ? "30px 0 15px 0 ": "38px 0 20px 0" };
       background-color: ${isDarkMode ? theme.colors.black : theme.colors.white};
     }
+  
     
     .liDiv{
       background-color: ${disabled ? theme.colors.disabled :isDarkMode ? theme.colors.black : theme.colors.white};
       padding:0;
       width:100%;
-      height :35px ;
+      height: ${size == 2 ? " 32px" : size==3 ? "60px" : "23px" };
     }
     .liDiv:hover{
       background-color:${disabled ? theme.colors.disabled : theme.colors.primary};
@@ -177,8 +208,9 @@ const styles = {
       height:100%;
       cursor: pointer;
       color: ${isDarkMode ? theme.colors.white : theme.colors.black};
-      padding-left:25px;
-      font-size: 16px;
+      padding-left:${size == 2 ? " 25px" : size==3 ? "30px" : "10px" };
+      font-size: ${size == 2 ? " 16px" : size==3 ? "35px" : "9px" };
+      
     }
     li:hover{
       color:${theme.colors.black};

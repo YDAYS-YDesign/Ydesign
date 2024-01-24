@@ -29,63 +29,93 @@ const meta: Meta<typeof Select> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const DefaultSelect: Story = (args: SelectProps) => {
-    const handleSelect = (selectedOption: string) => {
-        action("onSelect")(selectedOption);
-    };
 
-    return (
-        <YDesignWrapper>
-            <div
-                className={css`
-                    width: 100%;
-                    height: 90vh;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                `}
-            >
-                <Select
-                    title={args.title}
-                    isDarkMode={args.isDarkMode}
-                    // onSelect={handleSelect}
 
-                    {...args}
-                />
-            </div>
-        </YDesignWrapper>
-    );
-};
-
-DefaultSelect.args = {
-    title: "Select an option",
-    options: ["First option", "Second option", "Third option", "Fourth option"],
-    isDarkMode: false,
-    isBlock: true,
-    disabled: false,
-};
-
-DefaultSelect.argTypes = {
-    options: {
-        control: {
-            type: "array",
-            of: { type: "string" },
+export const Small: Story = {
+    args: {
+        title: "Select an option",
+        options: ["First option", "Second option", "Third option", "Fourth option"],
+        disabled: false,
+        isDarkMode: true,
+        isBlock:false,
+        size:1,
+    },
+    argTypes: {
+        disabled: {
+            control: "boolean",
         },
-    },
-    isDarkMode: {
-        control: "boolean",
-    },
-    disabled:{
-        control:"boolean"
-    },
-    onSelect: {
-        table: {
-            disable: true,
+        isDarkMode: {
+            control: "boolean",
+        },isBlock:{
+            control:"boolean"
         },
-    },
-    isBlock: {
-        control: "boolean",
+
     },
 };
+export const Medium: Story = {
+    args: {
+        title: "Select an option",
+        options: ["First option", "Second option", "Third option", "Fourth option"],
+        disabled: false,
+        isDarkMode: false,
+        isBlock:false,
+        size:2,
+    },
+    argTypes: {
+        disabled: {
+            control: "boolean",
+        },
+        isDarkMode: {
+            control: "boolean",
+        },
+        isBlock:{
+            control:"boolean"
+        },
+
+    },
+};
+export const Big: Story = {
+    args: {
+        title: "Select an option",
+        options: ["First option", "Second option", "Third option", "Fourth option"],
+        disabled: false,
+        isDarkMode: false,
+        isBlock:true,
+        size:3,
+    },
+    argTypes: {
+        disabled: {
+            control: "boolean",
+        },
+        isDarkMode: {
+            control: "boolean",
+        },isBlock:{
+            control:"boolean"
+        },
+
+    },
+};
+export const Disable: Story = {
+    args: {
+        title: "Select an option",
+        options: ["First option", "Second option", "Third option", "Fourth option"],
+        disabled: true,
+        isDarkMode: false,
+        isBlock:false,
+    },
+    argTypes: {
+        disabled: {
+            control: "boolean",
+        },
+        isDarkMode: {
+            control: "boolean",
+        },isBlock:{
+            control:"boolean"
+        },
+
+    },
+};
+
+
 
 export default meta;
