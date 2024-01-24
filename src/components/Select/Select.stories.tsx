@@ -36,17 +36,17 @@ export const Small: Story = {
         title: "Select an option",
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: false,
-        isDarkMode: true,
-        isBlock:false,
+        darkMode: true,
+        block:false,
         size:1,
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        isDarkMode: {
+        darkMode: {
             control: "boolean",
-        },isBlock:{
+        },block:{
             control:"boolean"
         },
 
@@ -57,18 +57,18 @@ export const Medium: Story = {
         title: "Select an option",
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: false,
-        isDarkMode: false,
-        isBlock:false,
+        darkMode: false,
+        block:false,
         size:2,
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        isDarkMode: {
+        darkMode: {
             control: "boolean",
         },
-        isBlock:{
+        block:{
             control:"boolean"
         },
 
@@ -79,17 +79,17 @@ export const Big: Story = {
         title: "Select an option",
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: false,
-        isDarkMode: false,
-        isBlock:true,
+        darkMode: false,
+        block:true,
         size:3,
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        isDarkMode: {
+        darkMode: {
             control: "boolean",
-        },isBlock:{
+        },block:{
             control:"boolean"
         },
 
@@ -100,16 +100,16 @@ export const Disable: Story = {
         title: "Select an option",
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: true,
-        isDarkMode: false,
-        isBlock:false,
+        darkMode: false,
+        block:false,
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        isDarkMode: {
+        darkMode: {
             control: "boolean",
-        },isBlock:{
+        },block:{
             control:"boolean"
         },
 

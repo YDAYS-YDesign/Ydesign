@@ -12,30 +12,34 @@ enum Size {
 export interface SelectProps {
   title?:string
   options: string[] 
-  isDarkMode?:boolean 
-  disabled?: boolean
-  onSelect: (selectedValue: string) => void
-  isBlock?:boolean
-  className?: string;
+  darkMode?:boolean 
   size?:Size;
+  disabled?: boolean
+  block?:boolean
+  onSelect: (selectedValue: string) => void
+  className?: string;
 }
 
-export const Select: React.FC<SelectProps> = ({ title, options, isDarkMode , disabled, onSelect , isBlock , className , size}) => {
-  isDarkMode = isDarkMode || false;
+export const Select: React.FC<SelectProps> = ({ title, options, darkMode , disabled, onSelect , block , className , size}) => {
+  darkMode = darkMode || false;
   size = size || Size.medium;
   disabled = disabled || false;
-  isBlock = isBlock || true;
+  block = block || true;
 var transf
 
-  if (isBlock) {
+  if (block) {
     if(size === 1){
       transf = "top: -31px;"
+    }else if (size===3){
+      transf = "top: -55px;"
     }else{
       transf = "top: -40px;"
     }
   }else{
     if(size === 1){
       transf = "transform:translateY(-31px);"
+    }else if (size===3){
+      transf = "transform:translateY(-52px);"
     }else{
       transf = "transform:translateY(-43px);"
     }
@@ -77,13 +81,13 @@ var transf
   return (
     <div className={cx(
       className,
-      styles.select(isDarkMode , isBlock ,disabled , size , transf),
+      styles.select(darkMode , block ,disabled , size , transf),
   )}>
     <div className="custom-select" >
       <div className= 'select-header'onClick={handleToggle}  ref={ref}  >
-      <input className= 'inputHead' type="text" value={selectedOption || title} />
+      <input className= 'inputHead' type="text" value={selectedOption || title }/>
         <div className={isOpen ? 'rotate chevron' : 'chevron'}>
-        <Icon iconName={'chevron-down'} color={disabled ? theme.colors.white : isDarkMode ? theme.colors.white : theme.colors.black} />
+        <Icon iconName={'chevron-down'} color={disabled ? theme.colors.white : darkMode ? theme.colors.white : theme.colors.black} />
         </div>
       </div>
       {isOpen && (
@@ -105,8 +109,8 @@ var transf
 
 const styles = {
   select: (
-      isDarkMode: boolean,
-      isBlock : boolean,
+      darkMode: boolean,
+      block : boolean,
       disabled :boolean,
       size : Size,
       transf : string,
@@ -132,7 +136,7 @@ const styles = {
       align-items: center; 
       width: ${size == 2 ? "253px" : size==3 ? "400px" : "125px" };
       height : ${size == 2 ? "35px" : size==3 ? "60px" : "23px" };
-      background-color: ${disabled ? theme.colors.disabled : isDarkMode ? theme.colors.black : theme.colors.white};
+      background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
       border: 1px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
       border-radius: ${size == 2 ? "25px" : size==3 ? "30px" : "20px" };
       margin: 5px;
@@ -143,11 +147,11 @@ const styles = {
       height: 100%;
       margin: 0;
       font-family:${theme.font.family} ;
-      color: ${disabled ? theme.colors.white : isDarkMode ? theme.colors.white : theme.colors.black};
+      color: ${disabled ? theme.colors.white : darkMode ? theme.colors.white : theme.colors.black};
       font-size: ${size == 2 ? " 16px" : size==3 ? "35px" : "9px" };
       padding-left:${size == 2 ? " 25px" : size==3 ? "30px" : "10px" };
       cursor: ${disabled ? "not-allowed" : "cursor: auto;" };
-      background-color: ${disabled ? theme.colors.disabled : isDarkMode ? theme.colors.black : theme.colors.white};
+      background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
       border: 1px solid ${disabled ? theme.colors.disabled :theme.colors.primary};
       border-radius: ${size == 2 ? "25px" : size==3 ? "30px" : "20px" };
     }
@@ -173,26 +177,21 @@ const styles = {
     .select-list {
       animation: fadeIn 1s forwards;
       z-index: 1;
-
-
-      position: ${isBlock ? "relative" : "absolute"}; 
-
+      position: ${block ? "relative" : "absolute"}; 
       ${transf}  
-
-
       list-style-type: none;
       width:  width: ${size == 2 ? "253px" : size==3 ? "400px" : "125px" };
       border: 2px solid ${theme.colors.primary};
-      border-radius: ${size == 2 ? " 25px" : size==3 ? "30px" : "20px" };
-      color: ${isDarkMode ?  theme.colors.black : theme.colors.white};
+      border-radius: ${size == 2 ? " 25px" : size==3 ? "40px" : "20px" };
+      color: ${darkMode ?  theme.colors.black : theme.colors.white};
       margin:0 5px -40px 5px;
-      padding:${size == 1 ? "30px 0 15px 0 ": "38px 0 20px 0" };
-      background-color: ${isDarkMode ? theme.colors.black : theme.colors.white};
+      padding:${size == 1 ? "30px 0 15px 0 ": size===2?"38px 0 20px 0" :"60px 0 30px 0"};
+      background-color: ${darkMode ? theme.colors.black : theme.colors.white};
     }
   
     
     .liDiv{
-      background-color: ${disabled ? theme.colors.disabled :isDarkMode ? theme.colors.black : theme.colors.white};
+      background-color: ${disabled ? theme.colors.disabled :darkMode ? theme.colors.black : theme.colors.white};
       padding:0;
       width:100%;
       height: ${size == 2 ? " 32px" : size==3 ? "60px" : "23px" };
@@ -207,7 +206,7 @@ const styles = {
       width:100%;
       height:100%;
       cursor: pointer;
-      color: ${isDarkMode ? theme.colors.white : theme.colors.black};
+      color: ${darkMode ? theme.colors.white : theme.colors.black};
       padding-left:${size == 2 ? " 25px" : size==3 ? "30px" : "10px" };
       font-size: ${size == 2 ? " 16px" : size==3 ? "35px" : "9px" };
       
