@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Icon, IconProps } from "../Icon/Icon";
-import { css, cx } from "@emotion/css";
+import { css } from "@emotion/css";
 import { useTheme } from "../../hooks/useTheme";
 import { Theme } from "../../theme/theme";
 
@@ -25,7 +25,7 @@ export const Accordion: React.FC<AccordionProps> = ({ title, description }) => {
     };
 
     return (
-        <div className={styles.accordion} onClick={toggleAccordion}>
+        <div className={styles.accordion(isDarkMode)} onClick={toggleAccordion}>
             <div className={styles.accordionLine}>
                 <div className={styles.accordionTitle(isDarkMode, theme)}>
                     {title}
@@ -40,13 +40,16 @@ export const Accordion: React.FC<AccordionProps> = ({ title, description }) => {
 };
 
 const styles = {
-    accordion: css`
+    accordion: (isDarkMode: Boolean) => css`
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
         padding: 30px;
         width: 100%;
         box-sizing: border-box;
         cursor: pointer;
+        :hover {
+            background-color: ${isDarkMode ? "#000000" : "#f1f1f1;"};
+        }
     `,
     accordionLine: css`
         display: flex;

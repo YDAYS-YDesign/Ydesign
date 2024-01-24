@@ -10,11 +10,11 @@ const StorybookAccordion: React.FC<AccordionProps> = (props) => {
                 className={css`
                     width: 100%;
                     height: 90vh;
-                    display: flex;
                     justify-content: center;
                     align-items: center;
                 `}
             >
+                <Accordion {...props}></Accordion>
                 <Accordion {...props}></Accordion>
             </div>
         </YDesignWrapper>
@@ -32,7 +32,6 @@ export default {
         description: { control: "text" },
     },
 };
-
 
 const Template = (args: AccordionProps) => <StorybookAccordion {...args} />;
 
