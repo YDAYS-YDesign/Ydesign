@@ -53,25 +53,20 @@ const meta: Meta<typeof PieChart> = {
                 `}
             >
                 <PieChart
-                    chartData={{
+                    chartData={{ 
                         labels: UserData.map((data) => data.year),
                         datasets: [
                             {
                                 label: "Users Gained",
                                 data: UserData.map((data) => data.userGain),
                                 backgroundColor: [
-                                    "rgba(75,192,192,1)",
-                                    "#ecf0f1",
-                                    "#50AF95",
-                                    "#f3ba2f",
-                                    "#2a71d0",
+                                    "#37247D", "#6D53C8", "#A58CFF", "#D2C5FF", "#E8E2FF"
                                 ],
                                 borderColor: "black",
                                 borderWidth: 2,
                             },
                         ],
-                    }}
-                />
+                    }}                />
             </div>
         </YDesignWrapper>
     ),
