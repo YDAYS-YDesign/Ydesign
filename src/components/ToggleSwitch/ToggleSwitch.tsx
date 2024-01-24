@@ -10,6 +10,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     buttonColor?: string;
 }
 
+const getRGBValues = (color: string): string => {
+    const hex = color.replace(/^#/, '');
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r}, ${g}, ${b}`;
+};
+
 export const ToggleSwitch = ({
     disabled,
     forcedChecked,
@@ -85,17 +94,21 @@ const styles = {
                   ? buttonColor
                   : theme.colors.white};
             transform: translateY(-50%);
+            box-shadow: 0 0.2rem 0.2rem 0.2rem rgba(${getRGBValues(theme.colors.disabled)}, 0.3);
             border-radius: 50%;
         }
+
         &:hover:before {
             content: "";
             position: absolute;
-            /* box-shadow: ${disabled
+            box-shadow: ${disabled
                 ? "none"
-                : `0 0 0 0.5rem ${
-                      checked ? buttonColor : theme.colors.darkerDisabled
-                  }`}; */
+                : checked
+                  ? `0 0 0 0.5rem rgba(${getRGBValues(buttonColor)}, 0.3)`
+                  : `0 0 0 0.5rem rgba(${getRGBValues(theme.colors.disabled)}, 0.3)`};
             transition: 0.2s;
+            cursor: ${disabled ? "not-allowed" : "pointer"};
+            border-radius: 50%;
         }
     `,
 };

@@ -33,7 +33,7 @@ export const DefaultToggleSwitch: Story = {
     args: {
         disabled: false,
         forcedChecked: false,
-        buttonColor: "red",
+        buttonColor: "blue",
     },
     argTypes: {
         disabled: {
