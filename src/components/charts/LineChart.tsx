@@ -1,6 +1,18 @@
 import React from "react";
 
-function LineChart({ chartData }) {
+export interface Props {
+    chartData: {
+        title: string;
+        labelsTitle: string;
+        labels: number[];
+        dataset: {
+            title: string;
+            data: number[];
+        };
+    };
+}
+
+function LineChart({ chartData }: Props) {
     const colors = ["#37247D", "#6D53C8", "#A58CFF", "#D2C5FF", "#E8E2FF"];
     const borderColor = "#111111";
 
@@ -10,19 +22,19 @@ function LineChart({ chartData }) {
     const chartWidth = canvasWidth - margin.left - margin.right;
     const chartHeight = canvasHeight - margin.top - margin.bottom;
 
-    const xScale = (value) =>
+    const xScale = (value: any) =>
         (value - chartData.labels[0]) *
         (chartWidth /
             (chartData.labels[chartData.labels.length - 1] -
                 chartData.labels[0]));
-    const yScale = (value) =>
+    const yScale = (value: any) =>
         chartHeight -
-        (value / Math.max(...chartData.datasets[0].data)) * chartHeight;
+        (value / Math.max(...chartData.dataset.data)) * chartHeight;
 
     const pathData = chartData.labels
         .map(
             (value, index) =>
-                `${xScale(value)},${yScale(chartData.datasets[0].data[index])}`,
+                `${xScale(value)},${yScale(chartData.dataset.data[index])}`,
         )
         .join(" L ");
 
@@ -60,7 +72,7 @@ function LineChart({ chartData }) {
                 stroke={borderColor}
                 strokeWidth="1"
             />
-            {chartData.datasets[0].data.map((value, index) => (
+            {chartData.dataset.data.map((value, index) => (
                 <g key={index} transform={`translate(0, ${yScale(value)})`}>
                     <text textAnchor="end" fontSize="10" x="-8" dy="0.3em">
                         {value}
@@ -75,7 +87,7 @@ function LineChart({ chartData }) {
             <g transform={`translate(${margin.left},${margin.top})`}>
                 <path
                     d={`M ${xScale(chartData.labels[0])},${yScale(
-                        chartData.datasets[0].data[0],
+                        chartData.dataset.data[0],
                     )} L ${pathData}`}
                     fill="none"
                     stroke={borderColor}
@@ -106,10 +118,10 @@ function LineChart({ chartData }) {
                     textAnchor="middle"
                     fontSize="12"
                 >
-                    {chartData.datasets[0].title}
+                    {chartData.dataset.title}
                 </text>
                 <g>
-                    {chartData.datasets[0].data.map((value, index) => (
+                    {chartData.dataset.data.map((value, index) => (
                         <circle
                             key={index}
                             cx={xScale(chartData.labels[index])}
