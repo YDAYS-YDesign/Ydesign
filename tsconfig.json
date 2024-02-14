@@ -1,38 +1,36 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "outDir": "dist/dist",
-    "module": "ESNext",
-    "target": "es6",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "rootDir": "src",
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "esModuleInterop": true,
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "rollup.config.js"
-  ],
-  "include": [
-    "src/**/*",
-    "src/setupTests.ts",
-    "assets/**/*",
-  ],
-  "types": [
-    "typePatches"
-  ],
-  "declaration": true,
-  "emitDeclarationOnly": true
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "outDir": "dist/dist",
+        "module": "ESNext",
+        "target": "es6",
+        "lib": ["es6", "dom"],
+        "sourceMap": true,
+        "allowJs": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "esModuleInterop": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "scripts",
+        "acceptance-tests",
+        "webpack",
+        "jest",
+        "rollup.config.js"
+    ],
+    "include": [
+        "src/**/*",
+        "src/setupTests.ts",
+        "assets/**/*"
+    ],
+    "types": ["typePatches"],
+    "declaration": true,
+    "emitDeclarationOnly": true
 }
