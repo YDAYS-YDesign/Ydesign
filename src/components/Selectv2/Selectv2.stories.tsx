@@ -31,12 +31,6 @@ const meta: Meta<typeof SelectVDeux> = {
             >
                 <SelectVDeux  {...args} />
 
-                <div className="">
-<br />
-<br />
-<br /><br /><br /><br />
-                 
-                </div>
             </div>
         </YDesignWrapper>
     ),
@@ -75,6 +69,7 @@ export const Medium: Story = {
           ],
         disabled: false,
         darkMode: true,
+        onSelect : handleSelect ,
         size: 1,
     },
     argTypes: {

@@ -150,24 +150,28 @@ const styles = {
             border-radius: 25px;
             padding: 17% 0 15px 0px;
             transform:translateY(-17%);
+            display:block;
             z-index:2;
             max-height: 150px;
             max-width: 400px;
             overflow: auto;
         }
         .container::-webkit-scrollbar {
-            width: 4px; 
-            height:20%; 
+            width: 4px;
+            overflow: hidden;
+            
         }
         
         
         .container::-webkit-scrollbar-track {
             background: ${darkMode ? theme.colors.black : theme.colors.white}; 
+            height: 1px;
         }
         
         .container::-webkit-scrollbar-thumb {
             background: ${theme.colors.primary};
             border-radius: 5px; 
+            height: 1px;
         }
         
         .container::-webkit-scrollbar-thumb:hover {
