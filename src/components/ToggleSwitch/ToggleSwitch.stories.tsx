@@ -68,7 +68,6 @@ export const DisabledToggle: Story = {
         buttonColor: "grey",
         className: "",
         size: "medium",
-        buttonColor: "grey",
     },
     argTypes: {
         disabled: {
