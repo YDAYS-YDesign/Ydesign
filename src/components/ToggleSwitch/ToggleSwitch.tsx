@@ -118,6 +118,7 @@ const styles = {
                   : `0 0 0 0.5rem rgba(${getRGBValues(theme.colors.disabled)}, 0.3)`};
             transition: 0.2s;
             cursor: ${disabled ? "not-allowed" : "pointer"};
+            border-radius: 50%;
         }
     `,
 

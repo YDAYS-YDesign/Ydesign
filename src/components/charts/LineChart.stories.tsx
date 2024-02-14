@@ -3,7 +3,7 @@ import React from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
-import PieChart from "./PieChart";
+import LineChart from "./LineChart";
 
 const UserData = [
     {
@@ -38,8 +38,8 @@ const UserData = [
     },
 ];
 
-const meta: Meta<typeof PieChart> = {
-    title: "PieChart",
+const meta: Meta<typeof LineChart> = {
+    title: "LineChart",
     parameters: {},
     component: (args) => (
         <YDesignWrapper>
@@ -52,9 +52,9 @@ const meta: Meta<typeof PieChart> = {
                     align-items: center;
                 `}
             >
-                <PieChart
-                    title={args.title}
-                    hoverColor={args.hoverColor}
+                <LineChart
+                    // title={args.title}
+                    // hoverColor={args.hoverColor}
                     chartData={args.chartData}
                 />
             </div>
@@ -66,33 +66,34 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultPieChart: Story = {
     args: {
-        title: "Pie Chart title",
-        hoverColor: "blue",
+        // title: "Pie Chart title",
+        // hoverColor: "blue",
         chartData: {
+            labelsTitle: "Labels title",
+            title: "Chart title",
             dataset: {
-                backgroundColor: ["green", "yellow", "red"],
+                title: "Dataset title",
                 data: [10, 40, 50],
             },
-            labels: ["Label1", "Label2", "Label3"],
+            labels: [1, 2, 3],
         },
     },
     argTypes: {
-        hoverColor: {
-            control: {
-                type: "color",
-            },
-        },
-        chartData: {
-            control: {
-                type: "object",
-            },
-        },
-
-        title: {
-            control: {
-                type: "text",
-            },
-        },
+        // hoverColor: {
+        //     control: {
+        //         type: "color",
+        //     },
+        // },
+        // chartData: {
+        //     control: {
+        //         type: "object",
+        //     },
+        // },
+        // title: {
+        //     control: {
+        //         type: "text",
+        //     },
+        // },
     },
 };
 
