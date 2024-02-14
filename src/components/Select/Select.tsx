@@ -9,7 +9,7 @@ enum Size {
     big = 3,
 }
 
-export interface SelectProps {
+export interface SelectV2Props {
     title?: string;
     options: string[];
     darkMode?: boolean;
@@ -20,7 +20,7 @@ export interface SelectProps {
     className?: string;
 }
 
-export const Select: React.FC<SelectProps> = ({
+export const Select: React.FC<SelectV2Props> = ({
     title,
     options,
     darkMode,
@@ -31,7 +31,7 @@ export const Select: React.FC<SelectProps> = ({
     size,
 }) => {
     darkMode = darkMode || false;
-    size = size || Size.medium;
+    size = size || 2;
     disabled = disabled || false;
     block = block || false;
     let transf;
@@ -55,11 +55,10 @@ export const Select: React.FC<SelectProps> = ({
     }
    
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState<string|null>(null);
     const ref = useRef<HTMLDivElement>(null);
-
+    const [inputValue, setInputValue] = useState('');
     
-
+ 
     const handleToggle = () => {
         if (!disabled) {
             setIsOpen(!isOpen);
@@ -68,10 +67,14 @@ export const Select: React.FC<SelectProps> = ({
     let handleSelection = (option: string) => {
         if (!disabled) {
             setIsOpen(!isOpen);
-            setSelectedOption(option);
+            setInputValue(option);
             onSelect(option);
         }
     };
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -99,7 +102,8 @@ export const Select: React.FC<SelectProps> = ({
                     <input
                         className="inputHead"
                         type="text"
-                        value={selectedOption || title}
+                        value={inputValue || title}
+                        onChange={handleInputChange}
                     />
                     <div className={isOpen ? "rotate chevron" : "chevron"}>
                         <Icon
@@ -116,13 +120,15 @@ export const Select: React.FC<SelectProps> = ({
                 </div>
                 {isOpen && (
                     <ul className="select-list">
-                        {options.map((option, index) => (
-                            <div key={index} className="liDiv">
-                                <li onClick={() => handleSelection(option) }>
+                        {options
+                            .filter(option => option.toLowerCase().includes(inputValue.toLowerCase()))
+                            .map(option => (
+                                <div className="liDiv">
+                                <div key={option} className="option" onClick={() => handleSelection(option)}>
                                     {option}
-                                </li>
-                            </div>
-                        )) }
+                                </div>
+                                </div>
+                            ))}
                     </ul>
                 ) }
             </div>
@@ -230,11 +236,7 @@ const styles = {
                 list-style-type: none;
                 width: ${size == 2 ? "253px" : size == 3 ? "400px" : "125px"};
                 border: 2px solid ${theme.colors.primary};
-                border-radius: ${size == 2
-                    ? " 25px"
-                    : size == 3
-                      ? "40px"
-                      : "20px"};
+                border-radius: 25px;
                 color: ${darkMode ? theme.colors.black : theme.colors.white};
                 margin: 0 5px -40px 5px;
                 padding: ${size == 1
@@ -261,7 +263,7 @@ const styles = {
                     ? theme.colors.disabled
                     : theme.colors.primary};
             }
-            li {
+            .option {
                 display: flex;
                 align-items: center;
                 width: 93%;
