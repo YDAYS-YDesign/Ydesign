@@ -33,30 +33,32 @@ export const Select: React.FC<SelectProps> = ({
     darkMode = darkMode || false;
     size = size || Size.medium;
     disabled = disabled || false;
-    block = block || true;
+    block = block || false;
     let transf;
 
     if (block) {
         if (size === 1) {
-            transf = "top: -27px;";
+            transf = "top: -26px;";
         } else if (size === 3) {
             transf = "top: -55px;";
         } else {
-            transf = "top: -40px;";
+            transf = "top: -38px;";
         }
     } else {
         if (size === 1) {
-            transf = "transform:translateY(-31px);";
+            transf = "transform:translateY(-26px);";
         } else if (size === 3) {
-            transf = "transform:translateY(-52px);";
+            transf = "transform:translateY(-55px);";
         } else {
-            transf = "transform:translateY(-43px);";
+            transf = "transform:translateY(-38px);";
         }
     }
-
+   
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState<string|null>(null);
     const ref = useRef<HTMLDivElement>(null);
+
+    
 
     const handleToggle = () => {
         if (!disabled) {
@@ -145,7 +147,6 @@ const styles = {
                     opacity: 1;
                 }
             }
-
             .custom-select {
                 margin: 3px;
                 font-family: "Exo", sans-serif;
@@ -239,13 +240,12 @@ const styles = {
                 padding: ${size == 1
                     ? "30px 0 13px 0 "
                     : size === 2
-                      ? "38px 0 20px 0"
-                      : "60px 0 30px 0"};
+                      ? "45px 0 20px 0"
+                      : "62px 0 30px 0"};
                 background-color: ${darkMode
                     ? theme.colors.black
                     : theme.colors.white};
             }
-
             .liDiv {
                 background-color: ${disabled
                     ? theme.colors.disabled
@@ -261,11 +261,10 @@ const styles = {
                     ? theme.colors.disabled
                     : theme.colors.primary};
             }
-
             li {
                 display: flex;
                 align-items: center;
-                width: 100%;
+                width: 93%;
                 height: 100%;
                 cursor: pointer;
                 color: ${darkMode ? theme.colors.white : theme.colors.black};

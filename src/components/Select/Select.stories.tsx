@@ -1,6 +1,5 @@
-import { action } from "@storybook/addon-actions";
 import React from "react";
-import { Select, SelectProps } from "./Select";
+import { Select } from "./Select";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
@@ -35,8 +34,8 @@ export const Small: Story = {
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: false,
         darkMode: true,
-        block:false,
-        size:1,
+        block: false,
+        size: 1,
     },
     argTypes: {
         disabled: {
@@ -44,7 +43,7 @@ export const Small: Story = {
         },
         darkMode: {
             control: "boolean",
-        },block:{
+        },block: {
             control:"boolean"
         },
     },
@@ -55,7 +54,7 @@ export const Medium: Story = {
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: false,
         darkMode: false,
-        block:false,
+        block: false,
         size:2,
     },
     argTypes: {
@@ -65,7 +64,7 @@ export const Medium: Story = {
         darkMode: {
             control: "boolean",
         },
-        block:{
+        block: {
             control:"boolean"
         },
 
@@ -77,8 +76,8 @@ export const Big: Story = {
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: false,
         darkMode: false,
-        block:true,
-        size:3,
+        block: true,
+        size: 3,
     },
     argTypes: {
         disabled: {
@@ -86,7 +85,7 @@ export const Big: Story = {
         },
         darkMode: {
             control: "boolean",
-        },block:{
+        },block: {
             control:"boolean"
         },
 
@@ -98,7 +97,7 @@ export const Disable: Story = {
         options: ["First option", "Second option", "Third option", "Fourth option"],
         disabled: true,
         darkMode: false,
-        block:false,
+        block: false,
     },
     argTypes: {
         disabled: {
@@ -106,7 +105,7 @@ export const Disable: Story = {
         },
         darkMode: {
             control: "boolean",
-        },block:{
+        },block: {
             control:"boolean"
         },
 
