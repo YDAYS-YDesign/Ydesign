@@ -6,7 +6,8 @@ on:
       - cd
 jobs:
   deploy:
-    runs-on: [self-hosted, ydesign]
+    runs-on: 
+      - self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v2
