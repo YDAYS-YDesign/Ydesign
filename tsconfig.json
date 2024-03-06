@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "outDir": "dist/dist",
-    "module": "esnext",
+    "module": "ESNext",
     "target": "es6",
     "lib": ["es6", "dom"],
     "sourceMap": true,
@@ -14,7 +14,7 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
   },
   "exclude": [
     "node_modules",
@@ -28,6 +28,7 @@
   "include": [
     "src/**/*",
     "src/setupTests.ts",
+    "assets/**/*",
   ],
   "types": [
     "typePatches"

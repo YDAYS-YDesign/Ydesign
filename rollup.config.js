@@ -1,14 +1,13 @@
 import typescript from "rollup-plugin-typescript2";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import commonjs from '@rollup/plugin-commonjs';
 import pkg from "./package.json" assert { type: "json" };
 
 const input = "src/index.ts";
 
-const plugins = [typescript()];
+const plugins = [typescript(), peerDepsExternal(), nodeResolve(), commonjs()];
 
-const external = [
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-];
 
 export default [
     {
@@ -19,7 +18,7 @@ export default [
             sourcemap: true,
         },
         plugins,
-        external,
+        external: ["react", "react-dom"],
     },
     {
         input,
@@ -29,7 +28,8 @@ export default [
             sourcemap: true,
         },
         plugins,
-        external,
+        external: ["react", "react-dom"],
+
     },
     // declaration types
     {
@@ -49,6 +49,7 @@ export default [
                 },
             }),
         ],
-        external,
-    }
+        external: ["react", "react-dom"],
+    },
+    
 ];
