@@ -30,7 +30,7 @@ export const Button = ({
     content,
     ...rest
 }: ButtonProps): JSX.Element => {
-    const { theme,isDarkMode  } = useTheme();
+    const { theme } = useTheme();
     return (
         <button
             disabled={disabled}
@@ -40,7 +40,7 @@ export const Button = ({
             )}
             {...rest}
         >
-            <span>texte demo</span>
+            <span>{content}</span>
             {suffix && <Icon iconName={suffix} color={suffixColor} />}
         </button>
     );
