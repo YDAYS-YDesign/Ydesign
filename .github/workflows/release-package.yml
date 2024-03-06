@@ -2,7 +2,8 @@ name: Publish NPM Package on Release
 
 on:
   push:
-    types: [draft]
+    branches:
+      - 'feat/pipeline-deploy'
 
 jobs:
   publish:
