@@ -1,13 +1,13 @@
 # Ydesign
 
-This project is built using React, TypeScript, Vite and pnpm.
+This project is built using React, TypeScript and pnpm.
 
 A simple react components library including responsive and translation features credit to feather icons
 
 ## To clone this project
 
 ```bash
-git clone git@github.com:YDAYS-YDesign/Ydesign.git
+git clone https://github.com/YDAYS-YDesign/Ydesign.git
 ```
 
 ## For this project you must have installed pnpm
