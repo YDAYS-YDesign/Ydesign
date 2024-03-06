@@ -26,3 +26,6 @@ jobs:
 
       - name: Build Storybook
         run: pnpm run build-storybook
+
+      - name: check formatting
+        run: pnpm run format
