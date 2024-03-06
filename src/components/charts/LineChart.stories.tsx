@@ -53,7 +53,7 @@ const meta: Meta<typeof LineChart> = {
                 `}
             >
                 <LineChart
-                    // title={args.title}
+                    title={args.title}
                     // hoverColor={args.hoverColor}
                     chartData={args.chartData}
                 />
@@ -66,13 +66,12 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultPieChart: Story = {
     args: {
-        // title: "Pie Chart title",
+        title: "Pie Chart title",
         // hoverColor: "blue",
         chartData: {
             labelsTitle: "Labels title",
             title: "Chart title",
             dataset: {
-                title: "Dataset title",
                 data: [10, 40, 50],
             },
             labels: [1, 2, 3],
@@ -84,16 +83,16 @@ export const DefaultPieChart: Story = {
         //         type: "color",
         //     },
         // },
-        // chartData: {
-        //     control: {
-        //         type: "object",
-        //     },
-        // },
-        // title: {
-        //     control: {
-        //         type: "text",
-        //     },
-        // },
+        chartData: {
+            control: {
+                type: "object",
+            },
+        },
+        title: {
+            control: {
+                type: "text",
+            },
+        },
     },
 };
 
