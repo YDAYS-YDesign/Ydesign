@@ -123,15 +123,17 @@ export const SelectVDeux: React.FC<SelectV2Props> = ({
 const styles = {
     select: (darkMode: boolean, disabled: boolean) => {
         return css`
-        
+
         @keyframes fadeIn {
             from {
-                opacity: 0;
+                opacity: 0; 
             }
             to {
                 opacity: 1;
             }
         }
+
+
         .chevron svg {
             transition: transform 0.5s ease;
         }
@@ -170,6 +172,8 @@ const styles = {
         
     
         .container {
+            opacity: 0; 
+            animation: fadeIn 1s forwards;
             background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
             border: 1.5px solid ${disabled ? theme.colors.disabled : darkMode ? theme.colors.primary : theme.colors.primary};
             border-radius: 25px;
@@ -180,33 +184,17 @@ const styles = {
             max-width: 400px;
             
         }
-        .scrollBarContainer{
+        .scrollBarContainer{ 
             width:100%;
             display:block;
             max-height: 150px;
             max-width: 400px;
             overflow: auto;
-        }
-        .scrollBarContainer::-webkit-scrollbar {
-            width: 4px;
-            overflow: hidden;
             
         }
-        .scrollBarContainer::-webkit-scrollbar-track {
-            background: ${darkMode ? theme.colors.black : theme.colors.white}; 
-            heigth:20px
-        }
-        
-        .scrollBarContainer::-webkit-scrollbar-thumb {
-            background: ${theme.colors.primary};
-            border-radius: 70px; 
-            
-        }
-        
-        .scrollBarContainer::-webkit-scrollbar-thumb:hover {
-            background: ${!darkMode ? theme.colors.black : theme.colors.white}; 
-        }
+       
         .option {
+            
             padding: 5px;
             cursor: pointer;
             padding-left:10px;
@@ -227,6 +215,26 @@ const styles = {
             color:${theme.colors.white};
             
          }
+
+         .scrollBarContainer::-webkit-scrollbar {
+            width: 4px;
+            overflow: hidden;
+            
+        }
+        .scrollBarContainer::-webkit-scrollbar-track {
+            background: ${darkMode ? theme.colors.black : theme.colors.white}; 
+            heigth:20px
+        }
+        
+        .scrollBarContainer::-webkit-scrollbar-thumb {
+            background: ${theme.colors.primary};
+            border-radius: 70px; 
+            
+        }
+        
+        .scrollBarContainer::-webkit-scrollbar-thumb:hover {
+            background: ${!darkMode ? theme.colors.black : theme.colors.white}; 
+        }
         `;
     },
 };
