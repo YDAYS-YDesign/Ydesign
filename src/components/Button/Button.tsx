@@ -40,7 +40,7 @@ export const Button = ({
             )}
             {...rest}
         >
-            <span>{content}</span>
+            <span>texte demo</span>
             {suffix && <Icon iconName={suffix} color={suffixColor} />}
         </button>
     );
