@@ -1,9 +1,9 @@
 name: Publish NPM Package on Release
 
 on:
-  push:
-    branches:
-      - 'feat/pipeline-deploy'
+  release:
+    types:
+      - created
 
 jobs:
   publish:
@@ -29,26 +29,26 @@ jobs:
             console.log(release.tag)
             return release.data;
 
-      # - uses: pnpm/action-setup@v2
-      #   name: Install pnpm
-      #   with:
-      #     version: 7
-      #     run_install: false
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 7
+          run_install: false
 
-      # - name: Install dependencies
-      #   run: pnpm install --recursive
+      - name: Install dependencies
+        run: pnpm install --recursive
 
-      # - name: Build package
-      #   run: npm run build
+      - name: Build package
+        run: npm run build
 
-      # - uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '20.x'
-      #     registry-url: 'https://registry.npmjs.org/'
-      #     token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org/'
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      # - name: Publish package to NPM
-      #   run: |
-      #     npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+      - name: Publish package to NPM
+        run: |
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
