@@ -62,6 +62,7 @@ export const SelectVDeux: React.FC<SelectV2Props> = ({
             setValueInput(option);
             setIsOpen(!isOpen);
             setSelectedOptions([option]);
+            setOptions(initialOptions);
         }
     };
 

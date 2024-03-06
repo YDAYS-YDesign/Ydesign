@@ -38,12 +38,12 @@ const meta: Meta<typeof SelectVDeux> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const multiChoise: Story = {
+export const multipleChoise: Story = {
     args: {
         title: "Select an option",
          options :[
             "Interstellar", "The  Redemption", "The Godfather", "Pulp Fiction",  "Inception", "The Matrix", "The Lord of the of the Ring",
-            "The Lord  the ", "The Lord of tthe King", "The Avengers",
+            "The Lord  the ", "The Lord of the King", "The Avengers",
             "Titanic",
           ],
         disabled: false,
@@ -67,7 +67,7 @@ export const uniqueChoise: Story = {
     args: {
         title: "Select an option",
          options :[
-            "Interstellar", "The Lord of tthe King", "The Avengers",
+            "Interstellar", "The Lord of the King", "The Avengers",
             "Titanic"
           ],
         disabled: false,
