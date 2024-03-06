@@ -30,7 +30,7 @@ export const Button = ({
     content,
     ...rest
 }: ButtonProps): JSX.Element => {
-    const { theme } = useTheme();
+    const { theme,isDarkMode  } = useTheme();
     return (
         <button
             disabled={disabled}

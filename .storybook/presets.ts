@@ -1,1 +1,1 @@
-module.exports = ['storybook-preset-inline-svg']
+module.exports = ["storybook-preset-inline-svg"];
