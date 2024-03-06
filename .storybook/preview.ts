@@ -16,9 +16,7 @@ const preview: Preview = {
             },
             light: { ...themes.normal, appBg: "white", appPreviewBg: "white" },
         },
-
     },
 };
 
 export default preview;
-
