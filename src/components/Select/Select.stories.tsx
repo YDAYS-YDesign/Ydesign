@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React from "react";
 import { SelectVDeux , SelectV2Props} from "./Select";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
@@ -38,7 +38,7 @@ const meta: Meta<typeof SelectVDeux> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const multipleChoise: Story = {
+export const multipleChoice: Story = {
     args: {
         title: "Select an option",
          options :[
@@ -63,7 +63,7 @@ export const multipleChoise: Story = {
         },
     },
 };
-export const uniqueChoise: Story = {
+export const uniqueChoice: Story = {
     args: {
         title: "Select an option",
          options :[
