@@ -17,6 +17,7 @@ export interface SelectV2Props {
     size?: Size;
     disabled?: boolean;
     className?: string;
+    multiChoise?: boolean;
     onSelect: (selectedValue: string[]) => void;
 }
 
@@ -26,11 +27,10 @@ export const SelectVDeux: React.FC<SelectV2Props> = ({
     darkMode,
     disabled,
     className,
-    size,
-    onSelect
+    multiChoise,
+    onSelect,
 }) => {
     darkMode = darkMode || false;
-    size = size || 2;
     disabled = disabled || false;
     const [isOpen, setIsOpen] = useState(false);
     const [valueInput, setValueInput] = useState(title);
@@ -39,62 +39,89 @@ export const SelectVDeux: React.FC<SelectV2Props> = ({
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValueInput(event.target.value);
-        const sortedOptions = initialOptions.filter(option =>
-            option.toLowerCase().includes(event.target.value.toLowerCase())
+        const sortedOptions = initialOptions.filter((option) =>
+            option.toLowerCase().includes(event.target.value.toLowerCase()),
         );
         setOptions(sortedOptions);
     };
 
-    
     const handleOptionClick = (option: string) => {
-        console.log("cc")
-        setValueInput(option);
-        if (selectedOptions.includes(option)) {
-            setSelectedOptions(selectedOptions.filter(selectedOption => selectedOption !== option));
+        if (multiChoise) {
+            setValueInput(option);
+            if (selectedOptions.includes(option)) {
+                setSelectedOptions(
+                    selectedOptions.filter(
+                        (selectedOption) => selectedOption !== option,
+                    ),
+                );
+            } else {
+                setSelectedOptions([...selectedOptions, option]);
+            }
+            setOptions(initialOptions);
         } else {
-            setSelectedOptions([...selectedOptions, option]); 
+            setValueInput(option);
+            setIsOpen(!isOpen);
+            setSelectedOptions([option]);
         }
-        setOptions(initialOptions)
     };
-    
-    
+
     const getOptionClassName = (option: string) => {
-        onSelect(selectedOptions)
-        return selectedOptions.includes(option) ? 'selected' : '';
-      
+        onSelect(selectedOptions);
+        return selectedOptions.includes(option) ? "selected" : "";
     };
     return (
-        <div className={cx(
-            className,
-            styles.select(darkMode, disabled,size),
-        ) }>
+        <div className={cx(className, styles.select(darkMode, disabled))}>
             <div className="head">
-            <input type="text" value={valueInput}  onChange={handleInputChange} onClick={() => setIsOpen(true)} readOnly={!isOpen}  />
-            <span className={disabled ? "chevron" : isOpen ? "chevron rotate" : "chevron"} onClick={() => setIsOpen(!isOpen)}>
-                        <Icon iconName={"chevron-down"} color={
-                                disabled
-                                    ? theme.colors.white
-                                    : darkMode
-                                      ? theme.colors.white
-                                      : theme.colors.black
-                            } />
-                    </span>
+                <input
+                    type="text"
+                    value={valueInput}
+                    onChange={handleInputChange}
+                    onClick={() => setIsOpen(true)}
+                    readOnly={!isOpen}
+                />
+                <span
+                    className={
+                        disabled
+                            ? "chevron"
+                            : isOpen
+                              ? "chevron rotate"
+                              : "chevron"
+                    }
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <Icon
+                        iconName={"chevron-down"}
+                        color={
+                            disabled
+                                ? theme.colors.white
+                                : darkMode
+                                  ? theme.colors.white
+                                  : theme.colors.black
+                        }
+                    />
+                </span>
             </div>
             {isOpen && !disabled && (
                 <div className="container">
-                    {options.map((option) => (
-                        <div key={option}   className={`option ${getOptionClassName(option)}`}  onClick={() => handleOptionClick(option) }>
-                            {option}
-                        </div>
-                    ))}
+                    <div className="scrollBarContainer">
+                        {options.map((option) => (
+                            <div
+                                key={option}
+                                className={`option ${getOptionClassName(option)}`}
+                                onClick={() => handleOptionClick(option)}
+                            >
+                                {option}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
-            </div>
+        </div>
     );
 };
 
 const styles = {
-    select: (darkMode: boolean, disabled: boolean, size: Size ) => {
+    select: (darkMode: boolean, disabled: boolean) => {
         return css`
         
         @keyframes fadeIn {
@@ -131,9 +158,7 @@ const styles = {
             flex: 1;
             background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
             border: none;
-            color: ${!darkMode
-                  ? theme.colors.black
-                  : theme.colors.white};
+            color: ${!darkMode ? theme.colors.black : theme.colors.white};
             outline: none;
         }
         
@@ -146,44 +171,47 @@ const styles = {
     
         .container {
             background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
-            border: 1px solid ${disabled ? theme.colors.disabled : darkMode ? theme.colors.primary : theme.colors.primary};
+            border: 1.5px solid ${disabled ? theme.colors.disabled : darkMode ? theme.colors.primary : theme.colors.primary};
             border-radius: 25px;
-            padding: 17% 0 15px 0px;
+            padding: 17% 1px 16px 0px;
             transform:translateY(-17%);
-            display:block;
             z-index:2;
+            max-height: 150px;
+            max-width: 400px;
+            
+        }
+        .scrollBarContainer{
+            width:100%;
+            display:block;
             max-height: 150px;
             max-width: 400px;
             overflow: auto;
         }
-        .container::-webkit-scrollbar {
+        .scrollBarContainer::-webkit-scrollbar {
             width: 4px;
             overflow: hidden;
             
         }
-        
-        
-        .container::-webkit-scrollbar-track {
+        .scrollBarContainer::-webkit-scrollbar-track {
             background: ${darkMode ? theme.colors.black : theme.colors.white}; 
-            height: 1px;
+            heigth:20px
         }
         
-        .container::-webkit-scrollbar-thumb {
+        .scrollBarContainer::-webkit-scrollbar-thumb {
             background: ${theme.colors.primary};
-            border-radius: 5px; 
-            height: 1px;
+            border-radius: 70px; 
+            
         }
         
-        .container::-webkit-scrollbar-thumb:hover {
+        .scrollBarContainer::-webkit-scrollbar-thumb:hover {
             background: ${!darkMode ? theme.colors.black : theme.colors.white}; 
         }
         .option {
             padding: 5px;
             cursor: pointer;
             padding-left:10px;
-            color: ${!darkMode
-                ? theme.colors.black
-                : theme.colors.white};
+            margin-right:1px;
+            color: ${!darkMode ? theme.colors.black : theme.colors.white};
         }
         
         .option:hover {

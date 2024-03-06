@@ -38,18 +38,18 @@ const meta: Meta<typeof SelectVDeux> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const Small: Story = {
+export const multiChoise: Story = {
     args: {
         title: "Select an option",
          options :[
             "Interstellar", "The  Redemption", "The Godfather", "Pulp Fiction",  "Inception", "The Matrix", "The Lord of the of the Ring",
             "The Lord  the ", "The Lord of tthe King", "The Avengers",
-            "Titanic"
+            "Titanic",
           ],
         disabled: false,
-        darkMode: true,
+        darkMode: false,
         onSelect : handleSelect ,
-        size: 1,
+        multiChoise:true,
     },
     argTypes: {
         disabled: {
@@ -58,9 +58,12 @@ export const Small: Story = {
         darkMode: {
             control: "boolean",
         },
+        multiChoise: {
+            control: "boolean",
+        },
     },
 };
-export const Medium: Story = {
+export const uniqueChoise: Story = {
     args: {
         title: "Select an option",
          options :[
@@ -70,13 +73,16 @@ export const Medium: Story = {
         disabled: false,
         darkMode: true,
         onSelect : handleSelect ,
-        size: 1,
+        multiChoise:false,
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
         darkMode: {
+            control: "boolean",
+        },
+        multiChoise: {
             control: "boolean",
         },
     },
