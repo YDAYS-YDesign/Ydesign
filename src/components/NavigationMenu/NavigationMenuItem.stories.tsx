@@ -1,71 +1,47 @@
 import React from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
-import {
-    NavigationMenuItem,
-    NavigationMenuItemProps,
-} from "./NavigationMenuItem";
+import NavigationMenuItem from "./NavigationMenuItem";
 import { css } from "@emotion/css";
 
-const NavigationMenuItemStory: React.FC<NavigationMenuItemProps> = (props) => (
-    <YDesignWrapper>
-        <div
-            className={css`
-                width: 100%;
-                height: 90vh;
-                justify-content: center;
-                align-items: center;
-            `}
-        >
-            <NavigationMenuItem {...props} />
-        </div>
-    </YDesignWrapper>
-);
+const StorybookNavigationMenuItem: React.FC = () => {
+    return (
+        <YDesignWrapper>
+            <div
+                className={css`
+                    width: 100%;
+                    height: 90vh;
+                    justify-content: center;
+                    align-items: center;
+                `}
+            >
+                <div>
+                    <NavigationMenuItem
+                        color=""
+                        hasIcon={true}
+                        isOpen={false}
+                        text="Design principles"
+                    />
+                    <NavigationMenuItem
+                        color=""
+                        hasIcon={false}
+                        isOpen={false}
+                        url="/components"
+                        text="Components"
+                    />
+                </div>
+            </div>
+        </YDesignWrapper>
+    );
+};
 
 export default {
     title: "NavigationMenuItem",
-    component: NavigationMenuItemStory,
+    component: StorybookNavigationMenuItem,
     parameters: {
         backgrounds: { disable: true },
     },
-    argTypes: {
-        items: { control: "object" },
-    },
 };
 
-const Template = (args: NavigationMenuItemProps) => (
-    <NavigationMenuItemStory {...args} />
-);
+const Template = () => <StorybookNavigationMenuItem />;
 
 export const NavigationMenuItemDefault = Template.bind({});
-
-NavigationMenuItemDefault.args = {
-    items: [
-        {
-            title: "Components",
-            url: "/components",
-        },
-    ],
-};
-
-export const NavigationMenuItemWithParent = Template.bind({});
-NavigationMenuItemWithParent.args = {
-    items: [
-        {
-            titleParent: "Design language",
-            children: [
-                {
-                    titleChildren: "About",
-                    url: "/about",
-                },
-                {
-                    titleChildren: "Services",
-                    url: "/services",
-                },
-                {
-                    titleChildren: "Contact",
-                    url: "/contact",
-                },
-            ],
-        },
-    ],
-};

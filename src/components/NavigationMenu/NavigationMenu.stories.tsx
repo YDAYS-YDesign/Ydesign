@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { NavigationMenu, NavigationMenuProps } from "./NavigationMenu";
-import { NavigationMenuItem } from "./NavigationMenuItem";
+import NavigationMenuItem from "./NavigationMenuItem";
 import { Button } from "../Button/Button";
 import { css } from "@emotion/css";
 import logo from "../../assets/logo.png";
+import NavigationMenuItemGroupChild from "./NavigationMenuItemGroupChild";
+import NavigationLink from "./NavigationLink";
+import NavigationMenuItemGroup from "./NavigationMenuItemGroup";
 
 const StorybookNavigationMenu: React.FC<NavigationMenuProps> = (props) => {
+    const [designLanguageOpen, setDesignLanguageOpen] = useState(false);
+    const [guidelinesOpen, setGuidelinesOpen] = useState(false);
+
     return (
         <YDesignWrapper>
             <div
@@ -20,67 +26,69 @@ const StorybookNavigationMenu: React.FC<NavigationMenuProps> = (props) => {
                         <img src={logo} alt="YDesign Logo" width={30} />
                         <p>YDesign</p>
                     </div>
+                    <NavigationMenuItemGroup
+                        menuItemProps={{
+                            color: "",
+                            hasIcon: true,
+                            text: "Design language",
+                        }}
+                        groupChildProps={{
+                            color: "",
+                        }}
+                        isOpen={designLanguageOpen}
+                        onClick={() =>
+                            setDesignLanguageOpen(!designLanguageOpen)
+                        }
+                    >
+                        <NavigationLink
+                            title="Design principles"
+                            url="/design-principles"
+                            color=""
+                        />
+                        <NavigationLink title="Colors" url="/colors" color="" />
+                        <NavigationLink title="Layout" url="/layout" color="" />
+                        <NavigationLink title="Motion" url="/motion" color="" />
+                        <NavigationLink title="Shapes" url="/shapes" color="" />
+                        <NavigationLink
+                            title="Typography"
+                            url="/typography"
+                            color=""
+                        />
+                    </NavigationMenuItemGroup>
+                    <NavigationMenuItemGroup
+                        menuItemProps={{
+                            color: "",
+                            hasIcon: true,
+                            text: "Guidelines",
+                        }}
+                        groupChildProps={{
+                            color: "",
+                        }}
+                        isOpen={guidelinesOpen}
+                        onClick={() => setGuidelinesOpen(!guidelinesOpen)}
+                    >
+                        <NavigationLink
+                            title="Accessibility"
+                            url="/accessibility"
+                            color=""
+                        />
+                        <NavigationLink
+                            title="Content design"
+                            url="/content-design"
+                            color=""
+                        />
+                        <NavigationLink
+                            title="Design token"
+                            url="/design-token"
+                            color=""
+                        />
+                    </NavigationMenuItemGroup>
                     <NavigationMenuItem
-                        items={[
-                            {
-                                titleParent: "Design language",
-                                children: [
-                                    {
-                                        titleChildren: "Design principles",
-                                        url: "/design-principles",
-                                    },
-                                    {
-                                        titleChildren: "Colors",
-                                        url: "/colors",
-                                    },
-                                    {
-                                        titleChildren: "Layout",
-                                        url: "/layout",
-                                    },
-                                    {
-                                        titleChildren: "Motion",
-                                        url: "/motion",
-                                    },
-                                    {
-                                        titleChildren: "Shapes",
-                                        url: "/shapes",
-                                    },
-                                    {
-                                        titleChildren: "Typography",
-                                        url: "/typography",
-                                    },
-                                ],
-                            },
-                        ]}
-                    />
-                    <NavigationMenuItem
-                        items={[
-                            {
-                                titleParent: "Guidelines",
-                                children: [
-                                    {
-                                        titleChildren: "Accessibility",
-                                        url: "/accessibility",
-                                    },
-                                    {
-                                        titleChildren: "Content design",
-                                        url: "/content-design",
-                                    },
-                                    {
-                                        titleChildren: "Design token",
-                                        url: "/design-token",
-                                    },
-                                ],
-                            },
-                        ]}
-                    />
-                    <NavigationMenuItem
-                        items={[
-                            {
-                                title: "Components",
-                                url: "/components",
-                            },
-                        ]}
+                        color=""
+                        hasIcon={false}
+                        isOpen={false}
+                        url="/components"
+                        text="Components"
                     />
                     <Button content="Get Started" className={styles.button} />
                 </NavigationMenu>
@@ -102,7 +110,11 @@ const styles = {
         font-family: "Exo", sans-serif;
     `,
     button: css`
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+
+        @media screen and (max-width: 768px) {
+            margin: 20px 0;
+        }
     `,
 };
 
@@ -112,12 +124,6 @@ export default {
     parameters: {
         backgrounds: { disable: true },
     },
-    items: [
-        {
-            title: "Home",
-            url: "/home",
-        },
-    ],
 };
 
 export const NavigationMenuStory = () => <StorybookNavigationMenu items={[]} />;

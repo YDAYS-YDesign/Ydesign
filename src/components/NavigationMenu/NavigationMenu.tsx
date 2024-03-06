@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { css } from "@emotion/css";
 import { useTheme } from "../../hooks/useTheme";
 import { Theme } from "../../theme/theme";
-import { Icon } from "../Icon/Icon";
+import { Icon, IconProps } from "../Icon/Icon";
 
 export interface NavigationMenuProps {
     items: { title: string; url: string }[];
     children?: React.ReactNode;
     className?: string;
-    isMobile?: boolean;
     color?: string;
 }
 
@@ -25,8 +24,11 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
         setIsSidebarOpen(!isSidebarOpen);
     };
 
-    const handleToggleMobile = () => {
-        setIsMobile(!isMobile);
+    const menuIconProps: IconProps = {
+        iconName: isSidebarOpen ? "x" : "menu",
+        size: "medium",
+        color: isDarkMode ? theme.colors.white : theme.colors.black,
+        isClickable: true,
     };
 
     useEffect(() => {
@@ -42,21 +44,47 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    return !isMobile ? (
-        <div className={styles.navigationMenu(theme, color, isDarkMode)}>
-            {children}
-        </div>
-    ) : (
-        <div className={styles.navigationMenuMobile(theme, color, isDarkMode)}>
-            //display the first and second children
-            {children.toArray().slice(0, 2)}
-            <Icon
-                className={styles.icon}
-                iconName={"menu"}
-                color={isDarkMode ? theme.colors.white : theme.colors.black}
-                isClickable={true}
-                onClick={handleToggleSidebar}
-            />
+    const firstChild = React.Children.toArray(children)[0];
+    const restChildren = React.Children.toArray(children).slice(1);
+    return (
+        <div>
+            {isMobile ? (
+                <div className={styles.navigationMenuMobile(theme, color)}>
+                    <div>{firstChild}</div>
+                    <Icon {...menuIconProps} onClick={handleToggleSidebar} />
+                    {isSidebarOpen && (
+                        <div className={styles.sidebar(theme, isDarkMode)}>
+                            <div
+                                className={styles.sidebarContent(
+                                    theme,
+                                    isDarkMode,
+                                )}
+                            >
+                                <div
+                                    className={styles.closeButton(
+                                        theme,
+                                        isDarkMode,
+                                    )}
+                                >
+                                    <Icon
+                                        {...menuIconProps}
+                                        onClick={handleToggleSidebar}
+                                    />
+                                </div>
+                                <div className={styles.children}>
+                                    {restChildren}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <div
+                    className={styles.navigationMenu(theme, color, isDarkMode)}
+                >
+                    {children}
+                </div>
+            )}
         </div>
     );
 };
@@ -76,18 +104,48 @@ const styles = {
             ? theme.colors.black
             : theme.colors.white};
     `,
-    navigationMenuMobile: (
-        theme: Theme,
-        color: string | undefined,
-        isDarkMode: Boolean,
-    ) => css`
+    navigationMenuMobile: (theme: Theme, color: string | undefined) => css`
         border-bottom: 1px solid ${color || theme.colors.primary};
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         text-align: end;
+    `,
+    sidebar: (theme: Theme, isDarkMode: Boolean) => css`
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 70%;
+        height: 100%;
+        background-color: ${isDarkMode
+            ? theme.colors.black
+            : theme.colors.white};
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+    `,
+    closeButton: (theme: Theme, isDarkMode: Boolean) => css`
+        padding: 10px;
         background-color: ${isDarkMode
             ? theme.colors.black
             : theme.colors.white};
     `,
-    icon: css`
-        cursor: pointer;
+    sidebarContent: (theme: Theme, isDarkMode: Boolean) => css`
+        width: 100%;
+        height: 100%;
+        background-color: ${isDarkMode
+            ? theme.colors.black
+            : theme.colors.white};
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        padding: 20px;
+    `,
+    children: css`
+        display: flex;
+        flex-direction: column;
+        align-items: end;
     `,
 };
