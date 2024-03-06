@@ -6,12 +6,14 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode;
     primary?: boolean;
     disabled: boolean;
-    forcedChecked?: boolean;
+    checked?: boolean;
     buttonColor?: string;
+    className?: string;
+    size?: "small" | "medium" | "large";
 }
 
 const getRGBValues = (color: string): string => {
-    const hex = color.replace(/^#/, '');
+    const hex = color.replace(/^#/, "");
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
     const g = (bigint >> 8) & 255;
@@ -21,30 +23,33 @@ const getRGBValues = (color: string): string => {
 
 export const ToggleSwitch = ({
     disabled,
-    forcedChecked,
+    checked,
     buttonColor = theme.colors.lightPrimary,
+    className,
+    size = "medium",
     ...props
 }: Props): JSX.Element => {
-    const [checked, setChecked] = useState(
-        forcedChecked !== undefined ? forcedChecked : true,
-    );
+    const [iscChecked, setChecked] = useState(checked || false);
 
     const handleToggle = () => {
-        const newCheckedState = !checked;
+        const newCheckedState = !iscChecked;
         setChecked(newCheckedState);
     };
 
     return (
-        <label className={styles.container}>
+        <label className={cx(styles.container, className)}>
             <input
                 type="checkbox"
-                checked={forcedChecked !== undefined ? forcedChecked : checked}
+                checked={checked !== undefined ? checked : iscChecked}
                 disabled={disabled}
                 onChange={handleToggle}
                 className={styles.input}
             />
             <span
-                className={cx(styles.toggle(checked, buttonColor, disabled))}
+                className={cx(
+                    styles.toggle(iscChecked, buttonColor, disabled),
+                    styles[size],
+                )}
                 {...props}
             ></span>
         </label>
@@ -66,7 +71,11 @@ const styles = {
         height: 0;
     `,
 
-    toggle: (checked: boolean, buttonColor: string, disabled: boolean) => css`
+    toggle: (
+        iscChecked: boolean,
+        buttonColor: string,
+        disabled: boolean,
+    ) => css`
         position: absolute;
         top: 0;
         left: 0;
@@ -74,7 +83,7 @@ const styles = {
         bottom: 0;
         background-color: ${disabled
             ? theme.colors.disabled
-            : checked
+            : iscChecked
               ? buttonColor
               : theme.colors.disabled};
         transition: 0.4s;
@@ -87,14 +96,15 @@ const styles = {
             height: 1.5rem;
             width: 1.5rem;
             top: 50%;
-            ${checked ? "right: 0" : "left: 0"};
+            ${iscChecked ? "right: 0" : "left: 0"};
             background-color: ${disabled
                 ? theme.colors.darkerDisabled
-                : checked
+                : iscChecked
                   ? buttonColor
                   : theme.colors.white};
             transform: translateY(-50%);
-            box-shadow: 0 0.2rem 0.2rem 0.2rem rgba(${getRGBValues(theme.colors.disabled)}, 0.3);
+            box-shadow: 0 0.2rem 0.2rem 0.2rem
+                rgba(${getRGBValues(theme.colors.disabled)}, 0.3);
             border-radius: 50%;
         }
 
@@ -103,13 +113,43 @@ const styles = {
             position: absolute;
             box-shadow: ${disabled
                 ? "none"
-                : checked
+                : iscChecked
                   ? `0 0 0 0.5rem rgba(${getRGBValues(buttonColor)}, 0.3)`
                   : `0 0 0 0.5rem rgba(${getRGBValues(theme.colors.disabled)}, 0.3)`};
             transition: 0.2s;
             cursor: ${disabled ? "not-allowed" : "pointer"};
             border-radius: 50%;
         }
+    `,
+
+    small: css`
+        width: 2rem;
+        height: 0.75rem;
+        &:before {
+            height: 1rem;
+            width: 1rem;
+        }
+    `,
+
+    medium: css`
+        width: 3rem;
+        height: 1rem;
+        &:before {
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+    `,
+
+    large: css`
+        width: 4rem;
+        height: 1.25rem;
+        &:before {
+            height: 2rem;
+            width: 2rem;
+        }
+    `,
+    labelOnOff: css`
+        margin-left: 5rem;
     `,
 };
 

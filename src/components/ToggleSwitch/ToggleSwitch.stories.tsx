@@ -21,7 +21,11 @@ const meta: Meta<typeof ToggleSwitch> = {
                     align-items: center;
                 `}
             >
-                <ToggleSwitch {...args} />
+                <ToggleSwitch
+                    {...args}
+                    className={args.className}
+                    size={args.size}
+                />
             </div>
         </YDesignWrapper>
     ),
@@ -32,18 +36,27 @@ type Story = StoryObj<typeof meta>;
 export const DefaultToggleSwitch: Story = {
     args: {
         disabled: false,
-        forcedChecked: false,
+        checked: false,
         buttonColor: "blue",
+        className: "",
+        size: "medium",
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        forcedChecked: {
+        checked: {
             control: "boolean",
         },
         buttonColor: {
             control: "color",
+        },
+        className: {
+            control: "text",
+        },
+        size: {
+            control: "select",
+            options: ["small", "medium", "large"],
         },
     },
 };
@@ -51,18 +64,27 @@ export const DefaultToggleSwitch: Story = {
 export const DisabledToggle: Story = {
     args: {
         disabled: true,
-        forcedChecked: false,
+        checked: false,
         buttonColor: "grey",
+        className: "",
+        size: "medium",
     },
     argTypes: {
         disabled: {
             control: "boolean",
         },
-        forcedChecked: {
+        checked: {
             control: "boolean",
         },
         buttonColor: {
             control: "color",
+        },
+        className: {
+            control: "text",
+        },
+        size: {
+            control: "select",
+            options: ["small", "medium", "large"],
         },
     },
 };
