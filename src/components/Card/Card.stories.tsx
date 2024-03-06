@@ -1,7 +1,6 @@
 import React from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { css } from "@emotion/css";
-import { Icon } from "../Icon/Icon";
 import { Card, CardProps } from "./Card";
 
 const CardStory: React.FC<CardProps> = (props) => {
@@ -35,6 +34,7 @@ export default {
         description: { control: "text" },
         buttonText: { control: "text" },
         link: { control: "text" },
+        isSlider: { control: "boolean" },
     },
 };
 
@@ -52,4 +52,5 @@ Default.args = {
         "Le Panda géant est un mammifères de la famille des Ursidés, endémique de Chine centrale. Il fait partie de l'ordre des Carnivores, même si son régime alimentaire est constitué à 99 % de végétaux, principalement de bambou",
     buttonText: "En Savoir Plus",
     link: "https://www.google.com",
+    isSlider: true,
 };
