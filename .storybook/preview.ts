@@ -4,7 +4,9 @@ import { theme } from "../src/theme/theme";
 
 const preview: Preview = {
     parameters: {
+        
         darkMode: {
+            current: "light",
             dark: {
                 ...themes.dark,
                 appBg: theme.colors.black,
