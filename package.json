@@ -4,18 +4,12 @@
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
-    "test": "echo \"test start\"",
-    "lint": "eslint .",
+    "lint": "eslint ./src --ext .ts,.tsx",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rollup --config",
     "build-icons": "cd src && go run gen-icons-types.go && cd .. && npx @svgr/cli --out-dir ./src/assets/iconsComponents --typescript --filename-case kebab ./src/assets/svgs",
     "prepare": "husky"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm run lint && pnpm run format"
-    }
   },
   "author": "",
   "license": "ISC",

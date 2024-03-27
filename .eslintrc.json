@@ -20,7 +20,7 @@
         "react/jsx-uses-react": ["off"],
         "react/jsx-props-no-spreading": ["off"],
         "react/no-unescaped-entities": ["off"],
-        "object-curly-spacing": ["error", "always"]
-    },
-    "ignorePatterns": ["rollup.config.js", "**/*.d.ts"]
+        "object-curly-spacing": ["error", "always"],
+        "no-console": ["error", { "allow": ["warn", "error"] }]
+    }
 }

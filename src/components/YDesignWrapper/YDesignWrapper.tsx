@@ -32,7 +32,7 @@ export const YDesignWrapper = ({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
     const setDarkMode = (isDarkMode: boolean) => {
-        console.log("setDarkMode", isDarkMode);
+        // console.log("setDarkMode", isDarkMode);
         setIsDarkMode(isDarkMode);
     };
     const value = {
