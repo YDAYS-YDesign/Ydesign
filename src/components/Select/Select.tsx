@@ -3,94 +3,121 @@ import { css, cx } from "@emotion/css";
 import { theme } from "../../theme/theme";
 import { Icon } from "../Icon/Icon";
 
-// ------------------------------------------------------
+
 export interface SelectProps {
     title?: string;
     options: string[];
-    isDarkMode?: boolean;
-    onSelect: (selectedValue: string) => void;
-    isBlock?: boolean;
+    darkMode?: boolean;
+    disabled?: boolean;
     className?: string;
+    multiChoise?: boolean;
+    onSelect: (selectedValue: string[]) => void;
 }
-// ------------------------------------------------------
+
 export const Select: React.FC<SelectProps> = ({
     title,
-    options,
-    isDarkMode,
-    onSelect,
-    isBlock,
+    options: initialOptions,
+    darkMode,
+    disabled,
     className,
+    multiChoise,
+    onSelect,
 }) => {
-    isDarkMode = isDarkMode || false;
-    isBlock = isBlock || true;
+    darkMode = darkMode || false;
+    disabled = disabled || false;
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const ref = useRef<HTMLDivElement>(null);
-    // ------------------------------------------------------
-    const handleToggle = () => {
-        setIsOpen(!isOpen);
-    };
-    const handleSelection = (option: string) => {
-        setIsOpen(!isOpen);
-        setSelectedOption(option);
-        onSelect(option);
+    const [valueInput, setValueInput] = useState(title);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [options, setOptions] = useState<string[]>(initialOptions);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!disabled) {
+            setValueInput(event.target.value);
+            const sortedOptions = initialOptions.filter((option) =>
+                option.toLowerCase().includes(event.target.value.toLowerCase()),
+            );
+            setOptions(sortedOptions);
+        }
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                if (isOpen) {
-                    setIsOpen(false);
-                }
+    const handleOptionClick = (option: string) => {
+        if (multiChoise) {
+            setValueInput(option);
+            if (selectedOptions.includes(option)) {
+                setSelectedOptions(
+                    selectedOptions.filter(
+                        (selectedOption) => selectedOption !== option,
+                    ),
+                );
+            } else {
+                setSelectedOptions([...selectedOptions, option]);
             }
-        };
+            setOptions(initialOptions);
+        } else {
+            setValueInput(option);
+            setIsOpen(!isOpen);
+            setSelectedOptions([option]);
+            setOptions(initialOptions);
+        }
+    };
 
-        // Attach the listeners on component mount.
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
-    // ------------------------------------------------------
+    const getOptionClassName = (option: string) => {
+        onSelect(selectedOptions);
+        return selectedOptions.includes(option) ? "selected" : "";
+    };
     return (
-        <div className={cx(className, styles.select(isDarkMode, isBlock))}>
-            <div className="custom-select">
-                <div className="select-header" onClick={handleToggle} ref={ref}>
-                    <input
-                        className="inputHead"
-                        type="text"
-                        value={selectedOption || title}
+        <div className={cx(className, styles.select(darkMode, disabled))}>
+            <div className="head">
+                <input
+                    type="text"
+                    value={valueInput}
+                    onChange={handleInputChange}
+                    onClick={() => setIsOpen(true)}
+                    readOnly={!isOpen}
+                />
+                <span
+                    className={
+                        disabled
+                            ? "chevron"
+                            : isOpen
+                              ? "chevron rotate"
+                              : "chevron"
+                    }
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <Icon
+                        iconName={"chevron-down"}
+                        color={
+                            disabled
+                                ? theme.colors.white
+                                : darkMode
+                                  ? theme.colors.white
+                                  : theme.colors.black
+                        }
                     />
-                    <div className={isOpen ? "rotate chevron" : "chevron"}>
-                        <Icon
-                            iconName={"chevron-down"}
-                            color={
-                                isDarkMode
-                                    ? theme.colors.white
-                                    : theme.colors.black
-                            }
-                        />
-                    </div>
-                </div>
-                {isOpen && (
-                    <ul className="select-list">
-                        {options.map((option, index) => (
-                            <div key={index} className="liDiv">
-                                <li onClick={() => handleSelection(option)}>
-                                    {option}
-                                </li>
+                </span>
+            </div>
+            {isOpen && !disabled && (
+                <div className="container">
+                    <div className="scrollBarContainer">
+                        {options.map((option) => (
+                            <div
+                                key={option}
+                                className={`option ${getOptionClassName(option)}`}
+                                onClick={() => handleOptionClick(option)}
+                            >
+                                {option}
                             </div>
                         ))}
-                    </ul>
-                )}
-            </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
-// ------------------------------------------------------
+
 const styles = {
-    select: (isDarkMode: boolean, isBlock: boolean) => {
+    select: (darkMode: boolean, disabled: boolean) => {
         return css`
             @keyframes fadeIn {
                 from {
@@ -100,102 +127,115 @@ const styles = {
                     opacity: 1;
                 }
             }
-            .custom-select {
-                margin: 3px;
-                font-family: "Exo", sans-serif;
-            }
-            .select-header {
-                position: relative;
-                z-index: 2;
-                display: flex;
-                align-items: center;
-                width: 253px;
-                height: 35px;
-                background-color: ${isDarkMode
-                    ? theme.colors.black
-                    : theme.colors.white};
-                border: 2px solid ${theme.colors.primary};
-                border-radius: 25px;
-                margin: 5px;
-                padding: 1px;
-
-                margin-bot: 0;
-            }
-            .inputHead {
-                font-family: ${theme.font.family};
-                color: ${isDarkMode ? theme.colors.white : theme.colors.black};
-                font-size: 16px;
-                padding-left: 25px;
-                height: 100%;
-                width: 100%;
-                border-radius: 25px;
-                background-color: ${isDarkMode
-                    ? theme.colors.black
-                    : theme.colors.white};
-                margin: 0;
-                color: ${isDarkMode ? theme.colors.white : theme.colors.black};
-                border: none;
-            }
-            .inputHead:focus {
-                outline: none;
-            }
             .chevron svg {
-                position: absolute;
-                top: calc(25%);
-                right: 10px;
-                width: 28px;
                 transition: transform 0.5s ease;
-                z-index: 2;
             }
             .rotate svg {
                 transform: rotate(180deg);
             }
-
-            .select-header:hover {
-                border: 2px solid ${theme.colors.primary};
-            }
-            .select-list {
-                animation: fadeIn 1s forwards;
-                z-index: 1;
-                position: ${isBlock ? "relative" : "absolute"};
-                ${isBlock ? " top: -40px;" : " transform: translateY(-40px);"}
-                list-style-type: none;
-                width: 253px;
-                border: 2px solid ${theme.colors.primary};
+            .head {
+                display: flex;
+                position: relative;
+                align-items: center;
+                justify-content: space-between;
+                padding: 5px;
+                padding-left: 10px;
+                background-color: ${disabled
+                    ? theme.colors.disabled
+                    : darkMode
+                      ? theme.colors.black
+                      : theme.colors.white};
+                border: 2px solid
+                    ${disabled
+                        ? theme.colors.disabled
+                        : darkMode
+                          ? theme.colors.primary
+                          : theme.colors.primary};
                 border-radius: 25px;
-                color: ${isDarkMode ? theme.colors.black : theme.colors.white};
-                margin: 0 5px -40px 5px;
-                padding: 38px 0 20px 0;
-                background-color: ${isDarkMode
-                    ? theme.colors.black
-                    : theme.colors.white};
+                z-index: 9;
             }
-
-            .liDiv {
-                background-color: ${isDarkMode
-                    ? theme.colors.black
-                    : theme.colors.white};
-                padding: 0;
+            .head input {
+                flex: 1;
+                background-color: ${disabled
+                    ? theme.colors.disabled
+                    : darkMode
+                      ? theme.colors.black
+                      : theme.colors.white};
+                border: none;
+                color: ${!darkMode ? theme.colors.black : theme.colors.white};
+                outline: none;
+            }
+            .chevron {
                 width: 100%;
-                height: 35px;
+                cursor: pointer;
+                transform: translateY(3px);
             }
-            .liDiv:hover {
+            .container {
+                opacity: 0;
+                animation: fadeIn 1s forwards;
+                background-color: ${disabled
+                    ? theme.colors.disabled
+                    : darkMode
+                      ? theme.colors.black
+                      : theme.colors.white};
+                border: 1.5px solid
+                    ${disabled
+                        ? theme.colors.disabled
+                        : darkMode
+                          ? theme.colors.primary
+                          : theme.colors.primary};
+                border-radius: 25px;
+                padding: 17% 1px 16px 0px;
+                transform: translateY(-17%);
+                z-index: 2;
+                max-height: 150px;
+                max-width: 400px;
+            }
+            .scrollBarContainer {
+                width: 100%;
+                display: block;
+                max-height: 150px;
+                max-width: 400px;
+                overflow: auto;
+            }
+            .option {
+                padding: 5px;
+                cursor: pointer;
+                padding-left: 10px;
+                margin-right: 1px;
+                color: ${!darkMode ? theme.colors.black : theme.colors.white};
+            }
+            .option:hover {
+                background-color: ${theme.colors.primary};
+                color: ${theme.colors.black};
+            }
+            .selected {
+                color: ${theme.colors.black};
                 background-color: ${theme.colors.primary};
             }
-
-            li {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                cursor: pointer;
-                color: ${isDarkMode ? theme.colors.white : theme.colors.black};
-                padding-left: 25px;
-                font-size: 16px;
+            .selected:hover {
+                color: ${theme.colors.white};
             }
-            li:hover {
-                color: ${theme.colors.black};
+            .scrollBarContainer::-webkit-scrollbar {
+                width: 4px;
+                overflow: hidden;
+            }
+            .scrollBarContainer::-webkit-scrollbar-track {
+                background: ${darkMode
+                    ? theme.colors.black
+                    : theme.colors.white};
+                heigth: 20px;
+            }
+            .scrollBarContainer::-webkit-scrollbar-thumb {
+                background: ${theme.colors.primary};
+                border-radius: 70px;
+            }
+            .scrollBarContainer::-webkit-scrollbar-thumb:hover {
+                background: ${!darkMode
+                    ? theme.colors.black
+                    : theme.colors.white};
             }
         `;
     },
 };
+export default Select;
