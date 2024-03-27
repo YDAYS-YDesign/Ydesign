@@ -54,7 +54,6 @@ const Footer = ({ footerImg, footerNewsLetter }: FooterProps) => {
                         <FooterGroupItem text="ydesign@gmail.com" />
                         <FooterGroupItem text="16 rue height valley" />
                         <FooterGroupItem text="Lyon 69009" />
-
                     </FooterGroup>
                 </FooterGroupRow>
                 <FoooterLine />
