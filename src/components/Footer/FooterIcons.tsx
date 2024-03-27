@@ -1,17 +1,26 @@
-import { css } from '@emotion/css';
-import { FaFacebookF, FaInstagram, FaDiscord, FaTwitch, FaTwitter, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { css } from "@emotion/css";
+import React from "react";
+import { Icon } from "../Icon/Icon";
+import { theme } from "../../theme/theme";
+
+import {
+    FaFacebookF,
+    FaInstagram,
+    FaDiscord,
+    FaTwitch,
+    FaTwitter,
+} from "react-icons/fa";
 
 const FooterIcons = () => {
     return (
         <div className={styles.socials}>
-            <FaFacebookF className={styles.socialIcon} />
-            <FaInstagram className={styles.socialIcon} />
-            <FaDiscord className={styles.socialIcon} />
-            <FaTwitch className={styles.socialIcon} />
-            <FaTwitter className={styles.socialIcon} />
+            <Icon iconName={"twitter"} color={theme.colors.black} />
+            <Icon iconName={"facebook"} color={theme.colors.black} />
+            <Icon iconName={"instagram"} color={theme.colors.black} />
+            <Icon iconName={"twitch"} color={theme.colors.black} />
         </div>
-    )
-}
+    );
+};
 
 const styles = {
     socials: css`
@@ -25,15 +34,15 @@ const styles = {
             order: 3;
         }
     `,
-  socialIcon: css`
+    socialIcon: css`
         margin-right: 10px;
         font-size: 24px;
         color: #333;
         cursor: pointer;
-        @media (max-width: 767px) { 
-        margin-right: 5px;
+        @media (max-width: 767px) {
+            margin-right: 5px;
         }
     `,
-}
+};
 
 export default FooterIcons;

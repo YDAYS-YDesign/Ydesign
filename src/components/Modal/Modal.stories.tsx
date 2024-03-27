@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
-import { Modal, ModalProps } from './Modal';
+import { Modal, ModalProps } from "./Modal";
 import { css } from "@emotion/css";
 
 const StorybookModal: React.FC<ModalProps> = (props) => {
@@ -26,7 +26,7 @@ const StorybookModal: React.FC<ModalProps> = (props) => {
             </div>
         </YDesignWrapper>
     );
-}
+};
 
 export default {
     title: "Modal",

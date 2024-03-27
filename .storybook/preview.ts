@@ -4,7 +4,6 @@ import { theme } from "../src/theme/theme";
 
 const preview: Preview = {
     parameters: {
-        
         darkMode: {
             current: "light",
             dark: {
@@ -16,9 +15,7 @@ const preview: Preview = {
             },
             light: { ...themes.normal, appBg: "white", appPreviewBg: "white" },
         },
-
     },
 };
 
 export default preview;
-

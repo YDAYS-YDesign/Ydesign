@@ -1,16 +1,12 @@
-import { css } from '@emotion/css';
+import { css } from "@emotion/css";
 
 interface FooterContainerProps {
     children: React.ReactNode;
 }
 
-const FooterContainer = ({children}: FooterContainerProps) => {
-    return (
-        <div className={styles.footerContainer}>
-            {children}
-        </div>
-    )
-}
+const FooterContainer = ({ children }: FooterContainerProps) => {
+    return <div className={styles.footerContainer}>{children}</div>;
+};
 
 const styles = {
     footerContainer: css`
@@ -21,10 +17,10 @@ const styles = {
         flex-direction: column;
         align-items: center;
         @media (max-width: 768px) {
-            padding: 20px 30px; 
-            border-bottom: 30px solid #A58CFF;
+            padding: 20px 30px;
+            border-bottom: 30px solid #a58cff;
         }
-    `
-}
+    `,
+};
 
-export default FooterContainer
+export default FooterContainer;
