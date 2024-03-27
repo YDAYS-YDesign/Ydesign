@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigationMenuItem from "./NavigationMenuItem";
 import NavigationMenuItemGroupChild from "./NavigationMenuItemGroupChild";
 
@@ -23,16 +23,53 @@ const NavigationMenuItemGroup: React.FC<NavigationMenuItemGroupProps> = ({
     isOpen,
     onClick,
 }) => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
     return (
         <>
-            <NavigationMenuItem
-                {...menuItemProps}
-                isOpen={isOpen}
-                onClick={onClick}
-            />
-            <NavigationMenuItemGroupChild {...groupChildProps} isOpen={isOpen}>
-                {children}
-            </NavigationMenuItemGroupChild>
+            {isMobile ? (
+                <>
+                    <NavigationMenuItem
+                        {...menuItemProps}
+                        isOpen={isOpen}
+                        isMobile={isMobile}
+                        onClick={onClick}
+                    />
+                    <NavigationMenuItemGroupChild
+                        {...groupChildProps}
+                        isOpen={isOpen}
+                        isMobile={isMobile}
+                    >
+                        {children}
+                    </NavigationMenuItemGroupChild>
+                </>
+            ) : (
+                <NavigationMenuItem
+                    {...menuItemProps}
+                    isOpen={isOpen}
+                    isMobile={isMobile}
+                    onClick={onClick}
+                >
+                    <NavigationMenuItemGroupChild
+                        {...groupChildProps}
+                        isOpen={isOpen}
+                        isMobile={isMobile}
+                    >
+                        {children}
+                    </NavigationMenuItemGroupChild>
+                </NavigationMenuItem>
+            )}
         </>
     );
 };

@@ -5,11 +5,10 @@ import NavigationMenuItem from "./NavigationMenuItem";
 import { Button } from "../Button/Button";
 import { css } from "@emotion/css";
 import logo from "../../assets/logo.png";
-import NavigationMenuItemGroupChild from "./NavigationMenuItemGroupChild";
 import NavigationLink from "./NavigationLink";
 import NavigationMenuItemGroup from "./NavigationMenuItemGroup";
 
-const StorybookNavigationMenu: React.FC<NavigationMenuProps> = (props) => {
+const StorybookNavigationMenu: React.FC<NavigationMenuProps> = () => {
     const [designLanguageOpen, setDesignLanguageOpen] = useState(false);
     const [guidelinesOpen, setGuidelinesOpen] = useState(false);
 
@@ -87,6 +86,7 @@ const StorybookNavigationMenu: React.FC<NavigationMenuProps> = (props) => {
                         color=""
                         hasIcon={false}
                         isOpen={false}
+                        isMobile={false}
                         url="/components"
                         text="Components"
                     />
@@ -113,7 +113,7 @@ const styles = {
         margin-bottom: 15px;
 
         @media screen and (max-width: 768px) {
-            margin: 20px 0;
+            margin: 20px 10px;
         }
     `,
 };

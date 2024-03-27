@@ -41,7 +41,6 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
         };
 
         window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     const firstChild = React.Children.toArray(children)[0];

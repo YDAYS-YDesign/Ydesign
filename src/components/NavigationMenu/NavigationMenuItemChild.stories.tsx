@@ -19,6 +19,7 @@ const StorybookNavigationMenuItemChild: React.FC = () => {
                     <NavigationLink
                         title="Components"
                         url="/design-principles"
+                        color=""
                     />
                 </NavigationMenuItemChild>
             </div>

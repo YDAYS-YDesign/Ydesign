@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
-import NavigationMenuItemGroupChild from "./NavigationMenuItemGroupChild";
+import NavigationMenuItemGroup from "./NavigationMenuItemGroup";
 import { css } from "@emotion/css";
 import NavigationLink from "./NavigationLink";
 
-const StorybookNavigationMenuItemGroupChild: React.FC = () => {
+const StorybookNavigationMenuItemGroup: React.FC = () => {
+    const [designLanguageOpen, setDesignLanguageOpen] = useState(false);
+
     return (
         <YDesignWrapper>
             <div
                 className={css`
                     width: 100%;
                     height: 90vh;
-                    justify-content: center;
-                    align-items: center;
                 `}
             >
-                <NavigationMenuItemGroupChild isOpen={true} isMobile={false}>
+                <NavigationMenuItemGroup
+                    menuItemProps={{
+                        color: "",
+                        hasIcon: true,
+                        text: "Design language",
+                    }}
+                    groupChildProps={{
+                        color: "",
+                    }}
+                    isOpen={designLanguageOpen}
+                    onClick={() => setDesignLanguageOpen(!designLanguageOpen)}
+                >
                     <NavigationLink
                         title="Design principles"
                         url="/design-principles"
@@ -30,20 +41,20 @@ const StorybookNavigationMenuItemGroupChild: React.FC = () => {
                         url="/typography"
                         color=""
                     />
-                </NavigationMenuItemGroupChild>
+                </NavigationMenuItemGroup>
             </div>
         </YDesignWrapper>
     );
 };
 
 export default {
-    title: "NavigationMenuItemGroupChild",
-    component: StorybookNavigationMenuItemGroupChild,
+    title: "NavigationMenuItemGroup",
+    component: StorybookNavigationMenuItemGroup,
     parameters: {
         backgrounds: { disable: true },
     },
 };
 
-const Template = () => <StorybookNavigationMenuItemGroupChild />;
+const Template = () => <StorybookNavigationMenuItemGroup />;
 
-export const NavigationMenuItemGroupChildDefault = Template.bind({});
+export const NavigationMenuItemGroupDefault = Template.bind({});
