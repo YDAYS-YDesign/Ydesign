@@ -1,16 +1,16 @@
 import React from "react";
-import { SelectVDeux , SelectV2Props} from "./Select";
+import { Select , SelectProps} from "./Select";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
 
 
-const handleSelect: SelectV2Props['onSelect'] = (selectedValue) => {
+const handleSelect: SelectProps['onSelect'] = (selectedValue) => {
     console.log('Selected values:', selectedValue);
     
 };
 
-const meta: Meta<typeof SelectVDeux> = {
+const meta: Meta<typeof Select> = {
     
     title: "Select",
     parameters: {
@@ -29,7 +29,7 @@ const meta: Meta<typeof SelectVDeux> = {
                     align-items: center;
                 `}
             >
-                <SelectVDeux  {...args} />
+                <Select  {...args} />
 
             </div>
         </YDesignWrapper>

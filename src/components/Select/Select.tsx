@@ -3,24 +3,18 @@ import { css, cx } from "@emotion/css";
 import { theme } from "../../theme/theme";
 import { Icon } from "../Icon/Icon";
 
-enum Size {
-    small = 1,
-    medium = 2,
-    big = 3,
-}
 
-export interface SelectV2Props {
+export interface SelectProps {
     title?: string;
     options: string[];
     darkMode?: boolean;
-    size?: Size;
     disabled?: boolean;
     className?: string;
     multiChoise?: boolean;
     onSelect: (selectedValue: string[]) => void;
 }
 
-export const SelectVDeux: React.FC<SelectV2Props> = ({
+export const Select: React.FC<SelectProps> = ({
     title,
     options: initialOptions,
     darkMode,
@@ -242,4 +236,4 @@ const styles = {
         `;
     },
 };
-export default SelectVDeux;
+export default Select;
