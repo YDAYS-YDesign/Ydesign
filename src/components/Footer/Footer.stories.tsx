@@ -1,16 +1,8 @@
-import React from 'react';
-import Footer, { FooterProps } from './Footer';
+import React from "react";
+import Footer, { FooterProps } from "./Footer";
 import { css } from "@emotion/css";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
-import YdesImg from "./Ydes.png";
-
-const storyStyles = css`
-    .storyContainer {
-        max-width: 960px;
-        margin: auto;
-    }
-`;
 
 const meta: Meta<typeof Footer> = {
     title: "Footer",
@@ -38,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultFooter: Story = {
     args: {
-        footerImg: YdesImg,
+        footerImg: `../../assets/other/Ydes.png`,
         footerNewsLetter: true,
     },
     argTypes: {
@@ -51,6 +43,4 @@ export const DefaultFooter: Story = {
     },
 };
 
-
 export default meta;
-

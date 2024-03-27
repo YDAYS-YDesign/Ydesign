@@ -29,6 +29,7 @@
     "src/**/*",
     "src/setupTests.ts",
     "assets/**/*",
+    "./src/index.d.ts"
   ],
   "types": [
     "typePatches"
