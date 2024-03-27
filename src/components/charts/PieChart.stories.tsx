@@ -67,10 +67,10 @@ type Story = StoryObj<typeof meta>;
 export const DefaultPieChart: Story = {
     args: {
         title: "Pie Chart title",
-        hoverColor: "blue",
+        hoverColor: "purple",
         chartData: {
             dataset: {
-                backgroundColor: ["green", "yellow", "red"],
+                backgroundColor: ["#37247D", "#A58CFF", "#E8E2FF"],
                 data: [10, 40, 50],
             },
             labels: ["Label1", "Label2", "Label3"],
