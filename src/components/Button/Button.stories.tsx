@@ -4,7 +4,7 @@ import { Button, ButtonProps } from "./Button";
 import { css } from "@emotion/css";
 import { Icon } from "../Icon/Icon";
 
-const StorybookButton: React.FC<ButtonProps> = (props) => {
+const ButtonStory: React.FC<ButtonProps> = (props) => {
     return (
         <YDesignWrapper>
             <div
@@ -24,7 +24,7 @@ const StorybookButton: React.FC<ButtonProps> = (props) => {
 
 export default {
     title: "Button",
-    component: StorybookButton,
+    component: ButtonStory,
     parameters: {
         backgrounds: { disable: true },
     },
@@ -44,7 +44,7 @@ export default {
 
 // Define default properties for your stories
 // eslint-disable-next-line react/jsx-props-no-spreading
-const Template = (args: ButtonProps) => <StorybookButton {...args} />;
+const Template = (args: ButtonProps) => <ButtonStory {...args} />;
 
 // Default story
 export const Primary = Template.bind({});
