@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { css, cx } from "@emotion/css";
 import { theme } from "../../theme/theme";
 import { Icon } from "../Icon/Icon";
-import { t } from "@storybook/theming/dist/create-df04f5c3";
 
 enum Size {
     small = 1,
@@ -124,118 +123,122 @@ export const SelectVDeux: React.FC<SelectV2Props> = ({
 const styles = {
     select: (darkMode: boolean, disabled: boolean) => {
         return css`
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0; 
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
             }
-            to {
-                opacity: 1;
+            .chevron svg {
+                transition: transform 0.5s ease;
             }
-        }
-
-
-        .chevron svg {
-            transition: transform 0.5s ease;
-        }
-        .rotate svg {
-            transform: rotate(180deg);
-        }
-       
-        
-       
-        .head {
-            display: flex;
-            position: relative;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px;
-            padding-left:10px;
-            background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
-            border: 2px solid ${disabled ? theme.colors.disabled : darkMode ? theme.colors.primary : theme.colors.primary};
-            border-radius: 25px;
-            z-index:9;
-        }
-        
-        .head input {
-            flex: 1;
-            background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
-            border: none;
-            color: ${!darkMode ? theme.colors.black : theme.colors.white};
-            outline: none;
-        }
-        
-        .chevron {
-            width:100%;
-            cursor: pointer;
-            transform:translateY(3px)
-        }
-        
-    
-        .container {
-            opacity: 0; 
-            animation: fadeIn 1s forwards;
-            background-color: ${disabled ? theme.colors.disabled : darkMode ? theme.colors.black : theme.colors.white};
-            border: 1.5px solid ${disabled ? theme.colors.disabled : darkMode ? theme.colors.primary : theme.colors.primary};
-            border-radius: 25px;
-            padding: 17% 1px 16px 0px;
-            transform:translateY(-17%);
-            z-index:2;
-            max-height: 150px;
-            max-width: 400px;
-            
-        }
-        .scrollBarContainer{ 
-            width:100%;
-            display:block;
-            max-height: 150px;
-            max-width: 400px;
-            overflow: auto;
-            
-        }
-       
-        .option {
-            
-            padding: 5px;
-            cursor: pointer;
-            padding-left:10px;
-            margin-right:1px;
-            color: ${!darkMode ? theme.colors.black : theme.colors.white};
-        }
-        
-        .option:hover {
-            background-color: ${theme.colors.primary};
-            color:${theme.colors.black};
-        }
-        
-        .selected{
-            color:${theme.colors.black};
-            background-color: ${theme.colors.primary};
-         }
-         .selected:hover{
-            color:${theme.colors.white};
-            
-         }
-
-         .scrollBarContainer::-webkit-scrollbar {
-            width: 4px;
-            overflow: hidden;
-            
-        }
-        .scrollBarContainer::-webkit-scrollbar-track {
-            background: ${darkMode ? theme.colors.black : theme.colors.white}; 
-            heigth:20px
-        }
-        
-        .scrollBarContainer::-webkit-scrollbar-thumb {
-            background: ${theme.colors.primary};
-            border-radius: 70px; 
-            
-        }
-        
-        .scrollBarContainer::-webkit-scrollbar-thumb:hover {
-            background: ${!darkMode ? theme.colors.black : theme.colors.white}; 
-        }
+            .rotate svg {
+                transform: rotate(180deg);
+            }
+            .head {
+                display: flex;
+                position: relative;
+                align-items: center;
+                justify-content: space-between;
+                padding: 5px;
+                padding-left: 10px;
+                background-color: ${disabled
+                    ? theme.colors.disabled
+                    : darkMode
+                      ? theme.colors.black
+                      : theme.colors.white};
+                border: 2px solid
+                    ${disabled
+                        ? theme.colors.disabled
+                        : darkMode
+                          ? theme.colors.primary
+                          : theme.colors.primary};
+                border-radius: 25px;
+                z-index: 9;
+            }
+            .head input {
+                flex: 1;
+                background-color: ${disabled
+                    ? theme.colors.disabled
+                    : darkMode
+                      ? theme.colors.black
+                      : theme.colors.white};
+                border: none;
+                color: ${!darkMode ? theme.colors.black : theme.colors.white};
+                outline: none;
+            }
+            .chevron {
+                width: 100%;
+                cursor: pointer;
+                transform: translateY(3px);
+            }
+            .container {
+                opacity: 0;
+                animation: fadeIn 1s forwards;
+                background-color: ${disabled
+                    ? theme.colors.disabled
+                    : darkMode
+                      ? theme.colors.black
+                      : theme.colors.white};
+                border: 1.5px solid
+                    ${disabled
+                        ? theme.colors.disabled
+                        : darkMode
+                          ? theme.colors.primary
+                          : theme.colors.primary};
+                border-radius: 25px;
+                padding: 17% 1px 16px 0px;
+                transform: translateY(-17%);
+                z-index: 2;
+                max-height: 150px;
+                max-width: 400px;
+            }
+            .scrollBarContainer {
+                width: 100%;
+                display: block;
+                max-height: 150px;
+                max-width: 400px;
+                overflow: auto;
+            }
+            .option {
+                padding: 5px;
+                cursor: pointer;
+                padding-left: 10px;
+                margin-right: 1px;
+                color: ${!darkMode ? theme.colors.black : theme.colors.white};
+            }
+            .option:hover {
+                background-color: ${theme.colors.primary};
+                color: ${theme.colors.black};
+            }
+            .selected {
+                color: ${theme.colors.black};
+                background-color: ${theme.colors.primary};
+            }
+            .selected:hover {
+                color: ${theme.colors.white};
+            }
+            .scrollBarContainer::-webkit-scrollbar {
+                width: 4px;
+                overflow: hidden;
+            }
+            .scrollBarContainer::-webkit-scrollbar-track {
+                background: ${darkMode
+                    ? theme.colors.black
+                    : theme.colors.white};
+                heigth: 20px;
+            }
+            .scrollBarContainer::-webkit-scrollbar-thumb {
+                background: ${theme.colors.primary};
+                border-radius: 70px;
+            }
+            .scrollBarContainer::-webkit-scrollbar-thumb:hover {
+                background: ${!darkMode
+                    ? theme.colors.black
+                    : theme.colors.white};
+            }
         `;
     },
 };
