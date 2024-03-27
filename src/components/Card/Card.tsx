@@ -19,9 +19,7 @@ export const Card: React.FC<CardProps> = ({
     imgSrc,
     imgAlt,
     title,
-
     description,
-
     buttonText,
     link,
     isSlider = true,
