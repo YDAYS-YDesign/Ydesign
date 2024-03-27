@@ -19,12 +19,17 @@ export const Card: React.FC<CardProps> = ({
     imgSrc,
     imgAlt,
     title,
+
+
+    
     description,
+    
     buttonText,
-    link,
-    isSlider = true,
+            link,
+    isSlider     = true,
 }) => {
-    const { theme } = useTheme();
+    const { theme
+     } = useTheme();
     return (
         <div
             className={`container ${styles.container(isSlider, imgSrc, imgAlt)}`}
