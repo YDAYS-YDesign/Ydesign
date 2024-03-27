@@ -19,9 +19,6 @@ const getRGBValues = (color: string): string => {
 
     const b = bigint & 255;
 
-
-
-            console.error("test error");
     return `${r}, ${g}, ${b}`;
 };
 
