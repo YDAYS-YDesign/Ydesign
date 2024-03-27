@@ -11,7 +11,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const getRGBValues = (color: string): string => {
-    const hex = color.replace(/^#/, '');
+    const hex = color.replace(/^#/, "");
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
     const g = (bigint >> 8) & 255;
@@ -94,7 +94,8 @@ const styles = {
                   ? buttonColor
                   : theme.colors.white};
             transform: translateY(-50%);
-            box-shadow: 0 0.2rem 0.2rem 0.2rem rgba(${getRGBValues(theme.colors.disabled)}, 0.3);
+            box-shadow: 0 0.2rem 0.2rem 0.2rem
+                rgba(${getRGBValues(theme.colors.disabled)}, 0.3);
             border-radius: 50%;
         }
 

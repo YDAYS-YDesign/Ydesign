@@ -26,29 +26,44 @@ export const Card: React.FC<CardProps> = ({
 }) => {
     const { theme } = useTheme();
     return (
-        <div className={`container ${styles.container(isSlider, imgSrc, imgAlt)}`}>
+        <div
+            className={`container ${styles.container(isSlider, imgSrc, imgAlt)}`}
+        >
             {imgSrc && imgAlt && (
                 <img src={imgSrc} alt={imgAlt} className={styles.img} />
             )}
-            
-                <div className={`${isSlider && imgAlt && imgSrc ? 'description' : '' } ${styles.description(isSlider, imgAlt, imgSrc)}`}>
-                    {title && <h1 className={styles.title}>{title}</h1>}
-                    {description && 
-                    <p className={styles.text(buttonText, link, isSlider, imgAlt, imgSrc)}>{description}</p>
-                    }
-                    {buttonText && link && (
-                        <Button rounded className={styles.buttonText(theme)} content={buttonText}>
 
-                        </Button>
-                    )}
-                </div>
-            
+            <div
+                className={`${isSlider && imgAlt && imgSrc ? "description" : ""} ${styles.description(isSlider, imgAlt, imgSrc)}`}
+            >
+                {title && <h1 className={styles.title}>{title}</h1>}
+                {description && (
+                    <p
+                        className={styles.text(
+                            buttonText,
+                            link,
+                            isSlider,
+                            imgAlt,
+                            imgSrc,
+                        )}
+                    >
+                        {description}
+                    </p>
+                )}
+                {buttonText && link && (
+                    <Button
+                        rounded
+                        className={styles.buttonText(theme)}
+                        content={buttonText}
+                    ></Button>
+                )}
+            </div>
         </div>
     );
 };
 
 const styles = {
-    container:(isSilder?: boolean, imgSrc?: string, imgAlt?: string)=> css`
+    container: (isSilder?: boolean, imgSrc?: string, imgAlt?: string) => css`
         width: 15rem;
         height: ${isSilder || !imgAlt || !imgSrc ? "15rem" : "25rem"};
         overflow: hidden;
@@ -67,14 +82,18 @@ const styles = {
         text-align: center;
         margin: 0.5rem 5%;
     `,
-    description:(isSilder?: boolean, imgSrc?: string, imgAlt?: string)=> css`
+    description: (isSilder?: boolean, imgSrc?: string, imgAlt?: string) => css`
         text-align: center;
         position: absolute;
         z-index: 1;
         border-radius: 1rem;
         background-color: #f1c40f;
-        top: ${isSilder && imgAlt && imgSrc? "80%" : !isSilder &&imgAlt && imgSrc ? "40%" : "0%"};
-        height: 100%
+        top: ${isSilder && imgAlt && imgSrc
+            ? "80%"
+            : !isSilder && imgAlt && imgSrc
+              ? "40%"
+              : "0%"};
+        height: 100%;
     `,
     buttonText: (theme: Theme) => css`
         border-radius: 5px;
@@ -94,13 +113,24 @@ const styles = {
                 0 0 0px 5px ${theme.colors.primary};
         }
     `,
-    text:(buttonText? : string, link?: string, isSlider?: boolean, imgSrc?: string, imgAlt?: string)=>css`
+    text: (
+        buttonText?: string,
+        link?: string,
+        isSlider?: boolean,
+        imgSrc?: string,
+        imgAlt?: string,
+    ) => css`
         overflow: hidden;
         padding: 0 0.5rem;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: ${isSlider && buttonText && link || !isSlider && buttonText && link || !imgAlt && buttonText && link || !imgSrc && buttonText && link ? 6 : 8};
-        -webkit-box-orient: vertical; 
-        word-break: break-word;  
+        -webkit-line-clamp: ${(isSlider && buttonText && link) ||
+        (!isSlider && buttonText && link) ||
+        (!imgAlt && buttonText && link) ||
+        (!imgSrc && buttonText && link)
+            ? 6
+            : 8};
+        -webkit-box-orient: vertical;
+        word-break: break-word;
     `,
 };
