@@ -37,7 +37,6 @@ const Template = (args: AccordionProps) => <StorybookAccordion {...args} />;
 
 export const AccordionDefault = Template.bind({});
 AccordionDefault.args = {
-    title: "un bouton test",
-    description : "description",
+    title: "un bouton",
+    description: "description",
 };
-
