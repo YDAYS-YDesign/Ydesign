@@ -4,10 +4,18 @@
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
+    "test": "echo \"test start\"",
+    "lint": "eslint .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rollup --config",
-    "build-icons": "cd src && go run gen-icons-types.go && cd .. && npx @svgr/cli --out-dir ./src/assets/iconsComponents --typescript --filename-case kebab ./src/assets/svgs"
+    "build-icons": "cd src && go run gen-icons-types.go && cd .. && npx @svgr/cli --out-dir ./src/assets/iconsComponents --typescript --filename-case kebab ./src/assets/svgs",
+    "prepare": "husky"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm run lint && pnpm run format"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +45,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.15",
+    "husky": "^9.0.11",
     "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
