@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
+import React from "react";
 
 const FooterNewsLetter = () => {
     return (

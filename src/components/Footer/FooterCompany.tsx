@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import React from "react";
 
 interface FooterCompanyProps {
     companyName: string;

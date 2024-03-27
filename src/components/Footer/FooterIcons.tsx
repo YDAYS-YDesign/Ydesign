@@ -3,14 +3,6 @@ import React from "react";
 import { Icon } from "../Icon/Icon";
 import { theme } from "../../theme/theme";
 
-import {
-    FaFacebookF,
-    FaInstagram,
-    FaDiscord,
-    FaTwitch,
-    FaTwitter,
-} from "react-icons/fa";
-
 const FooterIcons = () => {
     return (
         <div className={styles.socials}>
