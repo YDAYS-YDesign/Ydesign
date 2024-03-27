@@ -31,11 +31,13 @@ export const Select: React.FC<SelectProps> = ({
     const [options, setOptions] = useState<string[]>(initialOptions);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValueInput(event.target.value);
-        const sortedOptions = initialOptions.filter((option) =>
-            option.toLowerCase().includes(event.target.value.toLowerCase()),
-        );
-        setOptions(sortedOptions);
+        if (!disabled) {
+            setValueInput(event.target.value);
+            const sortedOptions = initialOptions.filter((option) =>
+                option.toLowerCase().includes(event.target.value.toLowerCase()),
+            );
+            setOptions(sortedOptions);
+        }
     };
 
     const handleOptionClick = (option: string) => {
