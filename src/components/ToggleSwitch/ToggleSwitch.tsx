@@ -12,24 +12,26 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const getRGBValues = (color: string): string => {
     const hex = color.replace(/^#/, "");
-                const bigint = parseInt(hex, 16);
+    const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
 
     const g = (bigint >> 8) & 255;
-    
-        const b = bigint & 255;
-    
-    console.error('test error')
+
+    const b = bigint & 255;
+
+
+
+            console.error("test error");
     return `${r}, ${g}, ${b}`;
 };
 
 export const ToggleSwitch = ({
     disabled,
-             forcedChecked,
+    forcedChecked,
     buttonColor = theme.colors.lightPrimary,
     ...props
 }: Props): JSX.Element => {
-            const [checked, setChecked] = useState(
+    const [checked, setChecked] = useState(
         forcedChecked !== undefined ? forcedChecked : true,
     );
 
