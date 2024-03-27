@@ -65,7 +65,7 @@ export const DefaultSelect: Story = (args: TableProps<Aliment>) => {
 const aliments: Aliment[] = [
     {
         id : "1",
-        nom: "Pomme",
+        nom: "z",
         poids_g: 100,
         calories: 52,
         proteines_g: 0.3,
@@ -75,7 +75,7 @@ const aliments: Aliment[] = [
     },
     {
         id : "2",
-        nom: "Banane",
+        nom: "g",
         poids_g: 100,
         calories: 89,
         proteines_g: 1.1,
@@ -85,7 +85,7 @@ const aliments: Aliment[] = [
     },
     {
         id : "3",
-        nom: "Oeuf",
+        nom: "a",
         poids_g: 50,
         calories: 72,
         proteines_g: 6.3,
@@ -95,7 +95,7 @@ const aliments: Aliment[] = [
     },
     {
         id : "4",
-        nom: "Poulet (cuisse)",
+        nom: "p",
         poids_g: 100,
         calories: 239,
         proteines_g: 18.3,
