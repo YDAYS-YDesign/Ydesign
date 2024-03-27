@@ -19,12 +19,14 @@ const StorybookNavigationMenuItem: React.FC = () => {
                         color=""
                         hasIcon={true}
                         isOpen={false}
+                        isMobile={false}
                         text="Design principles"
                     />
                     <NavigationMenuItem
                         color=""
                         hasIcon={false}
                         isOpen={false}
+                        isMobile={false}
                         url="/components"
                         text="Components"
                     />
