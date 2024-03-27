@@ -13,8 +13,13 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const getRGBValues = (color: string): string => {
     const hex = color.replace(/^#/, "");
     const bigint = parseInt(hex, 16);
+
     const r = (bigint >> 16) & 255;
+
     const g = (bigint >> 8) & 255;
+
+    console.error("r", r);
+
     const b = bigint & 255;
     return `${r}, ${g}, ${b}`;
 };
