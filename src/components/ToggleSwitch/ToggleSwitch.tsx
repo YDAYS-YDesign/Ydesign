@@ -24,11 +24,13 @@ export const ToggleSwitch = ({
     disabled,
     forcedChecked,
     buttonColor = theme.colors.lightPrimary,
+
     ...props
 }: Props): JSX.Element => {
     const [checked, setChecked] = useState(
         forcedChecked !== undefined ? forcedChecked : true,
     );
+
     const handleToggle = () => {
         const newCheckedState = !checked;
         setChecked(newCheckedState);

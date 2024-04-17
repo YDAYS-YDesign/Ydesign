@@ -4,7 +4,7 @@
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
     "format-check": "prettier --check --parser typescript '**/*.{ts,tsx}'",
-    "format-fix": "prettier --list-different --write --parser typescript '**/*.{ts,tsx}'",
+    "format-fix": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint ./src --ext .ts,.tsx",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -13,7 +13,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["format-fix", "lint"]
+    "*.{ts,tsx}": ["pnpm format-fix", "pnpm lint"]
   },
   "author": "",
   "license": "ISC",
