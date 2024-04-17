@@ -16,7 +16,7 @@ export interface FooterProps {
     footerNewsLetter: boolean;
 }
 
-const Footer = ({ footerImg, footerNewsLetter }: FooterProps) => {
+export const Footer = ({ footerImg, footerNewsLetter }: FooterProps) => {
     return (
         <footer className={styles.footer}>
             <FooterContainer>
@@ -76,5 +76,3 @@ const styles = {
         flex-direction: column;
     `,
 };
-
-export default Footer;

@@ -3,7 +3,7 @@ import React from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
-import LineChart from "./LineChart";
+import { LineChart } from "./LineChart";
 
 const UserData = [
     {

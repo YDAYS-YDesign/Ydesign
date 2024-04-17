@@ -15,7 +15,7 @@ export interface Props {
     title: string;
 }
 
-function PieChart({ chartData, hoverColor, title }: Props) {
+export function PieChart({ chartData, hoverColor, title }: Props) {
     const colors = chartData.dataset.backgroundColor;
     const originalRadius = 100;
     const hoverRadius = 120; // Increased radius when hovering
@@ -142,5 +142,3 @@ function PieChart({ chartData, hoverColor, title }: Props) {
         </div>
     );
 }
-
-export default PieChart;

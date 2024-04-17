@@ -12,7 +12,7 @@ export interface Props {
     };
 }
 
-function LineChart({ chartData }: Props) {
+export function LineChart({ chartData }: Props) {
     const colors = ["#37247D", "#6D53C8", "#A58CFF", "#D2C5FF", "#E8E2FF"];
     const borderColor = "#111111";
 
@@ -135,5 +135,3 @@ function LineChart({ chartData }: Props) {
         </svg>
     );
 }
-
-export default LineChart;

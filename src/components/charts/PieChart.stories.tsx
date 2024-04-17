@@ -3,7 +3,7 @@ import React from "react";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "@emotion/css";
-import PieChart from "./PieChart";
+import { PieChart } from "./PieChart";
 
 const UserData = [
     {

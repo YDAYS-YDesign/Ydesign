@@ -1,5 +1,5 @@
 import React from "react";
-import Footer, { FooterProps } from "./Footer";
+import { Footer, FooterProps } from "./Footer";
 import { css } from "@emotion/css";
 import { YDesignWrapper } from "../YDesignWrapper/YDesignWrapper";
 import { Meta, StoryObj } from "@storybook/react";

@@ -4,7 +4,6 @@ import { Button } from "../Button/Button";
 import { css, cx } from "@emotion/css";
 import { Theme } from "../../theme/theme";
 import { useTheme } from "../../hooks/useTheme";
-import "./Card.css";
 
 export interface CardProps {
     imgSrc?: string;
@@ -27,42 +26,55 @@ export const Card: React.FC<CardProps> = ({
     const { theme } = useTheme();
     return (
         <div
-            className={`container ${styles.container(
-                isSlider,
-                imgSrc,
-                imgAlt,
-            )}`}
+            className={css({
+                ".container .description": {
+                    top: "80%",
+                    transition: "all 0.5s ease-in-out",
+                },
+                ".container:hover .description": {
+                    top: "0%",
+                    height: "100%",
+                },
+            })}
         >
-            {imgSrc && imgAlt && (
-                <img src={imgSrc} alt={imgAlt} className={styles.img} />
-            )}
-
             <div
-                className={`${
-                    isSlider && imgAlt && imgSrc ? "description" : ""
-                } ${styles.description(isSlider, imgAlt, imgSrc)}`}
+                className={`container ${styles.container(
+                    isSlider,
+                    imgSrc,
+                    imgAlt,
+                )}`}
             >
-                {title && <h1 className={styles.title}>{title}</h1>}
-                {description && (
-                    <p
-                        className={styles.text(
-                            buttonText,
-                            link,
-                            isSlider,
-                            imgAlt,
-                            imgSrc,
-                        )}
-                    >
-                        {description}
-                    </p>
+                {imgSrc && imgAlt && (
+                    <img src={imgSrc} alt={imgAlt} className={styles.img} />
                 )}
-                {buttonText && link && (
-                    <Button
-                        rounded
-                        className={styles.buttonText(theme)}
-                        content={buttonText}
-                    ></Button>
-                )}
+
+                <div
+                    className={`${
+                        isSlider && imgAlt && imgSrc ? "description" : ""
+                    } ${styles.description(isSlider, imgAlt, imgSrc)}`}
+                >
+                    {title && <h1 className={styles.title}>{title}</h1>}
+                    {description && (
+                        <p
+                            className={styles.text(
+                                buttonText,
+                                link,
+                                isSlider,
+                                imgAlt,
+                                imgSrc,
+                            )}
+                        >
+                            {description}
+                        </p>
+                    )}
+                    {buttonText && link && (
+                        <Button
+                            rounded
+                            className={styles.buttonText(theme)}
+                            content={buttonText}
+                        ></Button>
+                    )}
+                </div>
             </div>
         </div>
     );
