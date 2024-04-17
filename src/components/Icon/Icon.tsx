@@ -10,6 +10,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
     isClickable?: boolean;
     color: string;
     onClick?: () => void;
+    isVerticalAlign?: boolean;
 }
 // Composant IconWrapper modifié
 export const Icon = ({
@@ -17,6 +18,7 @@ export const Icon = ({
     size = "medium",
     color = "currentColor",
     isClickable = false,
+    isVerticalAlign,
     ...props
 }: IconProps) => {
     const { isDarkMode, theme } = useTheme();
@@ -57,6 +59,7 @@ export const Icon = ({
                 overflow: hidden;
                 height: ${getSizes(size).height}px;
                 width: ${getSizes(size).width}px;
+                align-self: ${isVerticalAlign ? "center" : "unset"};
                 transition-timing-function: cubic-bezier(0.35, 0, 0.27, 0.96);
                 transition-duration: 0.2s;
                 transition-property: all;
