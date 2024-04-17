@@ -52,7 +52,7 @@ export const Table = <T extends Item>({
         if (typeof columnNames[index] === "number") {
             if (isDecreasing[index]) {
                 items.sort(
-                    (a, b) => a[columnNames[index]] - b[columnNames[index]],
+                    (a, b) => b[columnNames[index]] - a[columnNames[index]],
                 );
             } else {
                 items.sort(
@@ -222,13 +222,13 @@ const styles = {
             }
             .row {
                 display: flex;
+                justify-content: space-around;
                 text-align: center;
                 margin: 0px;
                 padding: 10px;
-                justify-content: space-between;
-
                 border-bottom: 1px ${theme.colors.primary} solid;
             }
+           
             #noneBorder {
                 border-bottom: none;
             }
@@ -237,6 +237,7 @@ const styles = {
                 width: 100%;
                 height: 100%;
                 font-weight: 250;
+                flex: 1;
             }
             .cell header {
                 text-align: left;
