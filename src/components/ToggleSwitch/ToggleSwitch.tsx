@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { css, cx } from "@emotion/css";
 import { theme } from "../../theme/theme";
+import { log } from "console";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode;
@@ -13,13 +14,8 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const getRGBValues = (color: string): string => {
     const hex = color.replace(/^#/, "");
     const bigint = parseInt(hex, 16);
-
     const r = (bigint >> 16) & 255;
-
     const g = (bigint >> 8) & 255;
-
-    console.error("r", r);
-
     const b = bigint & 255;
     return `${r}, ${g}, ${b}`;
 };
@@ -33,7 +29,6 @@ export const ToggleSwitch = ({
     const [checked, setChecked] = useState(
         forcedChecked !== undefined ? forcedChecked : true,
     );
-
     const handleToggle = () => {
         const newCheckedState = !checked;
         setChecked(newCheckedState);
