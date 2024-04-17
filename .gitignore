@@ -1,5 +1,29 @@
+#node_modules
 node_modules
-pnpm-lock.yaml
+
+#build
 dist
 storybook-static
+
+#Ideas files
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+#env files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+#ther .lock files than pnpm
+yarn.lock
+package-lock.json
+
+
 
