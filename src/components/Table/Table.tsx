@@ -166,13 +166,7 @@ export const Table = <T extends Item>({
                 {perPage !== -1 && (
                     <div className="nextPage">
                         <div className="actu">
-                            {page * perPage - perPage + 1}-
-                            {page <= items.length / perPage
-                                ? page * perPage
-                                : page * perPage -
-                                  perPage +
-                                  1 +
-                                  (items.length % perPage)}
+                            {page} / {Math.ceil(items.length / perPage)}
                         </div>
                         <div className="chang">
                             <Icon

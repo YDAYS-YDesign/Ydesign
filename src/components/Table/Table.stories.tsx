@@ -137,7 +137,7 @@ const aliments: Aliment[] = [
 ]
 
 DefaultSelect.args = {
-    title: "Titre ",
+    title: "TITRE  ",
     items: aliments,
     perPage : 5 , 
 
