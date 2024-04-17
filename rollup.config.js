@@ -2,22 +2,25 @@ import typescript from "rollup-plugin-typescript2";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import commonjs from "@rollup/plugin-commonjs";
 import pkg from "./package.json" assert { type: "json" };
 import css from "rollup-plugin-css-only";
 import replace from "rollup-plugin-replace";
 import globals from 'rollup-plugin-node-globals';
+import replace from 'rollup-plugin-replace';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 const input = "src/index.ts";
 
 const plugins = [
-    replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-        preventAssignment: true
-    }),
-    typescript(),
-    peerDepsExternal(),
     nodeResolve(),
     commonjs(),
+    replace({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+    typescript(),
+    nodePolyfills(),
+    peerDepsExternal(),
     css({ output: "bundle.css" }),
 ];
 

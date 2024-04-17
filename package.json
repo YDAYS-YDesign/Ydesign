@@ -79,6 +79,7 @@
     "from": "^0.1.7",
     "globals": "^15.0.0",
     "import": "^0.0.6",
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-node-globals": "^1.4.0"
   }
 }
