@@ -1,0 +1,9 @@
+.Home {
+    background-color: aqua;
+    display: flex;
+    width: 100%;
+}
+
+.Your {
+    color: blueviolet;
+}
