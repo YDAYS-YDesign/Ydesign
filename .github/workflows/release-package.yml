@@ -10,29 +10,27 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
+          # Assurez-vous que le NODE_AUTH_TOKEN est configuré comme un secret dans les settings du repo
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      - name: Get releases informations
-        id: get_release
-        uses: actions/github-script@v3
-        with:
-          script: |
-            const release = await github.repos.getReleaseByTag({
-              tag: context.ref.replace('refs/tags/', '')
-            });
-            console.log(release.tag)
-            return release.data;
+      - name: Update package version
+        run: |
+          PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+          npm version $PACKAGE_VERSION --no-git-tag-version
+        env:
+          GITHUB_REF: ${{ github.ref }}
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
         with:
           version: 7
-          run_install: false
 
       - name: Install dependencies
         run: pnpm install --recursive
@@ -40,14 +38,7 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org/'
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
-
       - name: Publish package to NPM
-        run: |
-          npm publish --access public
+        run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
