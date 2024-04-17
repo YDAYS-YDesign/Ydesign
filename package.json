@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A simple react components library including responsive and translation features",
   "scripts": {
-    "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
+    "format-check": "prettier --check --parser typescript '**/*.{ts,tsx}'",
+    "format-fix": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rollup --config",
