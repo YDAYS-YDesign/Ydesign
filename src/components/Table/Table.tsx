@@ -36,23 +36,17 @@ export const Table = <T extends Item>({
     );
 
     const compareString = (a: string, b: string) => {
-        if (a > b) {
-            return 1;
-        } else if (a == b) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return a.localeCompare(b);
     };
     const sortTable = (index: number) => {
         const isDecreasing = [...tabIsDecreasing];
         isDecreasing[index] = !isDecreasing[index];
         setTabIsDecreasing(isDecreasing);
 
-        if (typeof columnNames[index] === "number") {
+        if (typeof items[items.length - 1][columnNames[index]] == "number") {
             if (isDecreasing[index]) {
                 items.sort(
-                    (a, b) => b[columnNames[index]] - a[columnNames[index]],
+                    (a, b) => a[columnNames[index]] - b[columnNames[index]],
                 );
             } else {
                 items.sort(
@@ -228,7 +222,7 @@ const styles = {
                 padding: 10px;
                 border-bottom: 1px ${theme.colors.primary} solid;
             }
-           
+
             #noneBorder {
                 border-bottom: none;
             }
@@ -267,10 +261,10 @@ const styles = {
                 vertical-align: middle;
             }
             .chang {
-                display:flex;
-                flex-direction:row;
+                display: flex;
+                flex-direction: row;
                 padding: auto;
-                cursor:pointeur;
+                cursor: pointeur;
                 vertical-align: middle;
             }
             .chang svg {
