@@ -90,7 +90,7 @@ const StorybookNavigationMenu: React.FC<NavigationMenuProps> = () => {
                         url="/components"
                         text="Components"
                     />
-                    <Button content="Get Started" className={styles.button} />
+                    <Button className={styles.button}>Get Started</Button>
                 </NavigationMenu>
             </div>
         </YDesignWrapper>

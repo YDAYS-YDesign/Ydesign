@@ -68,11 +68,9 @@ export const Card: React.FC<CardProps> = ({
                         </p>
                     )}
                     {buttonText && link && (
-                        <Button
-                            rounded
-                            className={styles.buttonText(theme)}
-                            content={buttonText}
-                        ></Button>
+                        <Button rounded className={styles.buttonText(theme)}>
+                            {buttonText}
+                        </Button>
                     )}
                 </div>
             </div>

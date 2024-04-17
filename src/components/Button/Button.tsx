@@ -27,7 +27,6 @@ export const Button = ({
     rounded = true,
     suffix,
     suffixColor = "black",
-    content,
     ...rest
 }: ButtonProps): JSX.Element => {
     const { theme } = useTheme();
@@ -40,7 +39,7 @@ export const Button = ({
             )}
             {...rest}
         >
-            <span>{content}</span>
+            <span>{children}</span>
             {suffix && <Icon iconName={suffix} color={suffixColor} />}
         </button>
     );

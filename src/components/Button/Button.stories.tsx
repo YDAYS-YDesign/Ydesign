@@ -16,7 +16,7 @@ const ButtonStory: React.FC<ButtonProps> = (props) => {
                     align-items: center;
                 `}
             >
-                <Button {...props}>{props.content}</Button>
+                <Button {...props}>{props.children}</Button>
             </div>
         </YDesignWrapper>
     );
@@ -29,7 +29,7 @@ export default {
         backgrounds: { disable: true },
     },
     argTypes: {
-        content: { control: "text" },
+        children: { control: "text" },
         variant: {
             control: "select",
             options: ["primary", "secondary"],
@@ -50,7 +50,7 @@ const Template = (args: ButtonProps) => <ButtonStory {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
     disabled: false,
-    content: "un bouton", // Default button text
+    children: "un bouton", // Default button text
     variant: "primary",
     size: "medium",
     rounded: true,
@@ -59,7 +59,7 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
     disabled: false,
-    content: "un bouton", // Default button text
+    children: "un bouton", // Default button text
     variant: "secondary",
     size: "medium",
     rounded: true,
@@ -72,7 +72,7 @@ WithSuffix.argTypes = {
 WithSuffix.args = {
     variant: "primary",
     disabled: false,
-    content: "Download", // Default button text
+    children: "Download", // Default button text
     size: "medium",
     rounded: false,
     suffix: "download",
@@ -82,7 +82,7 @@ export const Disabled = Template.bind({});
 Disabled.args = {
     variant: "primary",
     disabled: true,
-    content: "un bouton", // Default button text
+    children: "un bouton", // Default button text
     rounded: false,
     size: "medium",
 };

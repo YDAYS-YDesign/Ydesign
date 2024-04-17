@@ -8,7 +8,7 @@ const FooterNewsLetter = () => {
         <div className={styles.newsletter}>
             <p className={styles.footerP}>Newsletter</p>
             <Input placeholder="Enter your email" />
-            <Button content="Subscribe" />
+            <Button>Subscribe</Button>
         </div>
     );
 };
