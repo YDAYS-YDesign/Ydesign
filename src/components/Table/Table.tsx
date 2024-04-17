@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { css, cx } from "@emotion/css";
 import { Icon } from "../Icon/Icon";
+import { theme } from "../../theme/theme";
 
 interface Item {
     id: string;
@@ -12,29 +13,36 @@ export interface TableProps<T extends Item> {
     items: T[];
     isDisabled: boolean;
     className?: string;
+    perPage?: number;
 }
 export const Table = <T extends Item>({
     title,
     items,
     isDisabled,
     className,
+    perPage,
 }: TableProps<T>) => {
+    if (perPage === -1 || perPage === undefined) {
+        perPage = -1;
+    }
     const [arrowIndex, setArrowIndex] = useState(0);
+    const [page, setPage] = useState(1);
     const columnNames: string[] = Array.from(
         new Set(items.flatMap((item) => Object.keys(item))),
     );
-    const [tabIsDecreasing, setTabIsDecreasing] = useState<boolean[]>(new Array(columnNames.length).fill(false));
+    const [tabIsDecreasing, setTabIsDecreasing] = useState<boolean[]>(
+        new Array(columnNames.length).fill(false),
+    );
 
-
-    const compareString =(a:string , b:string)=>{
-        if (a>b) {
-            return 1
-        } else if(a==b) {
-            return 0
-        }else{
-            return -1
+    const compareString = (a: string, b: string) => {
+        if (a > b) {
+            return 1;
+        } else if (a == b) {
+            return 0;
+        } else {
+            return -1;
         }
-    }
+    };
     const sortTable = (index: number) => {
         const isDecreasing = [...tabIsDecreasing];
         isDecreasing[index] = !isDecreasing[index];
@@ -52,114 +60,217 @@ export const Table = <T extends Item>({
             }
         } else {
             if (isDecreasing[index]) {
-                items.sort(
-                    (a, b) => compareString(a[columnNames[index]],b[columnNames[index]]),
+                items.sort((a, b) =>
+                    compareString(a[columnNames[index]], b[columnNames[index]]),
                 );
             } else {
-                items.sort(
-                    (a, b) => compareString(b[columnNames[index]],a[columnNames[index]]),
+                items.sort((a, b) =>
+                    compareString(b[columnNames[index]], a[columnNames[index]]),
                 );
             }
         }
     };
 
     return (
-        <div
-            className={cx(
-                className,
-                styles.Table(isDisabled),
-            )}
-        >
-            <h2>{title}</h2>
-            <div className="table">
-                <div className="row header">
-                    {columnNames.map((key, index: number) => (
-                        <div
-                            className={
-                                key == "id"
-                                    ? "displayNon"
-                                    : arrowIndex === index
-                                      ? "cell arrow"
-                                      : "cell"
-                            }
-                            onClick={() => {
-                                
-                                sortTable(index);
-                                setArrowIndex(index);
-                            }}
-                            key={key}
-                        >
-                            {key}
-                            {tabIsDecreasing[index] && arrowIndex===index  ? (
-                                <Icon
-                                iconName={"arrow-up"}
-                                color="pink"
-                            />
-                            ) : !tabIsDecreasing[index] && arrowIndex===index ?
-                            (
-                                <Icon
-                                iconName={"arrow-down"}
-                                color="pink"
-                            />  
-                            )  : <></>}
-                            
-                        </div>
-                    ))}
-                </div>
-
-                {items.map((item) => (
-                    <div className="row" key={item.id}>
-                        {columnNames.map((key) => (
+        <div className={cx(className, styles.Table(isDisabled))}>
+            <div className="tabComponent">
+                <div className="title">{title}</div>
+                <div className="table">
+                    <div className="row header">
+                        {columnNames.map((key, index: number) => (
                             <div
-                                className={key == "id" ? "displayNon" : "cell"}
+                                className={
+                                    key === "id" ? "disNone" : "cell header"
+                                }
+                                onClick={() => {
+                                    sortTable(index);
+                                    setArrowIndex(index);
+                                }}
                                 key={key}
                             >
-                                {item[key]}
+                                {key}
+                                {tabIsDecreasing[index] &&
+                                arrowIndex === index ? (
+                                    <div className="arrow">
+                                        <Icon
+                                            iconName={"arrow-up"}
+                                            color={theme.colors.primary}
+                                        />
+                                    </div>
+                                ) : !tabIsDecreasing[index] &&
+                                  arrowIndex === index ? (
+                                    <div className="arrow">
+                                        <Icon
+                                            iconName={"arrow-down"}
+                                            color={theme.colors.primary}
+                                            className="arrow"
+                                        />
+                                    </div>
+                                ) : (
+                                    <></>
+                                )}
                             </div>
                         ))}
                     </div>
-                ))}
+                    {perPage !== -1
+                        ? items
+                              .slice((page - 1) * perPage, page * perPage)
+                              .map((item, i: number) => (
+                                  <div
+                                      className={"row " + i}
+                                      id={
+                                          page <= items.length / perPage
+                                              ? perPage - 1 === i
+                                                  ? "noneBorder"
+                                                  : ""
+                                              : (items.length % perPage) - 1 ===
+                                                  i
+                                                ? "noneBorder"
+                                                : ""
+                                      }
+                                      key={item.id}
+                                  >
+                                      {columnNames.map((key, i: number) => (
+                                          <div
+                                              className={
+                                                  key === "id"
+                                                      ? "disNone"
+                                                      : "cell"
+                                              }
+                                              key={key}
+                                          >
+                                              {item[key]}
+                                          </div>
+                                      ))}
+                                  </div>
+                              ))
+                        : items.map((item) => (
+                              <div className="row" key={item.id}>
+                                  {columnNames.map((key, i: number) => (
+                                      <div
+                                          className={
+                                              key === "id" ? "disNone" : "cell"
+                                          }
+                                          key={key}
+                                      >
+                                          {item[key]}
+                                      </div>
+                                  ))}
+                              </div>
+                          ))}
+                </div>
+                {perPage !== -1 && (
+                    <div className="nextPage">
+                        <div className="actu">
+                            {page * perPage - perPage + 1}-
+                            {page <= items.length / perPage
+                                ? page * perPage
+                                : page * perPage -
+                                  perPage +
+                                  1 +
+                                  (items.length % perPage)}
+                        </div>
+                        <div className="chang">
+                            <Icon
+                                iconName={"chevron-left"}
+                                color={theme.colors.primary}
+                                onClick={() => {
+                                    page != 1 && setPage(page - 1);
+                                }}
+                            />
+                           
+                            <Icon
+                                iconName={"chevron-right"}
+                                color={theme.colors.primary}
+                                onClick={() => {
+                                    page < items.length / perPage &&
+                                        setPage(page + 1);
+                                }}
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
 };
 const styles = {
-    Table: (
-        isDisabled: boolean,
-    ) => {
+    Table: (isDisabled: boolean) => {
         return css`
+            .tabComponent {
+                border: 2px solid ${theme.colors.primary};
+                border-radius: 20px;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0px;
+            }
+            .title {
+                font-weight: bold;
+                padding-top: 10px;
+                padding-left: 30px;
+            }
             .table {
                 display: flex;
+                padding-top: 10px;
+                padding-right: 30px;
+                padding-left: 30px;
                 flex-direction: column;
                 justify-content: space-between;
             }
             .row {
                 display: flex;
-                margin: 20px;
+                text-align: center;
+                margin: 0px;
+                padding: 10px;
                 justify-content: space-between;
-                width: 100%;
-                height: 100%;
+
+                border-bottom: 1px ${theme.colors.primary} solid;
             }
-            .displayNon {
-                display: none;
+            #noneBorder {
+                border-bottom: none;
             }
             .cell {
-                margin: 5px;
-                border: 1px solid black;
+                margin: 10px;
                 width: 100%;
                 height: 100%;
+                font-weight: 250;
+            }
+            .cell header {
+                text-align: left;
+            }
+            .header {
+                font-weight: 500;
             }
             .arrow {
-                position: relative;
-            }
-            .arrow::after {
+                display: inline;
                 position: absolute;
-                top: 0%;
-                right: -5px;
-                transform: translateY(-50%);
-                width: 0;
-                height: 0;
             }
+
+            .disNone {
+                display: none;
+            }
+            .nextPage {
+                border-top: 2px solid ${theme.colors.primary};
+                text-align: center;
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .actu{
+                padding: auto;
+                vertical-align: middle;
+            }
+            .chang{
+                  padding: auto;
+                  vertical-align: middle;
+            }
+            .chang svg {
+                margin:auto;
+            }
+           
         `;
     },
 };

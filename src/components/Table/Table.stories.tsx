@@ -33,9 +33,9 @@ interface Aliment {
     id : string;
     nom: string;
     poids_g: number;
-    calories: number;
-    proteines_g: number;
-    graisses_g: number;
+    cal: number;
+    prot: number;
+    gais: number;
     glucides_g: number;
     fibres_g: number
 }
@@ -67,9 +67,9 @@ const aliments: Aliment[] = [
         id : "1",
         nom: "z",
         poids_g: 100,
-        calories: 52,
-        proteines_g: 0.3,
-        graisses_g: 0.2,
+        cal: 52,
+        prot: 0.3,
+        gais: 0.2,
         glucides_g: 14,
         fibres_g: 2.4
     },
@@ -77,9 +77,9 @@ const aliments: Aliment[] = [
         id : "2",
         nom: "g",
         poids_g: 100,
-        calories: 89,
-        proteines_g: 1.1,
-        graisses_g: 0.3,
+        cal: 89,
+        prot: 1.1,
+        gais: 0.3,
         glucides_g: 23,
         fibres_g: 2.6
     },
@@ -87,9 +87,9 @@ const aliments: Aliment[] = [
         id : "3",
         nom: "a",
         poids_g: 50,
-        calories: 72,
-        proteines_g: 6.3,
-        graisses_g: 4.8,
+        cal: 72,
+        prot: 6.3,
+        gais: 4.8,
         glucides_g: 0.4,
         fibres_g: 0
     },
@@ -97,18 +97,49 @@ const aliments: Aliment[] = [
         id : "4",
         nom: "p",
         poids_g: 100,
-        calories: 239,
-        proteines_g: 18.3,
-        graisses_g: 17.5,
+        cal: 239,
+        prot: 18.3,
+        gais: 17.5,
         glucides_g: 0,
         fibres_g: 0
     },
+    {
+        id: "5",
+        nom: "s",
+        poids_g: 75,
+        cal: 120,
+        prot: 9.5,
+        gais: 7.2,
+        glucides_g: 4.3,
+        fibres_g: 1.8
+    },
+    {
+        id: "6",
+        nom: "t",
+        poids_g: 120,
+        cal: 180,
+        prot: 15.6,
+        gais: 11.2,
+        glucides_g: 6.7,
+        fibres_g: 2.3
+    },
+    {
+        id: "7",
+        nom: "b",
+        poids_g: 50,
+        cal: 65,
+        prot: 5.3,
+        gais: 3.9,
+        glucides_g: 2.8,
+        fibres_g: 1.1
+    }
   
 ]
 
 DefaultSelect.args = {
     title: "Titre ",
     items: aliments,
+    perPage : 5 , 
 
 };
 
@@ -121,9 +152,8 @@ DefaultSelect.argTypes = {
             type: "array",
             of: { type: "Objet" },
         },
-    },
-    isDisabled : {
-        control : "boolean"
+    },perPage : {
+        control: "number"
     }
 
    
