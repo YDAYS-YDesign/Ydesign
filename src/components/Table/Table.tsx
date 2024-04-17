@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { css, cx } from "@emotion/css";
+import { Icon } from "../Icon/Icon";
 
 interface Item {
     id: string;
@@ -9,26 +10,21 @@ interface Item {
 export interface TableProps<T extends Item> {
     title?: string;
     items: T[];
-    isDarkMode: boolean;
     isDisabled: boolean;
     className?: string;
 }
 export const Table = <T extends Item>({
     title,
     items,
-    isDarkMode,
     isDisabled,
     className,
 }: TableProps<T>) => {
-    const [isDecreasing, setIsDecreasing] = useState(false);
     const [arrowIndex, setArrowIndex] = useState(0);
     const columnNames: string[] = Array.from(
         new Set(items.flatMap((item) => Object.keys(item))),
     );
+    const [tabIsDecreasing, setTabIsDecreasing] = useState<boolean[]>(new Array(columnNames.length).fill(false));
 
-    const toLowerIfString = (value: any) => {
-        return typeof value === "string" ? value.toLowerCase() : value;
-    };
 
     const compareString =(a:string , b:string)=>{
         if (a>b) {
@@ -39,10 +35,13 @@ export const Table = <T extends Item>({
             return -1
         }
     }
-
     const sortTable = (index: number) => {
+        const isDecreasing = [...tabIsDecreasing];
+        isDecreasing[index] = !isDecreasing[index];
+        setTabIsDecreasing(isDecreasing);
+
         if (typeof columnNames[index] === "number") {
-            if (isDecreasing) {
+            if (isDecreasing[index]) {
                 items.sort(
                     (a, b) => a[columnNames[index]] - b[columnNames[index]],
                 );
@@ -52,7 +51,7 @@ export const Table = <T extends Item>({
                 );
             }
         } else {
-            if (isDecreasing) {
+            if (isDecreasing[index]) {
                 items.sort(
                     (a, b) => compareString(a[columnNames[index]],b[columnNames[index]]),
                 );
@@ -68,7 +67,7 @@ export const Table = <T extends Item>({
         <div
             className={cx(
                 className,
-                styles.Table(isDarkMode, isDisabled, isDecreasing),
+                styles.Table(isDisabled),
             )}
         >
             <h2>{title}</h2>
@@ -84,13 +83,26 @@ export const Table = <T extends Item>({
                                       : "cell"
                             }
                             onClick={() => {
-                                setIsDecreasing(!isDecreasing);
+                                
                                 sortTable(index);
                                 setArrowIndex(index);
                             }}
                             key={key}
                         >
                             {key}
+                            {tabIsDecreasing[index] && arrowIndex===index  ? (
+                                <Icon
+                                iconName={"arrow-up"}
+                                color="pink"
+                            />
+                            ) : !tabIsDecreasing[index] && arrowIndex===index ?
+                            (
+                                <Icon
+                                iconName={"arrow-down"}
+                                color="pink"
+                            />  
+                            )  : <></>}
+                            
                         </div>
                     ))}
                 </div>
@@ -113,9 +125,7 @@ export const Table = <T extends Item>({
 };
 const styles = {
     Table: (
-        isDarkMode: boolean,
         isDisabled: boolean,
-        isDecreasing: boolean,
     ) => {
         return css`
             .table {
@@ -143,7 +153,6 @@ const styles = {
                 position: relative;
             }
             .arrow::after {
-                ${isDecreasing ? "content: '>';" : "content: '<';"}
                 position: absolute;
                 top: 0%;
                 right: -5px;

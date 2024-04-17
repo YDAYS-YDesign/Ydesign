@@ -107,9 +107,8 @@ const aliments: Aliment[] = [
 ]
 
 DefaultSelect.args = {
-    title: "Titre d",
+    title: "Titre ",
     items: aliments,
-    isDarkMode: false,
 
 };
 
@@ -122,9 +121,6 @@ DefaultSelect.argTypes = {
             type: "array",
             of: { type: "Objet" },
         },
-    },
-    isDarkMode: {
-        control: "boolean",
     },
     isDisabled : {
         control : "boolean"
