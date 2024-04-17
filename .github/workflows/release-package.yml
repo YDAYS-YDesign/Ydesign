@@ -1,0 +1,44 @@
+name: Publish NPM Package on Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
+          # Assurez-vous que le NODE_AUTH_TOKEN est configuré comme un secret dans les settings du repo
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Update package version
+        run: |
+          PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+          npm version $PACKAGE_VERSION --no-git-tag-version
+        env:
+          GITHUB_REF: ${{ github.ref }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 7
+
+      - name: Install dependencies
+        run: pnpm install --recursive
+
+      - name: Build package
+        run: npm run build
+
+      - name: Publish package to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
