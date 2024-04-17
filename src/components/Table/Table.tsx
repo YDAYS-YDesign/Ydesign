@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { css, cx } from "@emotion/css";
 import { Icon } from "../Icon/Icon";
 import { theme } from "../../theme/theme";
+import { Button } from "../Button/Button";
 
 interface Item {
     id: string;
@@ -147,7 +148,9 @@ export const Table = <T extends Item>({
                         : items.map((item, i: number) => (
                               <div
                                   className="row"
-                                  id={i === items.length-1 ? "noneBorder" : ""}
+                                  id={
+                                      i === items.length - 1 ? "noneBorder" : ""
+                                  }
                                   key={item.id}
                               >
                                   {columnNames.map((key, i: number) => (
@@ -169,17 +172,18 @@ export const Table = <T extends Item>({
                             {page} / {Math.ceil(items.length / perPage)}
                         </div>
                         <div className="chang">
-                            <Icon
-                                iconName={"chevron-left"}
-                                color={theme.colors.primary}
+                            <Button
+                                suffix={"chevron-left"}
+                                size={"small"}
+                                variant="secondary"
                                 onClick={() => {
                                     page != 1 && setPage(page - 1);
                                 }}
                             />
-
-                            <Icon
-                                iconName={"chevron-right"}
-                                color={theme.colors.primary}
+                            <Button
+                                suffix={"chevron-right"}
+                                size={"small"}
+                                variant="secondary"
                                 onClick={() => {
                                     page < items.length / perPage &&
                                         setPage(page + 1);
@@ -262,7 +266,10 @@ const styles = {
                 vertical-align: middle;
             }
             .chang {
+                display:flex;
+                flex-direction:row;
                 padding: auto;
+                cursor:pointeur;
                 vertical-align: middle;
             }
             .chang svg {

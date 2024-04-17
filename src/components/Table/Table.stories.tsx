@@ -137,15 +137,17 @@ const aliments: Aliment[] = [
 ]
 
 DefaultSelect.args = {
-    title: "TITRE  ",
+    title: "TITRE",
     items: aliments,
-    perPage : 5 , 
+    perPage : 3 , 
 
 };
 
 DefaultSelect.argTypes = {
     title: {
-        control: "string",
+        control:{
+            type : "string",
+        },
     },
     items: {
         control: {
