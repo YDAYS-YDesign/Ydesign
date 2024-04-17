@@ -144,8 +144,12 @@ export const Table = <T extends Item>({
                                       ))}
                                   </div>
                               ))
-                        : items.map((item) => (
-                              <div className="row" key={item.id}>
+                        : items.map((item, i: number) => (
+                              <div
+                                  className="row"
+                                  id={i === items.length-1 ? "noneBorder" : ""}
+                                  key={item.id}
+                              >
                                   {columnNames.map((key, i: number) => (
                                       <div
                                           className={
@@ -178,7 +182,7 @@ export const Table = <T extends Item>({
                                     page != 1 && setPage(page - 1);
                                 }}
                             />
-                           
+
                             <Icon
                                 iconName={"chevron-right"}
                                 color={theme.colors.primary}
@@ -259,18 +263,17 @@ const styles = {
                 justify-content: space-between;
             }
 
-            .actu{
+            .actu {
                 padding: auto;
                 vertical-align: middle;
             }
-            .chang{
-                  padding: auto;
-                  vertical-align: middle;
+            .chang {
+                padding: auto;
+                vertical-align: middle;
             }
             .chang svg {
-                margin:auto;
+                margin: auto;
             }
-           
         `;
     },
 };
